@@ -8,12 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		D41BDB63272EC58C00B4E388 /* No_EmotionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB62272EC58C00B4E388 /* No_EmotionApp.swift */; };
-		D41BDB65272EC58C00B4E388 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB64272EC58C00B4E388 /* ContentView.swift */; };
+		D41BDB65272EC58C00B4E388 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB64272EC58C00B4E388 /* Start.swift */; };
 		D41BDB67272EC58E00B4E388 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB66272EC58E00B4E388 /* Assets.xcassets */; };
 		D41BDB6A272EC58E00B4E388 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB69272EC58E00B4E388 /* Preview Assets.xcassets */; };
 		D41BDB74272EC58E00B4E388 /* No_EmotionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB73272EC58E00B4E388 /* No_EmotionTests.swift */; };
 		D41BDB7E272EC58E00B4E388 /* No_EmotionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB7D272EC58E00B4E388 /* No_EmotionUITests.swift */; };
 		D41BDB80272EC58E00B4E388 /* No_EmotionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB7F272EC58E00B4E388 /* No_EmotionUITestsLaunchTests.swift */; };
+		D41BDB93272EC5C100B4E388 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB8D272EC5C100B4E388 /* strings.swift */; };
+		D41BDB94272EC5C100B4E388 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB8E272EC5C100B4E388 /* date.swift */; };
+		D41BDB95272EC5C100B4E388 /* buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB8F272EC5C100B4E388 /* buttons.swift */; };
+		D41BDB96272EC5C100B4E388 /* gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB90272EC5C100B4E388 /* gestures.swift */; };
+		D41BDB97272EC5C100B4E388 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB91272EC5C100B4E388 /* colors.swift */; };
+		D41BDB98272EC5C100B4E388 /* search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB92272EC5C100B4E388 /* search.swift */; };
+		D41BDB9C272EC5CB00B4E388 /* SpectralMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9A272EC5CB00B4E388 /* SpectralMedium.ttf */; };
+		D41BDB9D272EC5CB00B4E388 /* SourceCodeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9B272EC5CB00B4E388 /* SourceCodeRegular.ttf */; };
+		D41BDBA0272EC6B600B4E388 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9F272EC6B600B4E388 /* Launch Screen.storyboard */; };
+		D41BDBA4272EC7CD00B4E388 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBA3272EC7CD00B4E388 /* SwiftyJSON */; };
+		D41BDBA7272EC80200B4E388 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBA6272EC80200B4E388 /* Realm */; };
+		D41BDBA9272EC80200B4E388 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBA8272EC80200B4E388 /* RealmSwift */; };
+		D41BDBAC272EC81900B4E388 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBAB272EC81900B4E388 /* Alamofire */; };
+		D41BDBAF272EC84B00B4E388 /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBAE272EC84B00B4E388 /* YandexMobileMetrica */; };
+		D41BDBB1272EC84B00B4E388 /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBB0272EC84B00B4E388 /* YandexMobileMetricaCrashes */; };
+		D41BDBB5272EC87600B4E388 /* logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB4272EC87600B4E388 /* logic.swift */; };
+		D41BDBB7272EC89600B4E388 /* settingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB6272EC89600B4E388 /* settingsView.swift */; };
+		D41BDBB9272EC8A700B4E388 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB8272EC8A700B4E388 /* settings.swift */; };
+		D41BDBBB272EC8D000B4E388 /* db.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBBA272EC8D000B4E388 /* db.swift */; };
+		D41BDBBE272EC95600B4E388 /* welcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBBD272EC95600B4E388 /* welcomeView.swift */; };
+		D41BDBC1272ECAC100B4E388 /* calendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBC0272ECAC100B4E388 /* calendarView.swift */; };
+		D41BDBC4272ED88300B4E388 /* Neon in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBC3272ED88300B4E388 /* Neon */; };
+		D41BDBC7272F098600B4E388 /* newsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBC6272F098600B4E388 /* newsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +59,7 @@
 /* Begin PBXFileReference section */
 		D41BDB5F272EC58C00B4E388 /* No.Emotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = No.Emotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41BDB62272EC58C00B4E388 /* No_EmotionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_EmotionApp.swift; sourceTree = "<group>"; };
-		D41BDB64272EC58C00B4E388 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D41BDB64272EC58C00B4E388 /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		D41BDB66272EC58E00B4E388 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D41BDB69272EC58E00B4E388 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D41BDB6F272EC58E00B4E388 /* No.EmotionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = No.EmotionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +67,24 @@
 		D41BDB79272EC58E00B4E388 /* No.EmotionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = No.EmotionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41BDB7D272EC58E00B4E388 /* No_EmotionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_EmotionUITests.swift; sourceTree = "<group>"; };
 		D41BDB7F272EC58E00B4E388 /* No_EmotionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_EmotionUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D41BDB8D272EC5C100B4E388 /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
+		D41BDB8E272EC5C100B4E388 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
+		D41BDB8F272EC5C100B4E388 /* buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = buttons.swift; sourceTree = "<group>"; };
+		D41BDB90272EC5C100B4E388 /* gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gestures.swift; sourceTree = "<group>"; };
+		D41BDB91272EC5C100B4E388 /* colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
+		D41BDB92272EC5C100B4E388 /* search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = search.swift; sourceTree = "<group>"; };
+		D41BDB9A272EC5CB00B4E388 /* SpectralMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpectralMedium.ttf; sourceTree = "<group>"; };
+		D41BDB9B272EC5CB00B4E388 /* SourceCodeRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SourceCodeRegular.ttf; sourceTree = "<group>"; };
+		D41BDB9E272EC61600B4E388 /* No-Emotion-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "No-Emotion-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D41BDB9F272EC6B600B4E388 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		D41BDBA1272EC79700B4E388 /* No.Emotion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = No.Emotion.entitlements; sourceTree = "<group>"; };
+		D41BDBB4272EC87600B4E388 /* logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logic.swift; sourceTree = "<group>"; };
+		D41BDBB6272EC89600B4E388 /* settingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsView.swift; sourceTree = "<group>"; };
+		D41BDBB8272EC8A700B4E388 /* settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
+		D41BDBBA272EC8D000B4E388 /* db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = db.swift; sourceTree = "<group>"; };
+		D41BDBBD272EC95600B4E388 /* welcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcomeView.swift; sourceTree = "<group>"; };
+		D41BDBC0272ECAC100B4E388 /* calendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calendarView.swift; sourceTree = "<group>"; };
+		D41BDBC6272F098600B4E388 /* newsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +92,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41BDBA9272EC80200B4E388 /* RealmSwift in Frameworks */,
+				D41BDBAC272EC81900B4E388 /* Alamofire in Frameworks */,
+				D41BDBC4272ED88300B4E388 /* Neon in Frameworks */,
+				D41BDBA7272EC80200B4E388 /* Realm in Frameworks */,
+				D41BDBB1272EC84B00B4E388 /* YandexMobileMetricaCrashes in Frameworks */,
+				D41BDBA4272EC7CD00B4E388 /* SwiftyJSON in Frameworks */,
+				D41BDBAF272EC84B00B4E388 /* YandexMobileMetrica in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,10 +142,17 @@
 		D41BDB61272EC58C00B4E388 /* No.Emotion */ = {
 			isa = PBXGroup;
 			children = (
+				D41BDBA1272EC79700B4E388 /* No.Emotion.entitlements */,
+				D41BDB9E272EC61600B4E388 /* No-Emotion-Info.plist */,
+				D41BDBB3272EC86900B4E388 /* logic */,
+				D41BDBB2272EC86200B4E388 /* views */,
+				D41BDB99272EC5CB00B4E388 /* fonts */,
+				D41BDB8C272EC5C100B4E388 /* extensions */,
 				D41BDB62272EC58C00B4E388 /* No_EmotionApp.swift */,
-				D41BDB64272EC58C00B4E388 /* ContentView.swift */,
+				D41BDB64272EC58C00B4E388 /* Start.swift */,
 				D41BDB66272EC58E00B4E388 /* Assets.xcassets */,
 				D41BDB68272EC58E00B4E388 /* Preview Content */,
+				D41BDB9F272EC6B600B4E388 /* Launch Screen.storyboard */,
 			);
 			path = No.Emotion;
 			sourceTree = "<group>";
@@ -127,6 +182,73 @@
 			path = No.EmotionUITests;
 			sourceTree = "<group>";
 		};
+		D41BDB8C272EC5C100B4E388 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D41BDB8D272EC5C100B4E388 /* strings.swift */,
+				D41BDB8E272EC5C100B4E388 /* date.swift */,
+				D41BDB8F272EC5C100B4E388 /* buttons.swift */,
+				D41BDB90272EC5C100B4E388 /* gestures.swift */,
+				D41BDB91272EC5C100B4E388 /* colors.swift */,
+				D41BDB92272EC5C100B4E388 /* search.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		D41BDB99272EC5CB00B4E388 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D41BDB9A272EC5CB00B4E388 /* SpectralMedium.ttf */,
+				D41BDB9B272EC5CB00B4E388 /* SourceCodeRegular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		D41BDBB2272EC86200B4E388 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				D41BDBC5272F097A00B4E388 /* news */,
+				D41BDBBF272ECAB400B4E388 /* calendar */,
+				D41BDBBC272EC94B00B4E388 /* welcome */,
+				D41BDBB6272EC89600B4E388 /* settingsView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		D41BDBB3272EC86900B4E388 /* logic */ = {
+			isa = PBXGroup;
+			children = (
+				D41BDBB4272EC87600B4E388 /* logic.swift */,
+				D41BDBB8272EC8A700B4E388 /* settings.swift */,
+				D41BDBBA272EC8D000B4E388 /* db.swift */,
+			);
+			path = logic;
+			sourceTree = "<group>";
+		};
+		D41BDBBC272EC94B00B4E388 /* welcome */ = {
+			isa = PBXGroup;
+			children = (
+				D41BDBBD272EC95600B4E388 /* welcomeView.swift */,
+			);
+			path = welcome;
+			sourceTree = "<group>";
+		};
+		D41BDBBF272ECAB400B4E388 /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				D41BDBC0272ECAC100B4E388 /* calendarView.swift */,
+			);
+			path = calendar;
+			sourceTree = "<group>";
+		};
+		D41BDBC5272F097A00B4E388 /* news */ = {
+			isa = PBXGroup;
+			children = (
+				D41BDBC6272F098600B4E388 /* newsView.swift */,
+			);
+			path = news;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +265,15 @@
 			dependencies = (
 			);
 			name = No.Emotion;
+			packageProductDependencies = (
+				D41BDBA3272EC7CD00B4E388 /* SwiftyJSON */,
+				D41BDBA6272EC80200B4E388 /* Realm */,
+				D41BDBA8272EC80200B4E388 /* RealmSwift */,
+				D41BDBAB272EC81900B4E388 /* Alamofire */,
+				D41BDBAE272EC84B00B4E388 /* YandexMobileMetrica */,
+				D41BDBB0272EC84B00B4E388 /* YandexMobileMetricaCrashes */,
+				D41BDBC3272ED88300B4E388 /* Neon */,
+			);
 			productName = No.Emotion;
 			productReference = D41BDB5F272EC58C00B4E388 /* No.Emotion.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +346,13 @@
 				Base,
 			);
 			mainGroup = D41BDB56272EC58C00B4E388;
+			packageReferences = (
+				D41BDBA2272EC7CD00B4E388 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				D41BDBAA272EC81900B4E388 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
+				D41BDBC2272ED88300B4E388 /* XCRemoteSwiftPackageReference "Neon" */,
+			);
 			productRefGroup = D41BDB60272EC58C00B4E388 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,7 +370,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D41BDB6A272EC58E00B4E388 /* Preview Assets.xcassets in Resources */,
+				D41BDB9C272EC5CB00B4E388 /* SpectralMedium.ttf in Resources */,
 				D41BDB67272EC58E00B4E388 /* Assets.xcassets in Resources */,
+				D41BDBA0272EC6B600B4E388 /* Launch Screen.storyboard in Resources */,
+				D41BDB9D272EC5CB00B4E388 /* SourceCodeRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +398,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D41BDB65272EC58C00B4E388 /* ContentView.swift in Sources */,
+				D41BDBB9272EC8A700B4E388 /* settings.swift in Sources */,
+				D41BDBBE272EC95600B4E388 /* welcomeView.swift in Sources */,
+				D41BDBBB272EC8D000B4E388 /* db.swift in Sources */,
+				D41BDB65272EC58C00B4E388 /* Start.swift in Sources */,
+				D41BDBB5272EC87600B4E388 /* logic.swift in Sources */,
+				D41BDB95272EC5C100B4E388 /* buttons.swift in Sources */,
+				D41BDB97272EC5C100B4E388 /* colors.swift in Sources */,
 				D41BDB63272EC58C00B4E388 /* No_EmotionApp.swift in Sources */,
+				D41BDBC7272F098600B4E388 /* newsView.swift in Sources */,
+				D41BDBB7272EC89600B4E388 /* settingsView.swift in Sources */,
+				D41BDB93272EC5C100B4E388 /* strings.swift in Sources */,
+				D41BDB98272EC5C100B4E388 /* search.swift in Sources */,
+				D41BDB94272EC5C100B4E388 /* date.swift in Sources */,
+				D41BDBC1272ECAC100B4E388 /* calendarView.swift in Sources */,
+				D41BDB96272EC5C100B4E388 /* gestures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,17 +570,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = No.Emotion/No.Emotion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"No.Emotion/Preview Content\"";
 				DEVELOPMENT_TEAM = GAH72SPMY9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "No-Emotion-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -445,17 +603,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = No.Emotion/No.Emotion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"No.Emotion/Preview Content\"";
 				DEVELOPMENT_TEAM = GAH72SPMY9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "No-Emotion-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -605,6 +767,87 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D41BDBA2272EC7CD00B4E388 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D41BDBAA272EC81900B4E388 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D41BDBC2272ED88300B4E388 /* XCRemoteSwiftPackageReference "Neon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/0xLeif/Neon.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D41BDBA3272EC7CD00B4E388 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41BDBA2272EC7CD00B4E388 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		D41BDBA6272EC80200B4E388 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		D41BDBA8272EC80200B4E388 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		D41BDBAB272EC81900B4E388 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41BDBAA272EC81900B4E388 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		D41BDBAE272EC84B00B4E388 /* YandexMobileMetrica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetrica;
+		};
+		D41BDBB0272EC84B00B4E388 /* YandexMobileMetricaCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetricaCrashes;
+		};
+		D41BDBC3272ED88300B4E388 /* Neon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41BDBC2272ED88300B4E388 /* XCRemoteSwiftPackageReference "Neon" */;
+			productName = Neon;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D41BDB57272EC58C00B4E388 /* Project object */;
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct No_EmotionApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Start()
         }
     }
 }
