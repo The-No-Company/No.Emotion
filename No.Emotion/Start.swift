@@ -12,6 +12,8 @@ struct Start: View {
     @ObservedObject var logic: Logic = LogicAPI
     @Environment(\.calendar) var calendar
     
+    @State private var showing_add = false
+    
     private var header: some View {
         let component = calendar.component(.month, from: Date())
         let formatter = component == 1 ? DateFormatter.monthAndYear : .month
@@ -31,7 +33,7 @@ struct Start: View {
                         self.header
                     }
                     Spacer()
-                    
+
                     Button(action: {
                         let generator = UIImpactFeedbackGenerator(style: .light)
                         generator.impactOccurred()
@@ -42,7 +44,7 @@ struct Start: View {
                     })
                         .buttonStyle(ScaleButtonStyle())
                         .padding(.leading)
-                    
+
                 }.padding(.horizontal)
                 ScrollView(.vertical, showsIndicators: false){
                     HStack{
@@ -54,40 +56,40 @@ struct Start: View {
                             .frame(width: 6, alignment: .center)
                             .padding(.vertical)
                             .blur(radius: 2)
-                        
+
                     }.padding(.horizontal)
-                    
+
                     HStack{
                         Text("Timeline")
                             .font(Font.custom("Spectral-Medium", size: 26))
                             .foregroundColor(Color.white)
                         Spacer()
                     }.padding(.horizontal)
-                    
+
                     HStack{
                         Text("Quotes added daily to lift your spirits")
                             .font(.custom("SourceCodePro-Regular", size: 14))
                             .foregroundColor(Color.white)
                         Spacer()
                     }
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                    
+                    .padding(.horizontal)
+                    .padding(.bottom)
+
                     newsView()
                         .padding(.horizontal)
                         .padding(.bottom)
-                    
-                    
+
+
                     HStack{
                         Text("Add a quote widget to the desktop")
                             .font(.custom("SourceCodePro-Regular", size: 14))
                             .foregroundColor(Color.white)
                         Spacer()
                     }
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                    
-                    
+                    .padding(.horizontal)
+                    .padding(.bottom)
+
+
                     Spacer(minLength: 120)
                 }
             }
@@ -111,6 +113,8 @@ struct Start: View {
                         let generator = UIImpactFeedbackGenerator(style: .light)
                         generator.impactOccurred()
                         
+                        self.logic.add.toggle()
+                        
                     }, label: {
                         ZStack{
                             Circle()
@@ -132,6 +136,8 @@ struct Start: View {
                         .offset(y: -5)
                         .contentShape(Rectangle())
                         .buttonStyle(ScaleButtonStyle())
+                        
+
                 }
                 .background(.ultraThinMaterial)
                 .cornerRadius(16)
@@ -142,9 +148,18 @@ struct Start: View {
         .preferredColorScheme(.dark)
         .ignoresSafeArea(.all, edges: .bottom)
         .ignoresSafeArea(.keyboard)
-        .onAppear{
-            
+        
+
+        
+        .sheet(isPresented: self.$logic.add) {
+           
+        } content: {
+            addEmotionView()
+                .ignoresSafeArea(.keyboard)
+
         }
+
+        
     }
 }
 

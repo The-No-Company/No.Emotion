@@ -161,7 +161,8 @@ struct CalendarView<DateView>: View where DateView: View {
 
 struct RootView: View {
     @Environment(\.calendar) var calendar
-    
+    @ObservedObject var logic: Logic = LogicAPI
+
     private var year: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
     }

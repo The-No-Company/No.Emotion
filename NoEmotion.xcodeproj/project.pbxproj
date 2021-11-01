@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D41BDB63272EC58C00B4E388 /* No_EmotionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB62272EC58C00B4E388 /* No_EmotionApp.swift */; };
+		D41BDB63272EC58C00B4E388 /* NoEmotionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB62272EC58C00B4E388 /* NoEmotionApp.swift */; };
 		D41BDB65272EC58C00B4E388 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB64272EC58C00B4E388 /* Start.swift */; };
 		D41BDB67272EC58E00B4E388 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB66272EC58E00B4E388 /* Assets.xcassets */; };
 		D41BDB6A272EC58E00B4E388 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB69272EC58E00B4E388 /* Preview Assets.xcassets */; };
@@ -23,20 +23,19 @@
 		D41BDB9C272EC5CB00B4E388 /* SpectralMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9A272EC5CB00B4E388 /* SpectralMedium.ttf */; };
 		D41BDB9D272EC5CB00B4E388 /* SourceCodeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9B272EC5CB00B4E388 /* SourceCodeRegular.ttf */; };
 		D41BDBA0272EC6B600B4E388 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9F272EC6B600B4E388 /* Launch Screen.storyboard */; };
-		D41BDBA4272EC7CD00B4E388 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBA3272EC7CD00B4E388 /* SwiftyJSON */; };
-		D41BDBA7272EC80200B4E388 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBA6272EC80200B4E388 /* Realm */; };
-		D41BDBA9272EC80200B4E388 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBA8272EC80200B4E388 /* RealmSwift */; };
-		D41BDBAC272EC81900B4E388 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBAB272EC81900B4E388 /* Alamofire */; };
-		D41BDBAF272EC84B00B4E388 /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBAE272EC84B00B4E388 /* YandexMobileMetrica */; };
-		D41BDBB1272EC84B00B4E388 /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBB0272EC84B00B4E388 /* YandexMobileMetricaCrashes */; };
 		D41BDBB5272EC87600B4E388 /* logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB4272EC87600B4E388 /* logic.swift */; };
 		D41BDBB7272EC89600B4E388 /* settingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB6272EC89600B4E388 /* settingsView.swift */; };
 		D41BDBB9272EC8A700B4E388 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB8272EC8A700B4E388 /* settings.swift */; };
 		D41BDBBB272EC8D000B4E388 /* db.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBBA272EC8D000B4E388 /* db.swift */; };
 		D41BDBBE272EC95600B4E388 /* welcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBBD272EC95600B4E388 /* welcomeView.swift */; };
 		D41BDBC1272ECAC100B4E388 /* calendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBC0272ECAC100B4E388 /* calendarView.swift */; };
-		D41BDBC4272ED88300B4E388 /* Neon in Frameworks */ = {isa = PBXBuildFile; productRef = D41BDBC3272ED88300B4E388 /* Neon */; };
 		D41BDBC7272F098600B4E388 /* newsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBC6272F098600B4E388 /* newsView.swift */; };
+		D4472790272F4595007EF947 /* addEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D447278F272F4595007EF947 /* addEmotionView.swift */; };
+		D48DD273272FEFA8009513A4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD272272FEFA8009513A4 /* RealmSwift */; };
+		D48DD276272FEFB3009513A4 /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD275272FEFB3009513A4 /* YandexMobileMetrica */; };
+		D48DD279272FEFBB009513A4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD278272FEFBB009513A4 /* Alamofire */; };
+		D48DD27C272FEFC1009513A4 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD27B272FEFC1009513A4 /* SwiftyJSON */; };
+		D48DD27F272FF163009513A4 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD27E272FF163009513A4 /* Introspect */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,14 +56,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D41BDB5F272EC58C00B4E388 /* No.Emotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = No.Emotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D41BDB62272EC58C00B4E388 /* No_EmotionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_EmotionApp.swift; sourceTree = "<group>"; };
+		D41BDB5F272EC58C00B4E388 /* NoEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41BDB62272EC58C00B4E388 /* NoEmotionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoEmotionApp.swift; sourceTree = "<group>"; };
 		D41BDB64272EC58C00B4E388 /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		D41BDB66272EC58E00B4E388 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D41BDB69272EC58E00B4E388 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D41BDB6F272EC58E00B4E388 /* No.EmotionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = No.EmotionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41BDB6F272EC58E00B4E388 /* NoEmotionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoEmotionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41BDB73272EC58E00B4E388 /* No_EmotionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_EmotionTests.swift; sourceTree = "<group>"; };
-		D41BDB79272EC58E00B4E388 /* No.EmotionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = No.EmotionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41BDB79272EC58E00B4E388 /* NoEmotionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoEmotionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41BDB7D272EC58E00B4E388 /* No_EmotionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_EmotionUITests.swift; sourceTree = "<group>"; };
 		D41BDB7F272EC58E00B4E388 /* No_EmotionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_EmotionUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D41BDB8D272EC5C100B4E388 /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		D41BDBBD272EC95600B4E388 /* welcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcomeView.swift; sourceTree = "<group>"; };
 		D41BDBC0272ECAC100B4E388 /* calendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calendarView.swift; sourceTree = "<group>"; };
 		D41BDBC6272F098600B4E388 /* newsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newsView.swift; sourceTree = "<group>"; };
+		D447278F272F4595007EF947 /* addEmotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addEmotionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,13 +92,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D41BDBA9272EC80200B4E388 /* RealmSwift in Frameworks */,
-				D41BDBAC272EC81900B4E388 /* Alamofire in Frameworks */,
-				D41BDBC4272ED88300B4E388 /* Neon in Frameworks */,
-				D41BDBA7272EC80200B4E388 /* Realm in Frameworks */,
-				D41BDBB1272EC84B00B4E388 /* YandexMobileMetricaCrashes in Frameworks */,
-				D41BDBA4272EC7CD00B4E388 /* SwiftyJSON in Frameworks */,
-				D41BDBAF272EC84B00B4E388 /* YandexMobileMetrica in Frameworks */,
+				D48DD279272FEFBB009513A4 /* Alamofire in Frameworks */,
+				D48DD273272FEFA8009513A4 /* RealmSwift in Frameworks */,
+				D48DD27F272FF163009513A4 /* Introspect in Frameworks */,
+				D48DD27C272FEFC1009513A4 /* SwiftyJSON in Frameworks */,
+				D48DD276272FEFB3009513A4 /* YandexMobileMetrica in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,9 +130,9 @@
 		D41BDB60272EC58C00B4E388 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D41BDB5F272EC58C00B4E388 /* No.Emotion.app */,
-				D41BDB6F272EC58E00B4E388 /* No.EmotionTests.xctest */,
-				D41BDB79272EC58E00B4E388 /* No.EmotionUITests.xctest */,
+				D41BDB5F272EC58C00B4E388 /* NoEmotion.app */,
+				D41BDB6F272EC58E00B4E388 /* NoEmotionTests.xctest */,
+				D41BDB79272EC58E00B4E388 /* NoEmotionUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,7 +146,7 @@
 				D41BDBB2272EC86200B4E388 /* views */,
 				D41BDB99272EC5CB00B4E388 /* fonts */,
 				D41BDB8C272EC5C100B4E388 /* extensions */,
-				D41BDB62272EC58C00B4E388 /* No_EmotionApp.swift */,
+				D41BDB62272EC58C00B4E388 /* NoEmotionApp.swift */,
 				D41BDB64272EC58C00B4E388 /* Start.swift */,
 				D41BDB66272EC58E00B4E388 /* Assets.xcassets */,
 				D41BDB68272EC58E00B4E388 /* Preview Content */,
@@ -207,6 +205,7 @@
 		D41BDBB2272EC86200B4E388 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				D447278E272F4582007EF947 /* addEmotion */,
 				D41BDBC5272F097A00B4E388 /* news */,
 				D41BDBBF272ECAB400B4E388 /* calendar */,
 				D41BDBBC272EC94B00B4E388 /* welcome */,
@@ -249,12 +248,20 @@
 			path = news;
 			sourceTree = "<group>";
 		};
+		D447278E272F4582007EF947 /* addEmotion */ = {
+			isa = PBXGroup;
+			children = (
+				D447278F272F4595007EF947 /* addEmotionView.swift */,
+			);
+			path = addEmotion;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D41BDB5E272EC58C00B4E388 /* No.Emotion */ = {
+		D41BDB5E272EC58C00B4E388 /* NoEmotion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D41BDB83272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "No.Emotion" */;
+			buildConfigurationList = D41BDB83272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotion" */;
 			buildPhases = (
 				D41BDB5B272EC58C00B4E388 /* Sources */,
 				D41BDB5C272EC58C00B4E388 /* Frameworks */,
@@ -264,23 +271,21 @@
 			);
 			dependencies = (
 			);
-			name = No.Emotion;
+			name = NoEmotion;
 			packageProductDependencies = (
-				D41BDBA3272EC7CD00B4E388 /* SwiftyJSON */,
-				D41BDBA6272EC80200B4E388 /* Realm */,
-				D41BDBA8272EC80200B4E388 /* RealmSwift */,
-				D41BDBAB272EC81900B4E388 /* Alamofire */,
-				D41BDBAE272EC84B00B4E388 /* YandexMobileMetrica */,
-				D41BDBB0272EC84B00B4E388 /* YandexMobileMetricaCrashes */,
-				D41BDBC3272ED88300B4E388 /* Neon */,
+				D48DD272272FEFA8009513A4 /* RealmSwift */,
+				D48DD275272FEFB3009513A4 /* YandexMobileMetrica */,
+				D48DD278272FEFBB009513A4 /* Alamofire */,
+				D48DD27B272FEFC1009513A4 /* SwiftyJSON */,
+				D48DD27E272FF163009513A4 /* Introspect */,
 			);
 			productName = No.Emotion;
-			productReference = D41BDB5F272EC58C00B4E388 /* No.Emotion.app */;
+			productReference = D41BDB5F272EC58C00B4E388 /* NoEmotion.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D41BDB6E272EC58E00B4E388 /* No.EmotionTests */ = {
+		D41BDB6E272EC58E00B4E388 /* NoEmotionTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D41BDB86272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "No.EmotionTests" */;
+			buildConfigurationList = D41BDB86272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotionTests" */;
 			buildPhases = (
 				D41BDB6B272EC58E00B4E388 /* Sources */,
 				D41BDB6C272EC58E00B4E388 /* Frameworks */,
@@ -291,14 +296,14 @@
 			dependencies = (
 				D41BDB71272EC58E00B4E388 /* PBXTargetDependency */,
 			);
-			name = No.EmotionTests;
+			name = NoEmotionTests;
 			productName = No.EmotionTests;
-			productReference = D41BDB6F272EC58E00B4E388 /* No.EmotionTests.xctest */;
+			productReference = D41BDB6F272EC58E00B4E388 /* NoEmotionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D41BDB78272EC58E00B4E388 /* No.EmotionUITests */ = {
+		D41BDB78272EC58E00B4E388 /* NoEmotionUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D41BDB89272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "No.EmotionUITests" */;
+			buildConfigurationList = D41BDB89272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotionUITests" */;
 			buildPhases = (
 				D41BDB75272EC58E00B4E388 /* Sources */,
 				D41BDB76272EC58E00B4E388 /* Frameworks */,
@@ -309,9 +314,9 @@
 			dependencies = (
 				D41BDB7B272EC58E00B4E388 /* PBXTargetDependency */,
 			);
-			name = No.EmotionUITests;
+			name = NoEmotionUITests;
 			productName = No.EmotionUITests;
-			productReference = D41BDB79272EC58E00B4E388 /* No.EmotionUITests.xctest */;
+			productReference = D41BDB79272EC58E00B4E388 /* NoEmotionUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -337,7 +342,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D41BDB5A272EC58C00B4E388 /* Build configuration list for PBXProject "No.Emotion" */;
+			buildConfigurationList = D41BDB5A272EC58C00B4E388 /* Build configuration list for PBXProject "NoEmotion" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -347,19 +352,19 @@
 			);
 			mainGroup = D41BDB56272EC58C00B4E388;
 			packageReferences = (
-				D41BDBA2272EC7CD00B4E388 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				D41BDBAA272EC81900B4E388 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
-				D41BDBC2272ED88300B4E388 /* XCRemoteSwiftPackageReference "Neon" */,
+				D48DD271272FEFA8009513A4 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				D48DD274272FEFB3009513A4 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
+				D48DD277272FEFBB009513A4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D48DD27A272FEFC1009513A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				D48DD27D272FF163009513A4 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = D41BDB60272EC58C00B4E388 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D41BDB5E272EC58C00B4E388 /* No.Emotion */,
-				D41BDB6E272EC58E00B4E388 /* No.EmotionTests */,
-				D41BDB78272EC58E00B4E388 /* No.EmotionUITests */,
+				D41BDB5E272EC58C00B4E388 /* NoEmotion */,
+				D41BDB6E272EC58E00B4E388 /* NoEmotionTests */,
+				D41BDB78272EC58E00B4E388 /* NoEmotionUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -405,13 +410,14 @@
 				D41BDBB5272EC87600B4E388 /* logic.swift in Sources */,
 				D41BDB95272EC5C100B4E388 /* buttons.swift in Sources */,
 				D41BDB97272EC5C100B4E388 /* colors.swift in Sources */,
-				D41BDB63272EC58C00B4E388 /* No_EmotionApp.swift in Sources */,
+				D41BDB63272EC58C00B4E388 /* NoEmotionApp.swift in Sources */,
 				D41BDBC7272F098600B4E388 /* newsView.swift in Sources */,
 				D41BDBB7272EC89600B4E388 /* settingsView.swift in Sources */,
 				D41BDB93272EC5C100B4E388 /* strings.swift in Sources */,
 				D41BDB98272EC5C100B4E388 /* search.swift in Sources */,
 				D41BDB94272EC5C100B4E388 /* date.swift in Sources */,
 				D41BDBC1272ECAC100B4E388 /* calendarView.swift in Sources */,
+				D4472790272F4595007EF947 /* addEmotionView.swift in Sources */,
 				D41BDB96272EC5C100B4E388 /* gestures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,12 +444,12 @@
 /* Begin PBXTargetDependency section */
 		D41BDB71272EC58E00B4E388 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D41BDB5E272EC58C00B4E388 /* No.Emotion */;
+			target = D41BDB5E272EC58C00B4E388 /* NoEmotion */;
 			targetProxy = D41BDB70272EC58E00B4E388 /* PBXContainerItemProxy */;
 		};
 		D41BDB7B272EC58E00B4E388 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D41BDB5E272EC58C00B4E388 /* No.Emotion */;
+			target = D41BDB5E272EC58C00B4E388 /* NoEmotion */;
 			targetProxy = D41BDB7A272EC58E00B4E388 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -578,10 +584,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "No-Emotion-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = No.Emotion;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -590,11 +598,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "thenoco.co.No-Emotion";
+				PRODUCT_BUNDLE_IDENTIFIER = thenoco.co.NoEmotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -611,10 +619,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "No-Emotion-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = No.Emotion;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -623,11 +633,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "thenoco.co.No-Emotion";
+				PRODUCT_BUNDLE_IDENTIFIER = thenoco.co.NoEmotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -652,7 +662,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/No.Emotion.app/No.Emotion";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoEmotion.app/NoEmotion";
 			};
 			name = Debug;
 		};
@@ -677,7 +687,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/No.Emotion.app/No.Emotion";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoEmotion.app/NoEmotion";
 			};
 			name = Release;
 		};
@@ -730,7 +740,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D41BDB5A272EC58C00B4E388 /* Build configuration list for PBXProject "No.Emotion" */ = {
+		D41BDB5A272EC58C00B4E388 /* Build configuration list for PBXProject "NoEmotion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D41BDB81272EC58E00B4E388 /* Debug */,
@@ -739,7 +749,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D41BDB83272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "No.Emotion" */ = {
+		D41BDB83272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D41BDB84272EC58E00B4E388 /* Debug */,
@@ -748,7 +758,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D41BDB86272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "No.EmotionTests" */ = {
+		D41BDB86272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotionTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D41BDB87272EC58E00B4E388 /* Debug */,
@@ -757,7 +767,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D41BDB89272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "No.EmotionUITests" */ = {
+		D41BDB89272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotionUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D41BDB8A272EC58E00B4E388 /* Debug */,
@@ -769,15 +779,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D41BDBA2272EC7CD00B4E388 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		D48DD271272FEFA8009513A4 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
 			requirement = {
@@ -785,15 +787,7 @@
 				kind = branch;
 			};
 		};
-		D41BDBAA272EC81900B4E388 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
+		D48DD274272FEFB3009513A4 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
 			requirement = {
@@ -801,51 +795,57 @@
 				kind = branch;
 			};
 		};
-		D41BDBC2272ED88300B4E388 /* XCRemoteSwiftPackageReference "Neon" */ = {
+		D48DD277272FEFBB009513A4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/0xLeif/Neon.git";
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
-				branch = main;
+				branch = master;
+				kind = branch;
+			};
+		};
+		D48DD27A272FEFC1009513A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D48DD27D272FF163009513A4 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				branch = master;
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D41BDBA3272EC7CD00B4E388 /* SwiftyJSON */ = {
+		D48DD272272FEFA8009513A4 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D41BDBA2272EC7CD00B4E388 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		D41BDBA6272EC80200B4E388 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
-		D41BDBA8272EC80200B4E388 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D41BDBA5272EC80200B4E388 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = D48DD271272FEFA8009513A4 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
-		D41BDBAB272EC81900B4E388 /* Alamofire */ = {
+		D48DD275272FEFB3009513A4 /* YandexMobileMetrica */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D41BDBAA272EC81900B4E388 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		D41BDBAE272EC84B00B4E388 /* YandexMobileMetrica */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			package = D48DD274272FEFB3009513A4 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
 			productName = YandexMobileMetrica;
 		};
-		D41BDBB0272EC84B00B4E388 /* YandexMobileMetricaCrashes */ = {
+		D48DD278272FEFBB009513A4 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D41BDBAD272EC84B00B4E388 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
-			productName = YandexMobileMetricaCrashes;
+			package = D48DD277272FEFBB009513A4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
-		D41BDBC3272ED88300B4E388 /* Neon */ = {
+		D48DD27B272FEFC1009513A4 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D41BDBC2272ED88300B4E388 /* XCRemoteSwiftPackageReference "Neon" */;
-			productName = Neon;
+			package = D48DD27A272FEFC1009513A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		D48DD27E272FF163009513A4 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D48DD27D272FF163009513A4 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
