@@ -16,7 +16,7 @@ struct addEmotionView: View {
     
     @State var text : String = ""
     @State var openView : Bool = false
-    @State var percentage: Float = 79
+    @State var percentage: Float = 100
     
     
     @State var dataSelected : [String]  = []
@@ -49,6 +49,14 @@ struct addEmotionView: View {
                 Button(action: {
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.impactOccurred()
+                    
+                    self.logic.addEmotion(emotion: Logic.Emotion(id: 0,
+                                                                 bright: self.percentage,
+                                                                 date: Date(),
+                                                                 tags: self.dataSelected))
+                    
+                    self.presentationMode.wrappedValue.dismiss()
+
                     
                 }, label: {
                     Image(systemName: "paperplane")
@@ -84,6 +92,8 @@ struct addEmotionView: View {
                         }else{
                             self.dataSelected.append(item)
                         }
+                        
+                        
                         
                     }, label: {
                         

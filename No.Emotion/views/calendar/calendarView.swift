@@ -180,43 +180,69 @@ struct RootView: View {
     }
     private func getColor(date: Date) -> AnyView{
         let random_color_opacity = Double.random(in: 0.4...1.5)
-        let rotation = Double.random(in: 0...360)
-        
-        var colors : [Color] = []
-        
-        for _ in 0...5{
-            let random = Int.random(in: 0...4)
-            
-            if (random == 0){
-                colors.append(.yellow)
-            }
-            
-            if (random == 1){
-                colors.append(.yellow)
-            }
-            
-            if (random == 2){
-                colors.append(.green)
-            }
-            
-            if (random == 3){
-                colors.append(.green)
-            }
-            
-            if (random == 4){
-                colors.append(.red)
-            }
-
-        }
+//        let rotation = Double.random(in: 0...360)
+//
+//        var colors : [Color] = []
+//
+//        for _ in 0...5{
+//            let random = Int.random(in: 0...4)
+//
+//            if (random == 0){
+//                colors.append(.yellow)
+//            }
+//
+//            if (random == 1){
+//                colors.append(.yellow)
+//            }
+//
+//            if (random == 2){
+//                colors.append(.green)
+//            }
+//
+//            if (random == 3){
+//                colors.append(.green)
+//            }
+//
+//            if (random == 4){
+//                colors.append(.red)
+//            }
+//
+//        }
         
         let format : String = "dd.MM.yyyy"
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        if (formatter.string(from: date) == formatter.string(from: Date())){
-            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(0.07))
+        
+        var colors : [Color] = []
+        var bright : [Float] = []
+        for emotion in self.logic.emotions{
+            if (formatter.string(from: date) == formatter.string(from: emotion.date)){
+                for tag in emotion.tags{
+                    colors.append(self.logic.getSmileColor(smile: tag).opacity(Double(emotion.bright)/100))
+                    print(Double(emotion.bright)/100)
+                }
+                bright.append(emotion.bright)
+            }
         }
         
-        return AnyView(AngularGradient(gradient: Gradient(colors: colors), center: .center).blur(radius: 8).opacity(random_color_opacity))
+        var avarage : Float = 0.0
+        
+        if bright.isEmpty {
+            avarage = 0.0
+        }else{
+            var sumBright = bright.reduce(0, +)
+            avarage = (sumBright / Float(bright.count))/100
+        }
+        
+        
+//        if (formatter.string(from: date) == formatter.string(from: Date())){
+//            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(0.07))
+//        }
+        if (colors.count == 0){
+            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(Double(0.07)))
+        }else{
+            return AnyView(AngularGradient(gradient: Gradient(colors: colors), center: .center).blur(radius: 8))
+        }
     }
     
     var body: some View {

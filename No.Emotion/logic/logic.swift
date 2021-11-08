@@ -9,30 +9,29 @@ import Foundation
 import SwiftUI
 
 var LogicAPI: Logic = Logic()
+fileprivate let separator = "\u{FFFF}"
+
 
 class Logic: ObservableObject, Identifiable {
     public var id: Int = 0
     
 //  Usable arrays
-    @Published var emotions : [DayEmotion] = []
+    @Published var emotions : [Emotion] = []
     @Published var monthColors : [Color] = []
     @Published var news : [News] = []
     
-    @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺"]
+    @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺","😂","🥰","🤪","😬","🤢","🤝","🙏","😞"]
     @Published var add : Bool = false
     
     @ObservedObject var network: Network = Network()
         
     public struct Emotion: Identifiable, Hashable{
         var id : Int = 0
-        var title : String = ""
-        var colors : [Color] = []
+        var bright : Float = 0
+        var date : Date = Date()
+        var tags : [String] = []
     }
     
-    public struct DayEmotion: Identifiable, Hashable{
-        var id : Int = 0
-        var date : Date = Date()
-    }
     
     public struct News: Identifiable, Hashable{
         var id : Int = 0
@@ -66,14 +65,40 @@ class Logic: ObservableObject, Identifiable {
         case "😎":
             return .green
         case "🥳":
-            return .purple
+            return .green
         case "🥺":
+            return .orange
+//
+        case "😂":
+            return .green
+        case "🥰":
+            return .green
+        case "🤪":
+            return .green
+        case "😬":
             return .pink
+//
+        case "🤢":
+            return .red
+        case "🤝":
+            return .green
+        case "🙏":
+            return .orange
+        case "😞":
+            return .orange
         default:
             return .clear
         }
         
-        return .clear
+        
+    }
+    
+    func extractTags(tags: String) -> [String]{
+        return tags.components(separatedBy: separator)
+    }
+    
+    func impactTags(tags: [String]) -> String{
+        return tags.joined(separator: separator)
     }
     
     func getTodayNews(){
@@ -81,15 +106,43 @@ class Logic: ObservableObject, Identifiable {
     }
     
     func getEmotions(){
+        RealmAPI.getEmotions()
+    }
+    
+    func impactLine(){
+        let format : String = "MM.yyyy"
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
         
+        self.monthColors.removeAll()
+        
+        for emotion in emotions {
+            if (formatter.string(from: Date()) == formatter.string(from: emotion.date)){
+                for tag in emotion.tags{
+                    self.monthColors.append(self.getSmileColor(smile: tag).opacity(Double(emotion.bright)/100))
+                }
+            }
+        }
+       
     }
     
     func addEmotion(emotion: Emotion){
         
+        let formatter = DateFormatter()
+        formatter.locale =  Locale(identifier: "ru_RU")
+        formatter.dateFormat = "dd.MM.yyyy.HH.mm.ss"
+        
+        let id =  Int(formatter.string(from: emotion.date).replacingOccurrences(of: ".", with: "", options: .literal, range: nil))!
+        
+        RealmAPI.setEmotion(id: id,
+                            tags: self.impactTags(tags: emotion.tags),
+                            date: emotion.date,
+                            bright: emotion.bright)
+        
     }
     
     func deleteEmotion(id: Int){
-        
+        RealmAPI.deleteEmotion(id: id)
     }
 }
 

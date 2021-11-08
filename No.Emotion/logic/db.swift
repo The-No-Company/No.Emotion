@@ -42,4 +42,65 @@ class RealmDB: ObservableObject, Identifiable {
         realm = try! Realm()
     }
     
+    
+    func delete(){
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
+    
+    func deleteEmotion(id: Int) {
+        let realm = try! Realm()
+        let object = realm.objects(Emotion.self).filter("id = \(id)")
+        try! realm.write {
+            realm.delete(object)
+        }
+        self.getEmotions()
+    }
+    
+    func getEmotions(){
+        let realm = try! Realm()
+        let objects = realm.objects(Emotion.self)
+        
+        if (objects.count > 0) {
+            LogicAPI.emotions.removeAll()
+            for i in 0...objects.count - 1 {
+                let current = objects[i]
+                LogicAPI.emotions.append(Logic.Emotion(id: current.id,
+                                                       bright: current.bright,
+                                                       date: current.date,
+                                                       tags: LogicAPI.extractTags(tags: current.tags)
+                                                      ))
+            }
+            
+            LogicAPI.objectWillChange.send()
+            LogicAPI.impactLine()
+        }
+    }
+    
+    func setEmotion(id: Int, tags: String, date: Date, bright: Float){
+        
+        let emotion = Emotion()
+        emotion.date = date
+        emotion.bright = bright
+        emotion.tags = tags
+        emotion.id = id
+        
+        try! realm.write {
+            realm.add(emotion)
+        }
+        
+        self.getEmotions()
+        
+    }
+    
 }
+
+open class Emotion: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var tags : String = ""
+    @objc dynamic var bright :  Float = 0
+    @objc dynamic var date: Date = Date()
+}
+

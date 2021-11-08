@@ -51,11 +51,21 @@ struct Start: View {
                         RootView()
                             .padding(.vertical)
                         Spacer()
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(LinearGradient(gradient: Gradient(colors: [.green, .green, .red, .yellow, .green, .red, .green]), startPoint: .top, endPoint: .bottom))
-                            .frame(width: 6, alignment: .center)
-                            .padding(.vertical)
-                            .blur(radius: 2)
+                        if (!self.logic.monthColors.isEmpty){
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(LinearGradient(gradient: Gradient(colors: self.logic.monthColors), startPoint: .top, endPoint: .bottom))
+                                .frame(width: 6, alignment: .center)
+                                .padding(.vertical)
+                                .blur(radius: 2)
+                                .drawingGroup()
+                        }else{
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.white.opacity(0.7))
+                                .frame(width: 6, alignment: .center)
+                                .padding(.vertical)
+                                .blur(radius: 2)
+                                .drawingGroup()
+                        }
 
                     }.padding(.horizontal)
 
@@ -157,6 +167,11 @@ struct Start: View {
             addEmotionView()
                 .ignoresSafeArea(.keyboard)
 
+        }
+        
+        .onAppear{
+            SettingsAPI.setupPushNotifications()
+            self.logic.getEmotions()
         }
 
         
