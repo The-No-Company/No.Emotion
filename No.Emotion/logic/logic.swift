@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import Alamofire
+import SwiftyJSON
 
 var LogicAPI: Logic = Logic()
 fileprivate let separator = "\u{FFFF}"
@@ -15,7 +17,7 @@ fileprivate let separator = "\u{FFFF}"
 class Logic: ObservableObject, Identifiable {
     public var id: Int = 0
     
-//  Usable arrays
+    //  Usable arrays
     @Published var emotions : [Emotion] = []
     @Published var monthColors : [Color] = []
     @Published var news : [News] = []
@@ -24,7 +26,7 @@ class Logic: ObservableObject, Identifiable {
     @Published var add : Bool = false
     
     @ObservedObject var network: Network = Network()
-        
+    
     public struct Emotion: Identifiable, Hashable{
         var id : Int = 0
         var bright : Float = 0
@@ -40,7 +42,7 @@ class Logic: ObservableObject, Identifiable {
         var image : String = ""
     }
     
-//    Logic data
+    //    Logic data
     func getSmileColor(smile: String) -> Color{
         
         switch smile {
@@ -68,7 +70,6 @@ class Logic: ObservableObject, Identifiable {
             return .green
         case "🥺":
             return .orange
-//
         case "😂":
             return .green
         case "🥰":
@@ -77,7 +78,6 @@ class Logic: ObservableObject, Identifiable {
             return .green
         case "😬":
             return .pink
-//
         case "🤢":
             return .red
         case "🤝":
@@ -101,8 +101,28 @@ class Logic: ObservableObject, Identifiable {
         return tags.joined(separator: separator)
     }
     
-    func getTodayNews(){
-        
+    func getTodayNews(completionHandler: @escaping (_ success:Bool) -> Void){
+        AF.request("https://service.api.thenoco.co/noemotion/all", method: .get).responseJSON { (response) in
+            if (response.value != nil) {
+                let json = JSON(response.value!)
+                let json_string_cache = json.rawString()
+                if (json.count > 0) {
+                    self.news.removeAll()
+                    for i in 0...json.count - 1 {
+                        let object = json[i]
+                        self.news.append(News(id: object["id"].int!, title: object["title"].string!, author: object["subtitle"].string!, image: object["img"].string!))
+                    }
+                    
+                    DispatchQueue.main.async {
+                        completionHandler(true)
+                    }
+                }else{
+                    completionHandler(false)
+                }
+            }else{
+                completionHandler(false)
+            }
+        }
     }
     
     func getEmotions(){
@@ -123,7 +143,7 @@ class Logic: ObservableObject, Identifiable {
                 }
             }
         }
-       
+        
     }
     
     func addEmotion(emotion: Emotion){

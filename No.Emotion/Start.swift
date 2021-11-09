@@ -13,7 +13,7 @@ struct Start: View {
     @Environment(\.calendar) var calendar
     
     @State private var showing_add = false
-    
+    @State var loadNews : Bool = false
     private var header: some View {
         let component = calendar.component(.month, from: Date())
         let formatter = component == 1 ? DateFormatter.monthAndYear : .month
@@ -172,6 +172,11 @@ struct Start: View {
         .onAppear{
             SettingsAPI.setupPushNotifications()
             self.logic.getEmotions()
+            self.logic.getTodayNews { result in
+                if (result){
+                    self.loadNews = result
+                }
+            }
         }
 
         
