@@ -162,7 +162,7 @@ struct CalendarView<DateView>: View where DateView: View {
 struct RootView: View {
     @Environment(\.calendar) var calendar
     @ObservedObject var logic: Logic = LogicAPI
-
+    
     private var year: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
     }
@@ -178,36 +178,51 @@ struct RootView: View {
         
         return false
     }
+    
+    
+    private func today(date: Date) -> Bool{
+        
+        let format : String = "dd.MM.yyyy"
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        
+        if (formatter.string(from: date) == formatter.string(from: Date())){
+            return true
+        }
+        
+        return false
+    }
+    
     private func getColor(date: Date) -> AnyView{
         let random_color_opacity = Double.random(in: 0.4...1.5)
-//        let rotation = Double.random(in: 0...360)
-//
-//        var colors : [Color] = []
-//
-//        for _ in 0...5{
-//            let random = Int.random(in: 0...4)
-//
-//            if (random == 0){
-//                colors.append(.yellow)
-//            }
-//
-//            if (random == 1){
-//                colors.append(.yellow)
-//            }
-//
-//            if (random == 2){
-//                colors.append(.green)
-//            }
-//
-//            if (random == 3){
-//                colors.append(.green)
-//            }
-//
-//            if (random == 4){
-//                colors.append(.red)
-//            }
-//
-//        }
+        //        let rotation = Double.random(in: 0...360)
+        //
+        //        var colors : [Color] = []
+        //
+        //        for _ in 0...5{
+        //            let random = Int.random(in: 0...4)
+        //
+        //            if (random == 0){
+        //                colors.append(.yellow)
+        //            }
+        //
+        //            if (random == 1){
+        //                colors.append(.yellow)
+        //            }
+        //
+        //            if (random == 2){
+        //                colors.append(.green)
+        //            }
+        //
+        //            if (random == 3){
+        //                colors.append(.green)
+        //            }
+        //
+        //            if (random == 4){
+        //                colors.append(.red)
+        //            }
+        //
+        //        }
         
         let format : String = "dd.MM.yyyy"
         let formatter = DateFormatter()
@@ -235,9 +250,9 @@ struct RootView: View {
         }
         
         
-//        if (formatter.string(from: date) == formatter.string(from: Date())){
-//            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(0.07))
-//        }
+        //        if (formatter.string(from: date) == formatter.string(from: Date())){
+        //            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(0.07))
+        //        }
         if (colors.count == 0){
             return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(Double(0.07)))
         }else{
@@ -253,6 +268,7 @@ struct RootView: View {
                 
             }, label: {
                 Text("30")
+                    
                     .foregroundColor(.black)
                     .hidden()
                     .padding(10)
@@ -263,10 +279,20 @@ struct RootView: View {
                     .clipShape(Circle())
                     .padding(.vertical, 4)
                     .overlay(
-                        Text(String(self.calendar.component(.day, from: date)))
-                            .font(Font.custom("Spectral-Bold", size: 16))
-                            .foregroundColor(self.isToday(date: date) == true ? .white : .white)
+                        VStack(spacing: 0){
+                            Text(String(self.calendar.component(.day, from: date)))
+                                .font(Font.custom("Spectral-Bold", size: 16))
+                                .foregroundColor(self.isToday(date: date) == true ? .white : .white)
+                            
+                            if (self.today(date: date)){
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(.white)
+                                    .frame(width: 15, height: 2, alignment: .center)
+                            }
+                        }
+                            
                     )
+                    
             }).buttonStyle(ScaleButtonStyle())
         }
     }

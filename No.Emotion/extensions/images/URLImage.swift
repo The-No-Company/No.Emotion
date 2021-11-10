@@ -169,7 +169,7 @@ public extension URLImage where Placeholder == Image {
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: @escaping (_ error: Error) -> Failure, content: @escaping (_ imageProxy: ImageProxy) -> Content) {
 
@@ -180,7 +180,7 @@ return Image(systemName: "photo")
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+        return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: @escaping (_ error: Error) -> Failure, content: @escaping (_ imageProxy: ImageProxy) -> Content) {
 
@@ -253,7 +253,7 @@ public extension URLImage where Content == Image, Placeholder == Image {
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: @escaping (_ error: Error) -> Failure, content: @escaping (_ imageProxy: ImageProxy) -> Content = { $0.image }) {
 
@@ -264,7 +264,7 @@ return Image(systemName: "photo")
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: @escaping (_ error: Error) -> Failure, content: @escaping (_ imageProxy: ImageProxy) -> Content = { $0.image }) {
 
@@ -337,7 +337,7 @@ public extension URLImage where Placeholder == Image, Failure == Image {
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: Image = {
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
@@ -354,7 +354,7 @@ return Image(systemName: "exclamationmark.triangle")
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: Image = {
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
@@ -391,7 +391,7 @@ public extension URLImage where Content == Image, Placeholder == Image, Failure 
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: Image = {
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
@@ -408,7 +408,7 @@ return Image(systemName: "exclamationmark.triangle")
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 return Image(nsImage: NSImage())
 #else
-return Image(systemName: "photo")
+return Image(uiImage: UIImage(named: "placeholder")!)
 #endif
     }(), failure: Image = {
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)

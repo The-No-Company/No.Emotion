@@ -30,112 +30,114 @@ struct addEmotionView: View {
     
     
     var body: some View {
-        VStack(spacing: 0){
-            
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.clear)
-                .frame(height: 5)
-                .padding(.horizontal, -15)
-            
-            
-            HStack{
+        ScrollView(.vertical, showsIndicators: false){
+            VStack(spacing: 0){
                 
-                Text("Add emotion")
-                    .font(Font.custom("Spectral-Medium", size: 26))
-                
-                Spacer()
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.clear)
+                    .frame(height: 5)
+                    .padding(.horizontal, -15)
                 
                 
-                Button(action: {
-                    let generator = UIImpactFeedbackGenerator(style: .light)
-                    generator.impactOccurred()
+                HStack{
                     
-                    self.logic.addEmotion(emotion: Logic.Emotion(id: 0,
-                                                                 bright: self.percentage,
-                                                                 date: Date(),
-                                                                 tags: self.dataSelected))
+                    Text("Add emotion")
+                        .font(Font.custom("Spectral-Medium", size: 26))
                     
-                    self.presentationMode.wrappedValue.dismiss()
-
+                    Spacer()
                     
-                }, label: {
-                    Image(systemName: "paperplane")
-                        .font(.system(size: 22, weight: .medium, design: .rounded))
-                        .foregroundColor(.white)
-                        .opacity(self.dataSelected.count == 0 ? 0.3 : 1.0)
-                }).buttonStyle(ScaleButtonStyle())
-                
-                
-                
-            }
-            .padding(.horizontal)
-            .padding(.top, 20)
-            
-            HStack{
-                Text("Choose your mood")
-                    .font(.custom("SourceCodePro-Regular", size: 14))
-                    .foregroundColor(Color.secondary.opacity(0.7))
-                Spacer()
-            }
-            .padding(.horizontal)
-            
-            LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(self.logic.smiles, id: \.self) { item in
+                    
                     Button(action: {
                         let generator = UIImpactFeedbackGenerator(style: .light)
                         generator.impactOccurred()
                         
-                        if (self.dataSelected.contains(item)){
-                            if let index = self.dataSelected.firstIndex(of: item){
-                                self.dataSelected.remove(at: index)
-                            }
-                        }else{
-                            self.dataSelected.append(item)
-                        }
+                        self.logic.addEmotion(emotion: Logic.Emotion(id: 0,
+                                                                     bright: self.percentage,
+                                                                     date: Date(),
+                                                                     tags: self.dataSelected))
                         
+                        self.presentationMode.wrappedValue.dismiss()
                         
                         
                     }, label: {
-                        
-                        Text(item)
-                            .font(.system(size: 32))
-                            .padding()
-                            .background(self.dataSelected.contains(item) ? self.logic.getSmileColor(smile: item).opacity(0.3) : Color.secondary.opacity(0.1))
-                            .cornerRadius(8)
-                            .drawingGroup()
-                            
-                    })
-                        .contentShape(Rectangle())
-                        .buttonStyle(ScaleButtonStyle())
+                        Image(systemName: "paperplane")
+                            .font(.system(size: 22, weight: .medium, design: .rounded))
+                            .foregroundColor(.white)
+                            .opacity(self.dataSelected.count == 0 ? 0.3 : 1.0)
+                    }).buttonStyle(ScaleButtonStyle())
+                    
+                    
                     
                 }
-            }
-            .padding(.horizontal)
-            .padding(.vertical)
-            
-            HStack{
-                Text("How bright was the moment?")
-                    .font(.custom("SourceCodePro-Regular", size: 14))
-                    .foregroundColor(Color.secondary.opacity(0.7))
-                Spacer()
-            }
-            .padding(.horizontal)
-            
-            sliderView(percentage: $percentage)
-                .accentColor(Color.secondary.opacity(0.1))
-                .frame(height: 32)
+                .padding(.horizontal)
+                .padding(.top, 20)
+                
+                HStack{
+                    Text("Choose your mood")
+                        .font(.custom("SourceCodePro-Regular", size: 14))
+                        .foregroundColor(Color.secondary.opacity(0.7))
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(self.logic.smiles, id: \.self) { item in
+                        Button(action: {
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                            
+                            if (self.dataSelected.contains(item)){
+                                if let index = self.dataSelected.firstIndex(of: item){
+                                    self.dataSelected.remove(at: index)
+                                }
+                            }else{
+                                self.dataSelected.append(item)
+                            }
+                            
+                            
+                            
+                        }, label: {
+                            
+                            Text(item)
+                                .font(.system(size: 32))
+                                .padding()
+                                .background(self.dataSelected.contains(item) ? self.logic.getSmileColor(smile: item).opacity(0.3) : Color.secondary.opacity(0.1))
+                                .cornerRadius(8)
+                                .drawingGroup()
+                            
+                        })
+                            .contentShape(Rectangle())
+                            .buttonStyle(ScaleButtonStyle())
+                        
+                    }
+                }
                 .padding(.horizontal)
                 .padding(.vertical)
-            
-            HStack{
-                Text("You can add an unlimited number of moments during the day. Write down everything that happens to you - moments of happiness and joy, sadness and sorrow. The more you add, the better the picture will be during the month and we will be able to give you useful advice.")
-                    .font(.custom("SourceCodePro-Regular", size: 14))
-                    .foregroundColor(Color.secondary.opacity(0.7))
+                
+                HStack{
+                    Text("How bright was the moment?")
+                        .font(.custom("SourceCodePro-Regular", size: 14))
+                        .foregroundColor(Color.secondary.opacity(0.7))
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
+                sliderView(percentage: $percentage)
+                    .accentColor(Color.secondary.opacity(0.1))
+                    .frame(height: 32)
+                    .padding(.horizontal)
+                    .padding(.vertical)
+                
+                HStack{
+                    Text("You can add an unlimited number of moments during the day. Write down everything that happens to you - moments of happiness and joy, sadness and sorrow. The more you add, the better the picture will be during the month and we will be able to give you useful advice.")
+                        .font(.custom("SourceCodePro-Regular", size: 14))
+                        .foregroundColor(Color.secondary.opacity(0.7))
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
                 Spacer()
             }
-            .padding(.horizontal)
-            
-            Spacer()
         }.onAppear{
             UITextView.appearance().backgroundColor = .clear
         }

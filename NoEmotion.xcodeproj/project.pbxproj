@@ -76,6 +76,7 @@
 		D4AD7790273B20A9001A681A /* CircleProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD7768273B20A9001A681A /* CircleProgressShape.swift */; };
 		D4AD7791273B20A9001A681A /* CircleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD7769273B20A9001A681A /* CircleActivityView.swift */; };
 		D4AD7792273B20A9001A681A /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD776A273B20A9001A681A /* CircleProgressView.swift */; };
+		D4AD7794273B27BE001A681A /* indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD7793273B27BE001A681A /* indicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 		D4AD7768273B20A9001A681A /* CircleProgressShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressShape.swift; sourceTree = "<group>"; };
 		D4AD7769273B20A9001A681A /* CircleActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleActivityView.swift; sourceTree = "<group>"; };
 		D4AD776A273B20A9001A681A /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
+		D4AD7793273B27BE001A681A /* indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +272,7 @@
 				D41BDB90272EC5C100B4E388 /* gestures.swift */,
 				D41BDB91272EC5C100B4E388 /* colors.swift */,
 				D41BDB92272EC5C100B4E388 /* search.swift */,
+				D4AD7793273B27BE001A681A /* indicator.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				D4AD7787273B20A9001A681A /* DownloadService.swift in Sources */,
 				D41BDB98272EC5C100B4E388 /* search.swift in Sources */,
 				D41BDB94272EC5C100B4E388 /* date.swift in Sources */,
+				D4AD7794273B27BE001A681A /* indicator.swift in Sources */,
 				D4AD7791273B20A9001A681A /* CircleActivityView.swift in Sources */,
 				D4AD7792273B20A9001A681A /* CircleProgressView.swift in Sources */,
 				D4AD778B273B20A9001A681A /* ImageProxy.swift in Sources */,

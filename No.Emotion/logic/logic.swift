@@ -22,7 +22,7 @@ class Logic: ObservableObject, Identifiable {
     @Published var monthColors : [Color] = []
     @Published var news : [News] = []
     
-    @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺","😂","🥰","🤪","😬","🤢","🤝","🙏","😞"]
+    @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺","😂","🥰","🤪","😬","🤢","🤝","🙏","😞","😴","🤑","😩","🤩"]
     @Published var add : Bool = false
     
     @ObservedObject var network: Network = Network()
@@ -77,7 +77,7 @@ class Logic: ObservableObject, Identifiable {
         case "🤪":
             return .green
         case "😬":
-            return .pink
+            return .orange
         case "🤢":
             return .red
         case "🤝":
@@ -86,6 +86,14 @@ class Logic: ObservableObject, Identifiable {
             return .orange
         case "😞":
             return .orange
+        case "😴":
+            return .orange
+        case "🤑":
+            return .green
+        case "😩":
+            return .orange
+        case "🤩":
+            return .green
         default:
             return .clear
         }
@@ -110,7 +118,9 @@ class Logic: ObservableObject, Identifiable {
                     self.news.removeAll()
                     for i in 0...json.count - 1 {
                         let object = json[i]
-                        self.news.append(News(id: object["id"].int!, title: object["title"].string!, author: object["subtitle"].string!, image: object["img"].string!))
+                        withAnimation{
+                            self.news.append(News(id: object["id"].int!, title: object["title"].string!, author: object["subtitle"].string!, image: object["img"].string!))
+                        }
                     }
                     
                     DispatchQueue.main.async {

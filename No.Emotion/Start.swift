@@ -85,9 +85,15 @@ struct Start: View {
                     .padding(.horizontal)
                     .padding(.bottom)
 
-                    newsView()
-                        .padding(.horizontal)
-                        .padding(.bottom)
+                    if (self.loadNews){
+                        newsView()
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                    }else{
+                        ActivityIndicator(isAnimating: .constant(true), style: .large)
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                    }
 
 
                     HStack{
@@ -174,7 +180,11 @@ struct Start: View {
             self.logic.getEmotions()
             self.logic.getTodayNews { result in
                 if (result){
-                    self.loadNews = result
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        withAnimation{
+                            self.loadNews = result
+                        }
+                    }
                 }
             }
         }
