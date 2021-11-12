@@ -25,7 +25,7 @@ class Logic: ObservableObject, Identifiable {
     @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺","😂","🥰","🤪","😬","🤢","🤝","🙏","😞","😴","🤑","😩","🤩"]
     @Published var add : Bool = false
     
-    @ObservedObject var network: Network = Network()
+
     
     public struct Emotion: Identifiable, Hashable{
         var id : Int = 0
@@ -158,6 +158,8 @@ class Logic: ObservableObject, Identifiable {
     
     func addEmotion(emotion: Emotion){
         
+        AnalyticsAPI.send(action: "addEmotion")
+        
         let formatter = DateFormatter()
         formatter.locale =  Locale(identifier: "ru_RU")
         formatter.dateFormat = "dd.MM.yyyy.HH.mm.ss"
@@ -176,7 +178,3 @@ class Logic: ObservableObject, Identifiable {
     }
 }
 
-class Network: ObservableObject, Identifiable {
-    public var id: Int = 0
-    
-}

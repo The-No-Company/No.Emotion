@@ -10,6 +10,8 @@ import SwiftUI
 struct Start: View {
     
     @ObservedObject var logic: Logic = LogicAPI
+    @ObservedObject var analytics: Analytics = AnalyticsAPI
+
     @Environment(\.calendar) var calendar
     
     @State private var showing_add = false
@@ -178,6 +180,8 @@ struct Start: View {
         .onAppear{
             SettingsAPI.setupPushNotifications()
             self.logic.getEmotions()
+            self.analytics.register()
+            self.analytics.send(action: "open")
             self.logic.getTodayNews { result in
                 if (result){
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

@@ -77,6 +77,7 @@
 		D4AD7791273B20A9001A681A /* CircleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD7769273B20A9001A681A /* CircleActivityView.swift */; };
 		D4AD7792273B20A9001A681A /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD776A273B20A9001A681A /* CircleProgressView.swift */; };
 		D4AD7794273B27BE001A681A /* indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD7793273B27BE001A681A /* indicator.swift */; };
+		D4AD7796273C4AE1001A681A /* analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AD7795273C4AE1001A681A /* analytics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		D4AD7769273B20A9001A681A /* CircleActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleActivityView.swift; sourceTree = "<group>"; };
 		D4AD776A273B20A9001A681A /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		D4AD7793273B27BE001A681A /* indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indicator.swift; sourceTree = "<group>"; };
+		D4AD7795273C4AE1001A681A /* analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = analytics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +306,7 @@
 				D41BDBB4272EC87600B4E388 /* logic.swift */,
 				D41BDBB8272EC8A700B4E388 /* settings.swift */,
 				D41BDBBA272EC8D000B4E388 /* db.swift */,
+				D4AD7795273C4AE1001A681A /* analytics.swift */,
 			);
 			path = logic;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				D4AD7770273B20A9001A681A /* CGImage+Extensions.swift in Sources */,
 				D4AD777A273B20A9001A681A /* FileManager+Extensions.swift in Sources */,
 				D41BDB65272EC58C00B4E388 /* Start.swift in Sources */,
+				D4AD7796273C4AE1001A681A /* analytics.swift in Sources */,
 				D4AD778D273B20A9001A681A /* URLImage.swift in Sources */,
 				D41BDBB5272EC87600B4E388 /* logic.swift in Sources */,
 				D4AD778E273B20A9001A681A /* AnimatedImageView.swift in Sources */,
