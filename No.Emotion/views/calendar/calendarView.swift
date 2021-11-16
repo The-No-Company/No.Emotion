@@ -234,7 +234,7 @@ struct RootView: View {
             if (formatter.string(from: date) == formatter.string(from: emotion.date)){
                 for tag in emotion.tags{
                     colors.append(self.logic.getSmileColor(smile: tag).opacity(Double(emotion.bright)/100))
-                    print(Double(emotion.bright)/100)
+//                    print(Double(emotion.bright)/100)
                 }
                 bright.append(emotion.bright)
             }

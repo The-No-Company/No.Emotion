@@ -14,8 +14,11 @@ struct Start: View {
 
     @Environment(\.calendar) var calendar
     
-    @State private var showing_add = false
+    @State var showing_add = false
     @State var loadNews : Bool = false
+    
+    @State var openType : Int = 0
+    
     private var header: some View {
         let component = calendar.component(.month, from: Date())
         let formatter = component == 1 ? DateFormatter.monthAndYear : .month
@@ -39,6 +42,8 @@ struct Start: View {
                     Button(action: {
                         let generator = UIImpactFeedbackGenerator(style: .light)
                         generator.impactOccurred()
+                        self.openType = 0
+                        self.logic.add.toggle()
                     }, label: {
                         Image(systemName: "gear")
                             .font(.system(size: 20, weight: .medium, design: .rounded))
@@ -130,7 +135,7 @@ struct Start: View {
                     Button(action: {
                         let generator = UIImpactFeedbackGenerator(style: .light)
                         generator.impactOccurred()
-                        
+                        self.openType = 1
                         self.logic.add.toggle()
                         
                     }, label: {
@@ -172,9 +177,15 @@ struct Start: View {
         .sheet(isPresented: self.$logic.add) {
            
         } content: {
-            addEmotionView()
-                .ignoresSafeArea(.keyboard)
-
+            if (self.openType == 1){
+                addEmotionView()
+                    .ignoresSafeArea(.keyboard)
+            }
+            
+            if (self.openType == 0){
+                settingsView()
+                    .ignoresSafeArea(.keyboard)
+            }
         }
         
         .onAppear{

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C702DCA2743E05A0021E688 /* settingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C702DC92743E05A0021E688 /* settingsView.swift */; };
+		2C702DCF2743FA6E0021E688 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C702DCE2743FA6E0021E688 /* CloudKit.framework */; };
+		7B59D9CFF48C4C5DA8ADFCA8 /* Pods_NoEmotionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA9C2E8CA7530B27F94FF4D /* Pods_NoEmotionTests.framework */; };
+		7D00620F2ED436A367221ACC /* Pods_NoEmotion_NoEmotionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6BD71A552508936141BFCE /* Pods_NoEmotion_NoEmotionUITests.framework */; };
+		8F8DDE22614A3693ABA48E24 /* Pods_NoEmotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACF8380A6567545B7AC84E0 /* Pods_NoEmotion.framework */; };
 		D41BDB63272EC58C00B4E388 /* NoEmotionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB62272EC58C00B4E388 /* NoEmotionApp.swift */; };
 		D41BDB65272EC58C00B4E388 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDB64272EC58C00B4E388 /* Start.swift */; };
 		D41BDB67272EC58E00B4E388 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB66272EC58E00B4E388 /* Assets.xcassets */; };
@@ -24,14 +29,12 @@
 		D41BDB9D272EC5CB00B4E388 /* SourceCodeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9B272EC5CB00B4E388 /* SourceCodeRegular.ttf */; };
 		D41BDBA0272EC6B600B4E388 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D41BDB9F272EC6B600B4E388 /* Launch Screen.storyboard */; };
 		D41BDBB5272EC87600B4E388 /* logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB4272EC87600B4E388 /* logic.swift */; };
-		D41BDBB7272EC89600B4E388 /* settingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB6272EC89600B4E388 /* settingsView.swift */; };
 		D41BDBB9272EC8A700B4E388 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBB8272EC8A700B4E388 /* settings.swift */; };
 		D41BDBBB272EC8D000B4E388 /* db.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBBA272EC8D000B4E388 /* db.swift */; };
 		D41BDBBE272EC95600B4E388 /* welcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBBD272EC95600B4E388 /* welcomeView.swift */; };
 		D41BDBC1272ECAC100B4E388 /* calendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBC0272ECAC100B4E388 /* calendarView.swift */; };
 		D41BDBC7272F098600B4E388 /* newsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BDBC6272F098600B4E388 /* newsView.swift */; };
 		D4472790272F4595007EF947 /* addEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D447278F272F4595007EF947 /* addEmotionView.swift */; };
-		D48DD273272FEFA8009513A4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD272272FEFA8009513A4 /* RealmSwift */; };
 		D48DD276272FEFB3009513A4 /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD275272FEFB3009513A4 /* YandexMobileMetrica */; };
 		D48DD279272FEFBB009513A4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD278272FEFBB009513A4 /* Alamofire */; };
 		D48DD27C272FEFC1009513A4 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD27B272FEFC1009513A4 /* SwiftyJSON */; };
@@ -98,6 +101,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B6BD71A552508936141BFCE /* Pods_NoEmotion_NoEmotionUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoEmotion_NoEmotionUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C702DC92743E05A0021E688 /* settingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsView.swift; sourceTree = "<group>"; };
+		2C702DCE2743FA6E0021E688 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		40EA2FA22F43CF23DBE8BABD /* Pods-NoEmotionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotionTests.debug.xcconfig"; path = "Target Support Files/Pods-NoEmotionTests/Pods-NoEmotionTests.debug.xcconfig"; sourceTree = "<group>"; };
+		42E6E773CCBCB57F1BE53722 /* Pods-NoEmotion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotion.debug.xcconfig"; path = "Target Support Files/Pods-NoEmotion/Pods-NoEmotion.debug.xcconfig"; sourceTree = "<group>"; };
+		5C91F54578848DFCC2EBAA8D /* Pods-NoEmotion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotion.release.xcconfig"; path = "Target Support Files/Pods-NoEmotion/Pods-NoEmotion.release.xcconfig"; sourceTree = "<group>"; };
+		AA8738363509FF6574DC32B7 /* Pods-NoEmotion-NoEmotionUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotion-NoEmotionUITests.debug.xcconfig"; path = "Target Support Files/Pods-NoEmotion-NoEmotionUITests/Pods-NoEmotion-NoEmotionUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AEA9C2E8CA7530B27F94FF4D /* Pods_NoEmotionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoEmotionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41BDB5F272EC58C00B4E388 /* NoEmotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoEmotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41BDB62272EC58C00B4E388 /* NoEmotionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoEmotionApp.swift; sourceTree = "<group>"; };
 		D41BDB64272EC58C00B4E388 /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
@@ -120,7 +131,6 @@
 		D41BDB9F272EC6B600B4E388 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D41BDBA1272EC79700B4E388 /* No.Emotion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = No.Emotion.entitlements; sourceTree = "<group>"; };
 		D41BDBB4272EC87600B4E388 /* logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logic.swift; sourceTree = "<group>"; };
-		D41BDBB6272EC89600B4E388 /* settingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsView.swift; sourceTree = "<group>"; };
 		D41BDBB8272EC8A700B4E388 /* settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
 		D41BDBBA272EC8D000B4E388 /* db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = db.swift; sourceTree = "<group>"; };
 		D41BDBBD272EC95600B4E388 /* welcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcomeView.swift; sourceTree = "<group>"; };
@@ -169,6 +179,9 @@
 		D4AD776A273B20A9001A681A /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		D4AD7793273B27BE001A681A /* indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indicator.swift; sourceTree = "<group>"; };
 		D4AD7795273C4AE1001A681A /* analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = analytics.swift; sourceTree = "<group>"; };
+		F4443DEAFB35727ECD794E1C /* Pods-NoEmotion-NoEmotionUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotion-NoEmotionUITests.release.xcconfig"; path = "Target Support Files/Pods-NoEmotion-NoEmotionUITests/Pods-NoEmotion-NoEmotionUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FA706BECBDCA7A3B86B66AEA /* Pods-NoEmotionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotionTests.release.xcconfig"; path = "Target Support Files/Pods-NoEmotionTests/Pods-NoEmotionTests.release.xcconfig"; sourceTree = "<group>"; };
+		FACF8380A6567545B7AC84E0 /* Pods_NoEmotion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoEmotion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,10 +190,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D48DD279272FEFBB009513A4 /* Alamofire in Frameworks */,
-				D48DD273272FEFA8009513A4 /* RealmSwift in Frameworks */,
 				D48DD27F272FF163009513A4 /* Introspect in Frameworks */,
 				D48DD27C272FEFC1009513A4 /* SwiftyJSON in Frameworks */,
+				2C702DCF2743FA6E0021E688 /* CloudKit.framework in Frameworks */,
 				D48DD276272FEFB3009513A4 /* YandexMobileMetrica in Frameworks */,
+				8F8DDE22614A3693ABA48E24 /* Pods_NoEmotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B59D9CFF48C4C5DA8ADFCA8 /* Pods_NoEmotionTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,12 +210,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D00620F2ED436A367221ACC /* Pods_NoEmotion_NoEmotionUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C702DC82743E03B0021E688 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				2C702DC92743E05A0021E688 /* settingsView.swift */,
+			);
+			path = settings;
+			sourceTree = "<group>";
+		};
+		BF2089106799139E3F7431AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42E6E773CCBCB57F1BE53722 /* Pods-NoEmotion.debug.xcconfig */,
+				5C91F54578848DFCC2EBAA8D /* Pods-NoEmotion.release.xcconfig */,
+				AA8738363509FF6574DC32B7 /* Pods-NoEmotion-NoEmotionUITests.debug.xcconfig */,
+				F4443DEAFB35727ECD794E1C /* Pods-NoEmotion-NoEmotionUITests.release.xcconfig */,
+				40EA2FA22F43CF23DBE8BABD /* Pods-NoEmotionTests.debug.xcconfig */,
+				FA706BECBDCA7A3B86B66AEA /* Pods-NoEmotionTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D41BDB56272EC58C00B4E388 = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +245,8 @@
 				D41BDB72272EC58E00B4E388 /* No.EmotionTests */,
 				D41BDB7C272EC58E00B4E388 /* No.EmotionUITests */,
 				D41BDB60272EC58C00B4E388 /* Products */,
+				BF2089106799139E3F7431AB /* Pods */,
+				FE0E2AAE51AD0E111775CF3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -291,11 +330,11 @@
 		D41BDBB2272EC86200B4E388 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				2C702DC82743E03B0021E688 /* settings */,
 				D447278E272F4582007EF947 /* addEmotion */,
 				D41BDBC5272F097A00B4E388 /* news */,
 				D41BDBBF272ECAB400B4E388 /* calendar */,
 				D41BDBBC272EC94B00B4E388 /* welcome */,
-				D41BDBB6272EC89600B4E388 /* settingsView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -510,6 +549,17 @@
 			path = Circle;
 			sourceTree = "<group>";
 		};
+		FE0E2AAE51AD0E111775CF3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C702DCE2743FA6E0021E688 /* CloudKit.framework */,
+				FACF8380A6567545B7AC84E0 /* Pods_NoEmotion.framework */,
+				2B6BD71A552508936141BFCE /* Pods_NoEmotion_NoEmotionUITests.framework */,
+				AEA9C2E8CA7530B27F94FF4D /* Pods_NoEmotionTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -517,9 +567,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D41BDB83272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotion" */;
 			buildPhases = (
+				11940BEEA3FB26F9F60067C4 /* [CP] Check Pods Manifest.lock */,
 				D41BDB5B272EC58C00B4E388 /* Sources */,
 				D41BDB5C272EC58C00B4E388 /* Frameworks */,
 				D41BDB5D272EC58C00B4E388 /* Resources */,
+				D30CEEA19A4D24CE655DAF33 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -527,7 +579,6 @@
 			);
 			name = NoEmotion;
 			packageProductDependencies = (
-				D48DD272272FEFA8009513A4 /* RealmSwift */,
 				D48DD275272FEFB3009513A4 /* YandexMobileMetrica */,
 				D48DD278272FEFBB009513A4 /* Alamofire */,
 				D48DD27B272FEFC1009513A4 /* SwiftyJSON */,
@@ -541,6 +592,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D41BDB86272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotionTests" */;
 			buildPhases = (
+				F88CCC56F8059920D40CE23C /* [CP] Check Pods Manifest.lock */,
 				D41BDB6B272EC58E00B4E388 /* Sources */,
 				D41BDB6C272EC58E00B4E388 /* Frameworks */,
 				D41BDB6D272EC58E00B4E388 /* Resources */,
@@ -559,9 +611,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D41BDB89272EC58E00B4E388 /* Build configuration list for PBXNativeTarget "NoEmotionUITests" */;
 			buildPhases = (
+				5A9617D52E3A4659BF48DD23 /* [CP] Check Pods Manifest.lock */,
 				D41BDB75272EC58E00B4E388 /* Sources */,
 				D41BDB76272EC58E00B4E388 /* Frameworks */,
 				D41BDB77272EC58E00B4E388 /* Resources */,
+				E6915CBB909872B7C6AA07FD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -606,7 +660,6 @@
 			);
 			mainGroup = D41BDB56272EC58C00B4E388;
 			packageReferences = (
-				D48DD271272FEFA8009513A4 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				D48DD274272FEFB3009513A4 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
 				D48DD277272FEFBB009513A4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D48DD27A272FEFC1009513A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
@@ -652,11 +705,115 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		11940BEEA3FB26F9F60067C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoEmotion-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A9617D52E3A4659BF48DD23 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoEmotion-NoEmotionUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D30CEEA19A4D24CE655DAF33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoEmotion/Pods-NoEmotion-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoEmotion/Pods-NoEmotion-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoEmotion/Pods-NoEmotion-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6915CBB909872B7C6AA07FD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoEmotion-NoEmotionUITests/Pods-NoEmotion-NoEmotionUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoEmotion-NoEmotionUITests/Pods-NoEmotion-NoEmotionUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoEmotion-NoEmotionUITests/Pods-NoEmotion-NoEmotionUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F88CCC56F8059920D40CE23C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoEmotionTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D41BDB5B272EC58C00B4E388 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C702DCA2743E05A0021E688 /* settingsView.swift in Sources */,
 				D4AD7774273B20A9001A681A /* ImageSource.swift in Sources */,
 				D4AD776B273B20A9001A681A /* URLImageService.swift in Sources */,
 				D4AD7771273B20A9001A681A /* Log.swift in Sources */,
@@ -694,7 +851,6 @@
 				D4AD778A273B20A9001A681A /* ImageDownloadHandler.swift in Sources */,
 				D41BDB63272EC58C00B4E388 /* NoEmotionApp.swift in Sources */,
 				D41BDBC7272F098600B4E388 /* newsView.swift in Sources */,
-				D41BDBB7272EC89600B4E388 /* settingsView.swift in Sources */,
 				D4AD7773273B20A9001A681A /* Version.swift in Sources */,
 				D4AD7772273B20A9001A681A /* CacheHelper.swift in Sources */,
 				D4AD778F273B20A9001A681A /* ProgressView.swift in Sources */,
@@ -869,6 +1025,7 @@
 		};
 		D41BDB84272EC58E00B4E388 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42E6E773CCBCB57F1BE53722 /* Pods-NoEmotion.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -904,6 +1061,7 @@
 		};
 		D41BDB85272EC58E00B4E388 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C91F54578848DFCC2EBAA8D /* Pods-NoEmotion.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -939,6 +1097,7 @@
 		};
 		D41BDB87272EC58E00B4E388 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40EA2FA22F43CF23DBE8BABD /* Pods-NoEmotionTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -964,6 +1123,7 @@
 		};
 		D41BDB88272EC58E00B4E388 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA706BECBDCA7A3B86B66AEA /* Pods-NoEmotionTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -989,6 +1149,7 @@
 		};
 		D41BDB8A272EC58E00B4E388 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA8738363509FF6574DC32B7 /* Pods-NoEmotion-NoEmotionUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1012,6 +1173,7 @@
 		};
 		D41BDB8B272EC58E00B4E388 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4443DEAFB35727ECD794E1C /* Pods-NoEmotion-NoEmotionUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1075,14 +1237,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D48DD271272FEFA8009513A4 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		D48DD274272FEFB3009513A4 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
@@ -1118,11 +1272,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D48DD272272FEFA8009513A4 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D48DD271272FEFA8009513A4 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
-		};
 		D48DD275272FEFB3009513A4 /* YandexMobileMetrica */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D48DD274272FEFB3009513A4 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;

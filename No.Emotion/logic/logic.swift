@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Alamofire
 import SwiftyJSON
+import IceCream
 
 var LogicAPI: Logic = Logic()
 fileprivate let separator = "\u{FFFF}"
@@ -24,8 +25,8 @@ class Logic: ObservableObject, Identifiable {
     
     @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺","😂","🥰","🤪","😬","🤢","🤝","🙏","😞","😴","🤑","😩","🤩"]
     @Published var add : Bool = false
+   
     
-
     
     public struct Emotion: Identifiable, Hashable{
         var id : Int = 0
@@ -176,5 +177,7 @@ class Logic: ObservableObject, Identifiable {
     func deleteEmotion(id: Int){
         RealmAPI.deleteEmotion(id: id)
     }
+    
 }
+
 
