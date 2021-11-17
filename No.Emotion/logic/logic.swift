@@ -28,6 +28,7 @@ class Logic: ObservableObject, Identifiable {
    
     
     
+    
     public struct Emotion: Identifiable, Hashable{
         var id : Int = 0
         var bright : Float = 0
@@ -108,6 +109,21 @@ class Logic: ObservableObject, Identifiable {
     
     func impactTags(tags: [String]) -> String{
         return tags.joined(separator: separator)
+    }
+    
+    func getSettings(completionHandler: @escaping (_ success:Bool) -> Void){
+        AF.request("https://service.api.thenoco.co/noemotion/settings", method: .get).responseJSON { (response) in
+            if (response.value != nil) {
+                let json = JSON(response.value!)
+                print(json)
+                
+                SettingsAPI.policy = json["policy"].string!
+                SettingsAPI.shareURL = json["shareURL"].string!
+                SettingsAPI.rate = json["rate"].string!
+                SettingsAPI.feedback = json["feedback"].string!
+                SettingsAPI.terms = json["terms"].string!
+            }
+        }
     }
     
     func getTodayNews(completionHandler: @escaping (_ success:Bool) -> Void){

@@ -42,6 +42,11 @@ class Analytics: ObservableObject, Identifiable {
             }
             return
         }
+        
+        UserDefaults.standard.set(true, forKey: "icloud")
+        UserDefaults.standard.set(true, forKey: "haptic")
+        UserDefaults.standard.set(true, forKey: "notifications")
+
 
         AF.request("\(self.server)register", method: .get, parameters: ["app" : self.application]).responseJSON { (response) in
             if (response.value != nil) {

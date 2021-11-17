@@ -57,6 +57,12 @@ var SettingsAPI: Settings = Settings()
 
 class Settings: ObservableObject, Identifiable {
     public var id: Int = 0
+    public var shareURL : String = ""
+    public var policy : String = ""
+    public var feedback : String = ""
+    public var terms : String = ""
+    public var rate : String = ""
+
     
     func setupPushNotifications() {
         UIApplication.shared.applicationIconBadgeNumber = 0
@@ -116,5 +122,42 @@ enum PushNotification: String, CaseIterable {
             components.hour = 21
         }
         return components
+    }
+}
+
+var IconNamesAPI: IconNames = IconNames()
+
+
+class IconNames: ObservableObject, Identifiable  {
+    var iconNames: [String?] = [nil]
+    //exact index we're at inside our icon names
+    @Published var currentIndex = 0
+    
+    init() {
+        getAlternateIconNames()
+        
+        if let currentIcon = UIApplication.shared.alternateIconName{
+            self.currentIndex = iconNames.firstIndex(of: currentIcon) ?? 0
+        }
+    }
+    
+    func getAlternateIconNames(){
+    //looking into our info.plist file to locate the specific Bundle with our icons
+            if let icons = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String: Any],
+                let alternateIcons = icons["CFBundleAlternateIcons"] as? [String: Any]
+            {
+                     
+                 for (_, value) in alternateIcons{
+                    //Accessing the name of icon list inside the dictionary
+                     guard let iconList = value as? Dictionary<String,Any> else{return}
+                     //Accessing the name of icon files
+                     guard let iconFiles = iconList["CFBundleIconFiles"] as? [String]
+                         else{return}
+                         //Accessing the name of the icon
+                     guard let icon = iconFiles.first else{return}
+                     iconNames.append(icon)
+        
+                 }
+            }
     }
 }

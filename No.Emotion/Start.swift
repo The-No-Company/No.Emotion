@@ -193,6 +193,11 @@ struct Start: View {
             self.logic.getEmotions()
             self.analytics.register()
             self.analytics.send(action: "open")
+            self.logic.getSettings { result in
+                if (result){
+                    
+                }
+            }
             self.logic.getTodayNews { result in
                 if (result){
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

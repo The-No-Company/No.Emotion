@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 struct settingsView: View {
     
     @ObservedObject var logic: Logic = LogicAPI
     @Environment(\.presentationMode) private var presentationMode
     
-    @State private var icloud : Bool = true
-    @State private var haptic : Bool = true
-    @State private var notifications : Bool = true
+    @State  var icloud : Bool = true
+    @State  var haptic : Bool = true
+    @State  var notifications : Bool = true
+    
+    @Environment(\.openURL) var openURL
     
     init(){
         UISwitch.appearance().thumbTintColor = UIColor.black.withAlphaComponent(0.85)
@@ -87,6 +90,9 @@ struct settingsView: View {
                                     .accentColor(Color.white)
                             }
                             
+                        }.onChange(of: Just(self.haptic)) { result in
+                            print("Haptic - \(self.haptic)")
+                            UserDefaults.standard.set(self.haptic, forKey: "haptic")
                         }
                         
                         RoundedRectangle(cornerRadius: 8)
@@ -109,6 +115,9 @@ struct settingsView: View {
                                     .accentColor(Color.white)
                             }
                             
+                        }.onChange(of: Just(self.notifications)) { result in
+                            print("Notifications - \(self.notifications)")
+                            UserDefaults.standard.set(self.notifications, forKey: "notifications")
                         }
                         
                         RoundedRectangle(cornerRadius: 8)
@@ -131,6 +140,9 @@ struct settingsView: View {
                                     .accentColor(Color.white)
                             }
                             
+                        }.onChange(of: Just(self.icloud)) { result in
+                            print("iCloud - \(self.icloud)")
+                            UserDefaults.standard.set(self.icloud, forKey: "icloud")
                         }
                         
                         RoundedRectangle(cornerRadius: 8)
@@ -139,16 +151,17 @@ struct settingsView: View {
                             .padding(.vertical, 10)
                         
                         HStack{
-                            Text("Icon")
+                            Text("Icons: ")
                                 .font(.custom("SourceCodePro-Regular", size: 14))
                                 .fixedSize()
                             
                             Spacer()
-                            
-                           Image(systemName: "chevron.right")
-                                .foregroundColor(Color.white)
-                            
-                        }.padding(.vertical, 5)
+
+                        }
+                        
+                        
+                        iconsView()
+                            .padding(.vertical)
                         
                         
                     }
@@ -158,60 +171,7 @@ struct settingsView: View {
                     .cornerRadius(8)
                     .padding(.horizontal, 20)
                     
-                    VStack(spacing: 10){
-                        HStack{
-                            Text("Community")
-                                .font(Font.custom("Spectral-Medium", size: 20))
-                            
-                            Spacer()
-                        }
-                        .padding(.horizontal, 20)
-                        
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.secondary.opacity(0.2))
-                            .padding(.horizontal, 20)
-                            .frame(height: 2)
-                        
-                    }
-                    .padding(.bottom, 10)
-                    .padding(.top, 20)
-                    
-                    VStack(spacing: 0){
-                        HStack{
-                            Text("Share with Your Friends")
-                                .font(.custom("SourceCodePro-Regular", size: 14))
-                                .fixedSize()
-                            
-                            Spacer()
-                            
-                           Image(systemName: "chevron.right")
-                                .foregroundColor(Color.white)
-                            
-                        }.padding(.vertical, 5)
-                        
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.secondary.opacity(0.2))
-                            .frame(height: 2)
-                            .padding(.vertical, 10)
-                        
-                        HStack{
-                            Text("Rate Us on the App Store")
-                                .font(.custom("SourceCodePro-Regular", size: 14))
-                                .fixedSize()
-                            
-                            Spacer()
-                            
-                           Image(systemName: "chevron.right")
-                                .foregroundColor(Color.white)
-                            
-                        }.padding(.vertical, 5)
-                        
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .background(Color.init(hex: "2A2A2A"))
-                    .cornerRadius(8)
-                    .padding(.horizontal, 20)
+                 
                     
                     VStack(spacing: 10){
                         HStack{
@@ -239,10 +199,14 @@ struct settingsView: View {
                             
                             Spacer()
                             
-                           Image(systemName: "chevron.right")
+                            Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                             
-                        }.padding(.vertical, 5)
+                        }
+                        .padding(.vertical, 5)
+                        .onTapGesture {
+                            openURL(URL(string: SettingsAPI.feedback)!)
+                        }
                         
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.secondary.opacity(0.2))
@@ -256,7 +220,7 @@ struct settingsView: View {
                             
                             Spacer()
                             
-                           Image(systemName: "chevron.right")
+                            Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                             
                         }.padding(.vertical, 5)
@@ -273,10 +237,14 @@ struct settingsView: View {
                             
                             Spacer()
                             
-                           Image(systemName: "chevron.right")
+                            Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                             
-                        }.padding(.vertical, 5)
+                        }
+                        .padding(.vertical, 5)
+                        .onTapGesture {
+                            openURL(URL(string: SettingsAPI.terms)!)
+                        }
                         
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.secondary.opacity(0.2))
@@ -290,10 +258,14 @@ struct settingsView: View {
                             
                             Spacer()
                             
-                           Image(systemName: "chevron.right")
+                            Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                             
-                        }.padding(.vertical, 5)
+                        }
+                        .padding(.vertical, 5)
+                        .onTapGesture {
+                            openURL(URL(string: SettingsAPI.policy)!)
+                        }
                         
                     }
                     .padding(.horizontal)
@@ -301,10 +273,59 @@ struct settingsView: View {
                     .background(Color.init(hex: "2A2A2A"))
                     .cornerRadius(8)
                     .padding(.horizontal, 20)
-
                     
+                    
+                    VStack(spacing: 10){
+                        HStack{
+                            Text("Community")
+                                .font(Font.custom("Spectral-Medium", size: 20))
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.secondary.opacity(0.2))
+                            .padding(.horizontal, 20)
+                            .frame(height: 2)
+                        
+                    }
+                    .padding(.bottom, 10)
+                    .padding(.top, 20)
+                    
+                    VStack(spacing: 0){
+                        
+                        HStack{
+                            Text("Rate Us on the App Store")
+                                .font(.custom("SourceCodePro-Regular", size: 14))
+                                .fixedSize()
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(Color.white)
+                            
+                        }
+                        .padding(.vertical, 5)
+                        .onTapGesture {
+                            openURL(URL(string: SettingsAPI.rate)!)
+                        }
+                        
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
+                    .background(Color.init(hex: "2A2A2A"))
+                    .cornerRadius(8)
+                    .padding(.horizontal, 20)
                 }
             }
+        }.onAppear{
+            print("openSettings")
+            
+            self.haptic = UserDefaults.standard.bool(forKey: "haptic")
+            self.icloud = UserDefaults.standard.bool(forKey: "icloud")
+            self.notifications = UserDefaults.standard.bool(forKey: "notifications")
+            
         }
     }
 }
