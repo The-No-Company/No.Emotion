@@ -40,6 +40,17 @@
 		D46708362745797F0022AEAE /* Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = D46708322745797E0022AEAE /* Dark.png */; };
 		D46708372745797F0022AEAE /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = D46708332745797E0022AEAE /* Green.png */; };
 		D46708382745797F0022AEAE /* Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = D46708342745797E0022AEAE /* Orange.png */; };
+		D46708442745C2880022AEAE /* No_Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46708432745C2880022AEAE /* No_Emotion.swift */; };
+		D46708462745C28B0022AEAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D46708452745C28B0022AEAE /* Assets.xcassets */; };
+		D467084A2745C28B0022AEAE /* No.EmotionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D467083D2745C2870022AEAE /* No.EmotionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D46708512745C9F70022AEAE /* image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467084F2745C5C00022AEAE /* image.swift */; };
+		D46708522745C9FB0022AEAE /* image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467084F2745C5C00022AEAE /* image.swift */; };
+		D46708532745CBBD0022AEAE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46708402745C2880022AEAE /* SwiftUI.framework */; };
+		D46708562745CBBE0022AEAE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D467083E2745C2880022AEAE /* WidgetKit.framework */; };
+		D46708592745CBC80022AEAE /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D46708582745CBC80022AEAE /* SwiftyJSON */; };
+		D467085B2745CBCD0022AEAE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D467085A2745CBCD0022AEAE /* Alamofire */; };
+		D46708622745D0F80022AEAE /* SpectralMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D46708602745D0F80022AEAE /* SpectralMedium.ttf */; };
+		D46708632745D0F80022AEAE /* SourceCodeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D46708612745D0F80022AEAE /* SourceCodeRegular.ttf */; };
 		D48DD276272FEFB3009513A4 /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD275272FEFB3009513A4 /* YandexMobileMetrica */; };
 		D48DD279272FEFBB009513A4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD278272FEFBB009513A4 /* Alamofire */; };
 		D48DD27C272FEFC1009513A4 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D48DD27B272FEFC1009513A4 /* SwiftyJSON */; };
@@ -103,7 +114,28 @@
 			remoteGlobalIDString = D41BDB5E272EC58C00B4E388;
 			remoteInfo = No.Emotion;
 		};
+		D46708482745C28B0022AEAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41BDB57272EC58C00B4E388 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D467083C2745C2870022AEAE;
+			remoteInfo = No.EmotionExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D467084E2745C28B0022AEAE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D467084A2745C28B0022AEAE /* No.EmotionExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2B6BD71A552508936141BFCE /* Pods_NoEmotion_NoEmotionUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoEmotion_NoEmotionUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +179,15 @@
 		D46708322745797E0022AEAE /* Dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dark.png; sourceTree = SOURCE_ROOT; };
 		D46708332745797E0022AEAE /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = SOURCE_ROOT; };
 		D46708342745797E0022AEAE /* Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Orange.png; sourceTree = SOURCE_ROOT; };
+		D467083D2745C2870022AEAE /* No.EmotionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = No.EmotionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D467083E2745C2880022AEAE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		D46708402745C2880022AEAE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		D46708432745C2880022AEAE /* No_Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_Emotion.swift; sourceTree = "<group>"; };
+		D46708452745C28B0022AEAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D46708472745C28B0022AEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D467084F2745C5C00022AEAE /* image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = image.swift; sourceTree = "<group>"; };
+		D46708602745D0F80022AEAE /* SpectralMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SpectralMedium.ttf; path = fonts/SpectralMedium.ttf; sourceTree = "<group>"; };
+		D46708612745D0F80022AEAE /* SourceCodeRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SourceCodeRegular.ttf; path = fonts/SourceCodeRegular.ttf; sourceTree = "<group>"; };
 		D4AD7734273B20A9001A681A /* URLImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImageService.swift; sourceTree = "<group>"; };
 		D4AD7736273B20A9001A681A /* FileIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileIndex.swift; sourceTree = "<group>"; };
 		D4AD7737273B20A9001A681A /* RemoteFileCacheService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteFileCacheService.swift; sourceTree = "<group>"; };
@@ -224,6 +265,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D467083A2745C2870022AEAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46708592745CBC80022AEAE /* SwiftyJSON in Frameworks */,
+				D467085B2745CBCD0022AEAE /* Alamofire in Frameworks */,
+				D46708532745CBBD0022AEAE /* SwiftUI.framework in Frameworks */,
+				D46708562745CBBE0022AEAE /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -255,6 +307,7 @@
 				D41BDB61272EC58C00B4E388 /* No.Emotion */,
 				D41BDB72272EC58E00B4E388 /* No.EmotionTests */,
 				D41BDB7C272EC58E00B4E388 /* No.EmotionUITests */,
+				D46708422745C2880022AEAE /* No.Emotion */,
 				D41BDB60272EC58C00B4E388 /* Products */,
 				BF2089106799139E3F7431AB /* Pods */,
 				FE0E2AAE51AD0E111775CF3D /* Frameworks */,
@@ -267,6 +320,7 @@
 				D41BDB5F272EC58C00B4E388 /* NoEmotion.app */,
 				D41BDB6F272EC58E00B4E388 /* NoEmotionTests.xctest */,
 				D41BDB79272EC58E00B4E388 /* NoEmotionUITests.xctest */,
+				D467083D2745C2870022AEAE /* No.EmotionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -403,6 +457,19 @@
 				D46708322745797E0022AEAE /* Dark.png */,
 			);
 			path = Icons;
+			sourceTree = "<group>";
+		};
+		D46708422745C2880022AEAE /* No.Emotion */ = {
+			isa = PBXGroup;
+			children = (
+				D46708612745D0F80022AEAE /* SourceCodeRegular.ttf */,
+				D46708602745D0F80022AEAE /* SpectralMedium.ttf */,
+				D46708432745C2880022AEAE /* No_Emotion.swift */,
+				D46708452745C28B0022AEAE /* Assets.xcassets */,
+				D46708472745C28B0022AEAE /* Info.plist */,
+				D467084F2745C5C00022AEAE /* image.swift */,
+			);
+			path = No.Emotion;
 			sourceTree = "<group>";
 		};
 		D4AD7733273B20A9001A681A /* images */ = {
@@ -579,6 +646,8 @@
 				FACF8380A6567545B7AC84E0 /* Pods_NoEmotion.framework */,
 				2B6BD71A552508936141BFCE /* Pods_NoEmotion_NoEmotionUITests.framework */,
 				AEA9C2E8CA7530B27F94FF4D /* Pods_NoEmotionTests.framework */,
+				D467083E2745C2880022AEAE /* WidgetKit.framework */,
+				D46708402745C2880022AEAE /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -595,10 +664,12 @@
 				D41BDB5C272EC58C00B4E388 /* Frameworks */,
 				D41BDB5D272EC58C00B4E388 /* Resources */,
 				D30CEEA19A4D24CE655DAF33 /* [CP] Embed Pods Frameworks */,
+				D467084E2745C28B0022AEAE /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D46708492745C28B0022AEAE /* PBXTargetDependency */,
 			);
 			name = NoEmotion;
 			packageProductDependencies = (
@@ -650,6 +721,27 @@
 			productReference = D41BDB79272EC58E00B4E388 /* NoEmotionUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		D467083C2745C2870022AEAE /* No.EmotionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D467084B2745C28B0022AEAE /* Build configuration list for PBXNativeTarget "No.EmotionExtension" */;
+			buildPhases = (
+				D46708392745C2870022AEAE /* Sources */,
+				D467083A2745C2870022AEAE /* Frameworks */,
+				D467083B2745C2870022AEAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = No.EmotionExtension;
+			packageProductDependencies = (
+				D46708582745CBC80022AEAE /* SwiftyJSON */,
+				D467085A2745CBCD0022AEAE /* Alamofire */,
+			);
+			productName = No.EmotionExtension;
+			productReference = D467083D2745C2870022AEAE /* No.EmotionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -670,6 +762,9 @@
 					D41BDB78272EC58E00B4E388 = {
 						CreatedOnToolsVersion = 13.1;
 						TestTargetID = D41BDB5E272EC58C00B4E388;
+					};
+					D467083C2745C2870022AEAE = {
+						CreatedOnToolsVersion = 13.1;
 					};
 				};
 			};
@@ -695,6 +790,7 @@
 				D41BDB5E272EC58C00B4E388 /* NoEmotion */,
 				D41BDB6E272EC58E00B4E388 /* NoEmotionTests */,
 				D41BDB78272EC58E00B4E388 /* NoEmotionUITests */,
+				D467083C2745C2870022AEAE /* No.EmotionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -727,6 +823,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D467083B2745C2870022AEAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46708462745C28B0022AEAE /* Assets.xcassets in Resources */,
+				D46708632745D0F80022AEAE /* SourceCodeRegular.ttf in Resources */,
+				D46708622745D0F80022AEAE /* SpectralMedium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +975,7 @@
 				D4AD777A273B20A9001A681A /* FileManager+Extensions.swift in Sources */,
 				D41BDB65272EC58C00B4E388 /* Start.swift in Sources */,
 				D4AD7796273C4AE1001A681A /* analytics.swift in Sources */,
+				D46708522745C9FB0022AEAE /* image.swift in Sources */,
 				D4AD778D273B20A9001A681A /* URLImage.swift in Sources */,
 				D41BDBB5272EC87600B4E388 /* logic.swift in Sources */,
 				D4AD778E273B20A9001A681A /* AnimatedImageView.swift in Sources */,
@@ -919,6 +1026,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D46708392745C2870022AEAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46708442745C2880022AEAE /* No_Emotion.swift in Sources */,
+				D46708512745C9F70022AEAE /* image.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -931,6 +1047,11 @@
 			isa = PBXTargetDependency;
 			target = D41BDB5E272EC58C00B4E388 /* NoEmotion */;
 			targetProxy = D41BDB7A272EC58E00B4E388 /* PBXContainerItemProxy */;
+		};
+		D46708492745C28B0022AEAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D467083C2745C2870022AEAE /* No.EmotionExtension */;
+			targetProxy = D46708482745C28B0022AEAE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1055,6 +1176,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 42E6E773CCBCB57F1BE53722 /* Pods-NoEmotion.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = No.Emotion/No.Emotion.entitlements;
@@ -1091,6 +1213,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C91F54578848DFCC2EBAA8D /* Pods-NoEmotion.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = No.Emotion/No.Emotion.entitlements;
@@ -1223,6 +1346,60 @@
 			};
 			name = Release;
 		};
+		D467084C2745C28B0022AEAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GAH72SPMY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = No.Emotion/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = No.Emotion;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thenoco.co.NoEmotion.No-Emotion";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D467084D2745C28B0022AEAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GAH72SPMY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = No.Emotion/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = No.Emotion;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thenoco.co.NoEmotion.No-Emotion";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1258,6 +1435,15 @@
 			buildConfigurations = (
 				D41BDB8A272EC58E00B4E388 /* Debug */,
 				D41BDB8B272EC58E00B4E388 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D467084B2745C28B0022AEAE /* Build configuration list for PBXNativeTarget "No.EmotionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D467084C2745C28B0022AEAE /* Debug */,
+				D467084D2745C28B0022AEAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1300,6 +1486,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D46708582745CBC80022AEAE /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D48DD27A272FEFC1009513A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		D467085A2745CBCD0022AEAE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D48DD277272FEFBB009513A4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		D48DD275272FEFB3009513A4 /* YandexMobileMetrica */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D48DD274272FEFB3009513A4 /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;

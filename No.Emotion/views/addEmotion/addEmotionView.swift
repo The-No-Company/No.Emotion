@@ -48,8 +48,10 @@ struct addEmotionView: View {
                     
                     
                     Button(action: {
-                        let generator = UIImpactFeedbackGenerator(style: .light)
-                        generator.impactOccurred()
+                        if (UserDefaults.standard.bool(forKey: "haptic")){
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
                         
                         self.logic.addEmotion(emotion: Logic.Emotion(id: 0,
                                                                      bright: self.percentage,
@@ -83,8 +85,10 @@ struct addEmotionView: View {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(self.logic.smiles, id: \.self) { item in
                         Button(action: {
-                            let generator = UIImpactFeedbackGenerator(style: .light)
-                            generator.impactOccurred()
+                            if (UserDefaults.standard.bool(forKey: "haptic")){
+                                let generator = UIImpactFeedbackGenerator(style: .light)
+                                generator.impactOccurred()
+                            }
                             
                             if (self.dataSelected.contains(item)){
                                 if let index = self.dataSelected.firstIndex(of: item){

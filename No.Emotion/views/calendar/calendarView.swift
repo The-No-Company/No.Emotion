@@ -263,8 +263,10 @@ struct RootView: View {
     var body: some View {
         CalendarView(interval: year) { date in
             Button(action: {
-                let generator = UIImpactFeedbackGenerator(style: .light)
-                generator.impactOccurred()
+                if (UserDefaults.standard.bool(forKey: "haptic")){
+                    let generator = UIImpactFeedbackGenerator(style: .light)
+                    generator.impactOccurred()
+                }
                 
             }, label: {
                 Text("30")

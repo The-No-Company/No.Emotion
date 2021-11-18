@@ -40,8 +40,10 @@ struct Start: View {
                     Spacer()
 
                     Button(action: {
-                        let generator = UIImpactFeedbackGenerator(style: .light)
-                        generator.impactOccurred()
+                        if (UserDefaults.standard.bool(forKey: "haptic")){
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
                         self.openType = 0
                         self.logic.add.toggle()
                     }, label: {
@@ -133,8 +135,10 @@ struct Start: View {
                     
                     Spacer()
                     Button(action: {
-                        let generator = UIImpactFeedbackGenerator(style: .light)
-                        generator.impactOccurred()
+                        if (UserDefaults.standard.bool(forKey: "haptic")){
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
                         self.openType = 1
                         self.logic.add.toggle()
                         
@@ -195,7 +199,7 @@ struct Start: View {
             self.analytics.send(action: "open")
             self.logic.getSettings { result in
                 if (result){
-                    
+                    print("settings")
                 }
             }
             self.logic.getTodayNews { result in

@@ -118,6 +118,7 @@ struct settingsView: View {
                         }.onChange(of: Just(self.notifications)) { result in
                             print("Notifications - \(self.notifications)")
                             UserDefaults.standard.set(self.notifications, forKey: "notifications")
+                            
                         }
                         
                         RoundedRectangle(cornerRadius: 8)
