@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct Start: View {
     
@@ -193,6 +194,7 @@ struct Start: View {
         }
         
         .onAppear{
+            WidgetCenter.shared.reloadAllTimelines()
             SettingsAPI.setupPushNotifications()
             self.logic.getEmotions()
             self.analytics.register()

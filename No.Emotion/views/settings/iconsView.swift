@@ -31,19 +31,18 @@ struct iconsView: View {
                             let setIcon = self.iconSettings.iconNames[i] ?? "AppIcon"
                             
                             if (setIcon == "AppIcon"){
-                                UIApplication.shared.setAlternateIconName(nil, completionHandler: { error in
-                                    print(String(describing: error))
+                                UIApplication.shared.setAlternateIconName(nil, completionHandler: nil)
+                                
+                            }else{
+                                UIApplication.shared.setAlternateIconName(setIcon, completionHandler: {
+                                    error in
+                                    if let error = error {
+                                        print(error.localizedDescription)
+                                    } else {
+                                        print("Success!")
+                                    }
                                 })
                             }
-                            
-                            UIApplication.shared.setAlternateIconName(setIcon, completionHandler: {
-                                error in
-                                if let error = error {
-                                    print(error.localizedDescription)
-                                } else {
-                                    print("Success!")
-                                }
-                            })
                             
                         }
                     Text(self.iconSettings.iconNames[i] ?? "Standart")

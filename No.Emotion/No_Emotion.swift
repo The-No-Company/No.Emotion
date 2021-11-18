@@ -100,7 +100,7 @@ struct No_EmotionEntryView : View {
                     .frame(width: geo.size.width, height: geo.size.height)
                     .blur(radius: 5, opaque: true)
                 
-                VStack{
+                VStack(spacing: 15){
                     Text("\(entry.title)")
                         .font(Font.custom("Spectral-Medium", size: 18))
                         .foregroundColor(Color.white)
