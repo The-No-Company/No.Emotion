@@ -194,54 +194,54 @@ struct RootView: View {
     }
     
     private func getColor(date: Date) -> AnyView{
-        let random_color_opacity = Double.random(in: 0.4...1.5)
-        //        let rotation = Double.random(in: 0...360)
-        //
-        //        var colors : [Color] = []
-        //
-        //        for _ in 0...5{
-        //            let random = Int.random(in: 0...4)
-        //
-        //            if (random == 0){
-        //                colors.append(.yellow)
-        //            }
-        //
-        //            if (random == 1){
-        //                colors.append(.yellow)
-        //            }
-        //
-        //            if (random == 2){
-        //                colors.append(.green)
-        //            }
-        //
-        //            if (random == 3){
-        //                colors.append(.green)
-        //            }
-        //
-        //            if (random == 4){
-        //                colors.append(.red)
-        //            }
-        //
-        //        }
+//        let random_color_opacity = Double.random(in: 0.6...1.0)
+//        let rotation = Double.random(in: 0...360)
+//
+//        var colors : [Color] = []
+//
+//        for _ in 0...5{
+//            let random = Int.random(in: 0...4)
+//
+//            if (random == 0){
+//                colors.append(.yellow.opacity(random_color_opacity))
+//            }
+//
+//            if (random == 1){
+//                colors.append(.yellow.opacity(random_color_opacity))
+//            }
+//
+//            if (random == 2){
+//                colors.append(.green)
+//            }
+//
+//            if (random == 3){
+//                colors.append(.green)
+//            }
+//
+//            if (random == 4){
+//                colors.append(.red.opacity(random_color_opacity))
+//            }
+//
+//        }
         
         let format : String = "dd.MM.yyyy"
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        
+
         var colors : [Color] = []
         var bright : [Float] = []
         for emotion in self.logic.emotions{
             if (formatter.string(from: date) == formatter.string(from: emotion.date)){
                 for tag in emotion.tags{
                     colors.append(self.logic.getSmileColor(smile: tag).opacity(Double(emotion.bright)/100))
-//                    print(Double(emotion.bright)/100)
+                    //                    print(Double(emotion.bright)/100)
                 }
                 bright.append(emotion.bright)
             }
         }
-        
+
         var avarage : Float = 0.0
-        
+
         if bright.isEmpty {
             avarage = 0.0
         }else{
@@ -270,7 +270,7 @@ struct RootView: View {
                 
             }, label: {
                 Text("30")
-                    
+                
                     .foregroundColor(.black)
                     .hidden()
                     .padding(10)
@@ -292,9 +292,9 @@ struct RootView: View {
                                     .frame(width: 15, height: 2, alignment: .center)
                             }
                         }
-                            
+                        
                     )
-                    
+                
             }).buttonStyle(ScaleButtonStyle())
         }
     }

@@ -23,9 +23,11 @@ class Logic: ObservableObject, Identifiable {
     @Published var monthColors : [Color] = []
     @Published var news : [News] = []
     
+    @Published var welcome : Bool = true
+    
     @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺","😂","🥰","🤪","😬","🤢","🤝","🙏","😞","😴","🤑","😩","🤩"]
     @Published var add : Bool = false
-   
+    
     
     
     
@@ -192,6 +194,15 @@ class Logic: ObservableObject, Identifiable {
     
     func deleteEmotion(id: Int){
         RealmAPI.deleteEmotion(id: id)
+    }
+    
+    func welcomeCI() {
+        self.objectWillChange.send()
+        if (UserDefaults.standard.bool(forKey: "onboarding")){
+            self.welcome = true
+        }else{
+            self.welcome = false
+        }
     }
     
 }

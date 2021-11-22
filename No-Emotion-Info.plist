@@ -6,51 +6,105 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>Orange</key>
+			<key>Cocktail</key>
 			<dict>
-				<key>UIPrerenderedIcon</key>
-				<false/>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Orange</string>
+					<string>Cocktail</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
-			<key>Light</key>
+			<key>Election</key>
 			<dict>
-				<key>UIPrerenderedIcon</key>
-				<false/>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Light</string>
+					<string>Election</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
-			<key>Green</key>
+			<key>Inspire</key>
 			<dict>
-				<key>UIPrerenderedIcon</key>
-				<false/>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Green</string>
+					<string>Inspire</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
-			<key>Dark</key>
+			<key>Money</key>
 			<dict>
-				<key>UIPrerenderedIcon</key>
-				<false/>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Dark</string>
+					<string>Money</string>
 				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Plant</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Plant</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Soda</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Soda</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Speech</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Speech</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Stock</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Stock</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Story</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Story</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Warming</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Warming</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
 			</dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
-			<key>CFBundleIconName</key>
-			<string></string>
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>AppIcon</string>
 			</array>
+			<key>CFBundleIconName</key>
+			<string></string>
 			<key>UIPrerenderedIcon</key>
 			<false/>
 		</dict>

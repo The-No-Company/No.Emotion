@@ -84,6 +84,9 @@ class Settings: ObservableObject, Identifiable {
     
     private func schedulePushNotifications() {
         if UserDefaults.standard.bool(forKey: "didSetupPushNotifications") { return }
+        
+        if UserDefaults.standard.bool(forKey: "notifications") == false { return }
+        
         PushNotification.allCases.forEach { (push) in
             let content = UNMutableNotificationContent()
             content.title = "No.Emotion"

@@ -45,8 +45,11 @@ struct Start: View {
                             let generator = UIImpactFeedbackGenerator(style: .light)
                             generator.impactOccurred()
                         }
+                        
+                        
                         self.openType = 0
                         self.logic.add.toggle()
+
                     }, label: {
                         Image(systemName: "gear")
                             .font(.system(size: 20, weight: .medium, design: .rounded))
@@ -170,6 +173,57 @@ struct Start: View {
                 .background(.ultraThinMaterial)
                 .cornerRadius(16)
                 
+            }else{
+                
+                HStack{
+                    HStack{
+                        Image(systemName: "quote.bubble")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                            .offset(y: -5)
+                        
+                        
+                        Text("New emotion")
+                            .font(Font.custom("Spectral-Medium", size: 18))
+                            .offset(y: -5)
+                    }.padding(.horizontal)
+                    
+                    Spacer()
+                    Button(action: {
+                        if (UserDefaults.standard.bool(forKey: "haptic")){
+                            let generator = UIImpactFeedbackGenerator(style: .light)
+                            generator.impactOccurred()
+                        }
+                        self.openType = 1
+                        self.logic.add.toggle()
+                        
+                    }, label: {
+                        ZStack{
+                            Circle()
+                                .fill(Color.white)
+                            
+                            Image(systemName: "plus")
+                                .font(.system(size: 30, weight: .medium, design: .rounded))
+                                .foregroundColor(.black)
+                        }
+                        .frame(width: 45, height: 45, alignment: .center)
+                        .padding()
+                        
+                        .clipped()
+                        
+                        
+                        
+                        
+                    })
+                        .offset(y: -5)
+                        .contentShape(Rectangle())
+                        .buttonStyle(ScaleButtonStyle())
+                        
+
+                }
+                .background(Color.black)
+                .cornerRadius(16)
+                
             }
             
         }
@@ -194,6 +248,8 @@ struct Start: View {
         }
         
         .onAppear{
+            
+            
             WidgetCenter.shared.reloadAllTimelines()
             SettingsAPI.setupPushNotifications()
             self.logic.getEmotions()

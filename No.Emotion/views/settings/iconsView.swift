@@ -32,6 +32,7 @@ struct iconsView: View {
                             
                             if (setIcon == "AppIcon"){
                                 UIApplication.shared.setAlternateIconName(nil, completionHandler: nil)
+                                AnalyticsAPI.send(action: "settings_icon_default")
                                 
                             }else{
                                 UIApplication.shared.setAlternateIconName(setIcon, completionHandler: {
@@ -39,7 +40,9 @@ struct iconsView: View {
                                     if let error = error {
                                         print(error.localizedDescription)
                                     } else {
-                                        print("Success!")
+                                        
+                                        AnalyticsAPI.send(action: "settings_icon_\(setIcon.lowercased())")
+
                                     }
                                 })
                             }
