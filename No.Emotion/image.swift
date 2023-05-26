@@ -26,7 +26,7 @@ class NoEmotionProvider {
                     
                     self.getImage(image: json[0]["img"].string!) { success, image in
                         if (success){
-                            
+
                             completion!(NoEmotionResponse.Success(image: image,
                                                                   title: json[0]["title"].string!,
                                                                   subtitle: json[0]["subtitle"].string!))

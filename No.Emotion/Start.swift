@@ -60,10 +60,10 @@ struct Start: View {
 
                 }.padding(.horizontal)
                 ScrollView(.vertical, showsIndicators: false){
-                    HStack{
+                    HStack(spacing: 35){
                         RootView()
                             .padding(.vertical)
-                        Spacer()
+                       
                         if (!self.logic.monthColors.isEmpty){
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(LinearGradient(gradient: Gradient(colors: self.logic.monthColors), startPoint: .top, endPoint: .bottom))

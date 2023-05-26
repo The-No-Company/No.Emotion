@@ -23,10 +23,49 @@ struct Provider: TimelineProvider {
             
             switch response{
             case .Failure:
-                entry = SimpleEntry(date: Date(), title: "", subtitle: "", image:  UIImage(named: "placeholderWidget")!)
+                var cachedImage : UIImage = UIImage(named: "placeholderWidget")!
+                
+                
+                let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
+
+                if let fileURL = fileURL {
+                    // Create a UIImage instance from the file contents
+                    if let image = UIImage(contentsOfFile: fileURL.path) {
+                        // Use the retrieved image
+                        
+                        cachedImage = image
+                        // Do something with the UIImage object
+                        print("Image loaded successfully")
+                    } else {
+                        print("Failed to load image")
+                    }
+                }
+                
+                
+                entry = SimpleEntry(date: Date(), title: UserDefaults.standard.string(forKey: "title") ?? "",
+                                    subtitle: UserDefaults.standard.string(forKey: "subtitle") ?? "", image:  cachedImage.resized(toWidth: 800)!)
                 break
             case .Success(let image, let title, let subtitle):
-                entry = SimpleEntry(date: Date(), title: title, subtitle: subtitle, image: image)
+                
+                let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
+
+                if let fileURL = fileURL {
+                    // Convert the image to JPEG representation with a compression quality of 1.0 (highest quality)
+                    if let imageData = image.jpegData(compressionQuality: 1.0) {
+                        do {
+                            // Write the image data to the specified file URL
+                            try imageData.write(to: fileURL, options: .atomic)
+                            print("Image saved successfully at \(fileURL.path)")
+                        } catch {
+                            print("Error saving image: \(error)")
+                        }
+                    }
+                }
+                
+                UserDefaults.standard.set(title, forKey: "title")
+                UserDefaults.standard.set(subtitle, forKey: "subtitle")
+                
+                entry = SimpleEntry(date: Date(), title: title, subtitle: subtitle, image: image.resized(toWidth: 800)!)
                 break
             }
             
@@ -45,10 +84,48 @@ struct Provider: TimelineProvider {
             
             switch response{
             case .Failure:
-                entry = SimpleEntry(date: Date(), title: "", subtitle: "", image:  UIImage(named: "placeholderWidget")!)
+                
+                var cachedImage : UIImage = UIImage(named: "placeholderWidget")!
+               
+                let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
+
+                if let fileURL = fileURL {
+                    // Create a UIImage instance from the file contents
+                    if let image = UIImage(contentsOfFile: fileURL.path) {
+                        // Use the retrieved image
+                        
+                        cachedImage = image
+                        // Do something with the UIImage object
+                        print("Image loaded successfully")
+                    } else {
+                        print("Failed to load image")
+                    }
+                }
+                
+                entry = SimpleEntry(date: Date(), title: UserDefaults.standard.string(forKey: "title") ?? "",
+                                    subtitle: UserDefaults.standard.string(forKey: "subtitle") ?? "", image:  cachedImage.resized(toWidth: 800)!)
                 break
             case .Success(let image, let title, let subtitle):
-                entry = SimpleEntry(date: Date(), title: title, subtitle: subtitle, image: image)
+                
+                let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
+
+                if let fileURL = fileURL {
+                    // Convert the image to JPEG representation with a compression quality of 1.0 (highest quality)
+                    if let imageData = image.jpegData(compressionQuality: 1.0) {
+                        do {
+                            // Write the image data to the specified file URL
+                            try imageData.write(to: fileURL, options: .atomic)
+                            print("Image saved successfully at \(fileURL.path)")
+                        } catch {
+                            print("Error saving image: \(error)")
+                        }
+                    }
+                }
+                
+                UserDefaults.standard.set(title, forKey: "title")
+                UserDefaults.standard.set(subtitle, forKey: "subtitle")
+                
+                entry = SimpleEntry(date: Date(), title: title, subtitle: subtitle, image: image.resized(toWidth: 800)!)
                 break
             }
             // Generate a timeline consisting of five entries an hour apart, starting from the current date.
@@ -129,5 +206,17 @@ struct No_Emotion: Widget {
         .configurationDisplayName("No.Emotion")
         .description("Get new quotes every day.")
     }
+}
+
+
+extension UIImage {
+  func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+    let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+    let format = imageRendererFormat
+    format.opaque = isOpaque
+    return UIGraphicsImageRenderer(size: canvas, format: format).image {
+      _ in draw(in: CGRect(origin: .zero, size: canvas))
+    }
+  }
 }
 
