@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import Alamofire
 import SwiftyJSON
-import IceCream
 
 var LogicAPI: Logic = Logic()
 fileprivate let separator = "\u{FFFF}"

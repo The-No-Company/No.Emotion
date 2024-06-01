@@ -27,7 +27,7 @@ struct Provider: TimelineProvider {
                 
                 
                 let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
-
+                
                 if let fileURL = fileURL {
                     // Create a UIImage instance from the file contents
                     if let image = UIImage(contentsOfFile: fileURL.path) {
@@ -48,7 +48,7 @@ struct Provider: TimelineProvider {
             case .Success(let image, let title, let subtitle):
                 
                 let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
-
+                
                 if let fileURL = fileURL {
                     // Convert the image to JPEG representation with a compression quality of 1.0 (highest quality)
                     if let imageData = image.jpegData(compressionQuality: 1.0) {
@@ -86,9 +86,9 @@ struct Provider: TimelineProvider {
             case .Failure:
                 
                 var cachedImage : UIImage = UIImage(named: "placeholderWidget")!
-               
+                
                 let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
-
+                
                 if let fileURL = fileURL {
                     // Create a UIImage instance from the file contents
                     if let image = UIImage(contentsOfFile: fileURL.path) {
@@ -108,7 +108,7 @@ struct Provider: TimelineProvider {
             case .Success(let image, let title, let subtitle):
                 
                 let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("image.jpg")
-
+                
                 if let fileURL = fileURL {
                     // Convert the image to JPEG representation with a compression quality of 1.0 (highest quality)
                     if let imageData = image.jpegData(compressionQuality: 1.0) {
@@ -181,7 +181,7 @@ struct No_EmotionEntryView : View {
                     Text("\(entry.title)")
                         .font(Font.custom("Spectral-Medium", size: 18))
                         .foregroundColor(Color.white)
-                        
+                    
                     
                     Text("― \(entry.subtitle)")
                         .font(.custom("SourceCodePro-Regular", size: 14))
@@ -201,22 +201,48 @@ struct No_Emotion: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             No_EmotionEntryView(entry: entry)
+                .widgetBackground(Color.black)
         }
         .supportedFamilies([.systemMedium])
         .configurationDisplayName("No.Emotion")
         .description("Get new quotes every day.")
+        .contentMarginsDisabledIfAvailable()
     }
 }
 
 
 extension UIImage {
-  func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
-    let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
-    let format = imageRendererFormat
-    format.opaque = isOpaque
-    return UIGraphicsImageRenderer(size: canvas, format: format).image {
-      _ in draw(in: CGRect(origin: .zero, size: canvas))
+    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
     }
-  }
 }
 
+extension View {
+    func widgetBackground(_ backgroundView: some View) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                backgroundView
+            }
+        } else {
+            return background(backgroundView)
+        }
+    }
+}
+
+
+
+extension WidgetConfiguration {
+    func contentMarginsDisabledIfAvailable() -> some WidgetConfiguration {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return self.contentMarginsDisabled()
+        }
+        else {
+            return self
+        }
+    }
+}

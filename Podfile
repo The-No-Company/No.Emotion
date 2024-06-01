@@ -6,7 +6,6 @@ target 'NoEmotion' do
   use_frameworks!
 
   # Pods for NoEmotion
-  pod 'IceCream'
   pod 'RealmSwift', '10.19'
 
   target 'NoEmotionTests' do

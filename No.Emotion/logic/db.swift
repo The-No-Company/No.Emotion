@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import RealmSwift
-import IceCream
 import CloudKit
 
 var RealmAPI: RealmDB = RealmDB()
@@ -16,7 +15,6 @@ var RealmAPI: RealmDB = RealmDB()
 class RealmDB: ObservableObject, Identifiable {
     var id: Int = 0
     @ObservedObject var logic: Logic = LogicAPI
-    var syncEngine: SyncEngine?
     
     let realm : Realm
     init() {
@@ -97,11 +95,7 @@ class RealmDB: ObservableObject, Identifiable {
         
     }
     
-    func synciCloud(){
-        syncEngine = SyncEngine(objects: [
-            SyncObject(type: Emotion.self)
-        ])
-    }
+    func synciCloud(){}
     
     
 }
@@ -116,12 +110,3 @@ open class Emotion: Object {
         return "id"
     }
 }
-
-
-
-extension Emotion: CKRecordConvertible & CKRecordRecoverable {
-    public var isDeleted: Bool {
-        false
-    }
-}
-
