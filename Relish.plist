@@ -16,7 +16,7 @@
 	<array>
 		<dict>
 			<key>path</key>
-			<string>platform/ios/VisionCenter/VisionCenter.xcodeproj</string>
+			<string>NoEmotion.xcodeproj</string>
 			<key>name</key>
 			<string>NoEmotion</string>
 		</dict>
