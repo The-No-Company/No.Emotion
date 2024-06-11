@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if git diff --cached --name-only | grep -q '^/'; then
+  echo "Changes detected in /platform/ios. Running checks..."
+
+  ./scripts/ios-specific-checks.sh
+
+  if [ $? -ne 0 ]; then
+    echo "Pre-commit checks failed. Aborting commit."
+    exit 1
+  fi
+  exit 1
+else
+  echo "No changes detected in /platforms/ios. Skipping checks."
+fi
