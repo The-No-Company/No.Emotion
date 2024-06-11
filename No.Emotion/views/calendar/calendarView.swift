@@ -1,10 +1,3 @@
-//
-//  calendarView.swift
-//  No.Emotion
-//
-//  Created by Michael Safir on 31.10.2021.
-//
-
 import Foundation
 import SwiftUI
 
@@ -14,7 +7,7 @@ extension DateFormatter {
         formatter.dateFormat = "MMMM"
         return formatter
     }
-    
+
     static var monthAndYear: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
@@ -22,14 +15,14 @@ extension DateFormatter {
     }
 }
 
-fileprivate extension Calendar {
-    func generateDates(
+extension Calendar {
+    fileprivate func generateDates(
         inside interval: DateInterval,
         matching components: DateComponents
     ) -> [Date] {
         var dates: [Date] = []
         dates.append(interval.start)
-        
+
         enumerateDates(
             startingAfter: interval.start,
             matching: components,
@@ -43,22 +36,22 @@ fileprivate extension Calendar {
                 }
             }
         }
-        
+
         return dates
     }
 }
 
 struct WeekView<DateView>: View where DateView: View {
     @Environment(\.calendar) var calendar
-    
+
     let week: Date
     let content: (Date) -> DateView
-    
+
     init(week: Date, @ViewBuilder content: @escaping (Date) -> DateView) {
         self.week = week
         self.content = content
     }
-    
+
     private var days: [Date] {
         guard
             let weekInterval = calendar.dateInterval(of: .weekOfYear, for: week)
@@ -68,7 +61,7 @@ struct WeekView<DateView>: View where DateView: View {
             matching: DateComponents(hour: 0, minute: 0, second: 0)
         )
     }
-    
+
     var body: some View {
         HStack {
             ForEach(days, id: \.self) { date in
@@ -86,11 +79,11 @@ struct WeekView<DateView>: View where DateView: View {
 
 struct MonthView<DateView>: View where DateView: View {
     @Environment(\.calendar) var calendar
-    
+
     let month: Date
     let showHeader: Bool
     let content: (Date) -> DateView
-    
+
     init(
         month: Date,
         showHeader: Bool = true,
@@ -100,7 +93,7 @@ struct MonthView<DateView>: View where DateView: View {
         self.content = content
         self.showHeader = showHeader
     }
-    
+
     private var weeks: [Date] {
         guard
             let monthInterval = calendar.dateInterval(of: .month, for: month)
@@ -110,7 +103,7 @@ struct MonthView<DateView>: View where DateView: View {
             matching: DateComponents(hour: 0, minute: 0, second: 0, weekday: calendar.firstWeekday)
         )
     }
-    
+
     private var header: some View {
         let component = calendar.component(.month, from: month)
         let formatter = component == 1 ? DateFormatter.monthAndYear : .month
@@ -118,13 +111,13 @@ struct MonthView<DateView>: View where DateView: View {
             .font(.title)
             .padding()
     }
-    
+
     var body: some View {
         VStack {
             if showHeader {
                 header
             }
-            
+
             ForEach(weeks, id: \.self) { week in
                 WeekView(week: week, content: self.content)
             }
@@ -134,22 +127,22 @@ struct MonthView<DateView>: View where DateView: View {
 
 struct CalendarView<DateView>: View where DateView: View {
     @Environment(\.calendar) var calendar
-    
+
     let interval: DateInterval
     let content: (Date) -> DateView
-    
+
     init(interval: DateInterval, @ViewBuilder content: @escaping (Date) -> DateView) {
         self.interval = interval
         self.content = content
     }
-    
+
     private var months: [Date] {
         calendar.generateDates(
             inside: interval,
             matching: DateComponents(day: 1, hour: 0, minute: 0, second: 0)
         )
     }
-    
+
     var body: some View {
         VStack {
             ForEach(months, id: \.self) { month in
@@ -162,38 +155,35 @@ struct CalendarView<DateView>: View where DateView: View {
 struct RootView: View {
     @Environment(\.calendar) var calendar
     @ObservedObject var logic: Logic = LogicAPI
-    
+
     private var year: DateInterval {
         calendar.dateInterval(of: .month, for: Date())!
     }
-    
-    private func isToday(date: Date) -> Bool{
-        
-        let format : String = "dd.MM.yyyy"
+
+    private func isToday(date: Date) -> Bool {
+        let format = "dd.MM.yyyy"
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        if (formatter.string(from: date) == formatter.string(from: Date())){
+        if formatter.string(from: date) == formatter.string(from: Date()) {
             return true
         }
-        
+
         return false
     }
-    
-    
-    private func today(date: Date) -> Bool{
-        
-        let format : String = "dd.MM.yyyy"
+
+    private func today(date: Date) -> Bool {
+        let format = "dd.MM.yyyy"
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        
-        if (formatter.string(from: date) == formatter.string(from: Date())){
+
+        if formatter.string(from: date) == formatter.string(from: Date()) {
             return true
         }
-        
+
         return false
     }
-    
-    private func getColor(date: Date) -> AnyView{
+
+    private func getColor(date: Date) -> AnyView {
 //        let random_color_opacity = Double.random(in: 0.6...1.0)
 //        let rotation = Double.random(in: 0...360)
 //
@@ -223,54 +213,55 @@ struct RootView: View {
 //            }
 //
 //        }
-        
-        let format : String = "dd.MM.yyyy"
+
+        let format = "dd.MM.yyyy"
         let formatter = DateFormatter()
         formatter.dateFormat = format
 
-        var colors : [Color] = []
-        var bright : [Float] = []
-        for emotion in self.logic.emotions{
-            if (formatter.string(from: date) == formatter.string(from: emotion.date)){
-                for tag in emotion.tags{
-                    colors.append(self.logic.getSmileColor(smile: tag).opacity(Double(emotion.bright)/100))
+        var colors: [Color] = []
+        var bright: [Float] = []
+        for emotion in logic.emotions {
+            if formatter.string(from: date) == formatter.string(from: emotion.date) {
+                for tag in emotion.tags {
+                    colors.append(logic.getSmileColor(smile: tag).opacity(Double(emotion.bright) / 100))
                     //                    print(Double(emotion.bright)/100)
                 }
                 bright.append(emotion.bright)
             }
         }
 
-        var avarage : Float = 0.0
+        var avarage: Float = 0.0
 
         if bright.isEmpty {
             avarage = 0.0
-        }else{
+        } else {
             var sumBright = bright.reduce(0, +)
-            avarage = (sumBright / Float(bright.count))/100
+            avarage = (sumBright / Float(bright.count)) / 100
         }
-        
-        
+
         //        if (formatter.string(from: date) == formatter.string(from: Date())){
-        //            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(0.07))
+        //            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center:
+        //            .center).opacity(0.07))
         //        }
-        if (colors.count == 0){
-            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center).opacity(Double(0.07)))
-        }else{
+        if colors.isEmpty {
+            return AnyView(AngularGradient(gradient: Gradient(colors: [.init(hex: "FFFFFF")]), center: .center)
+                .opacity(Double(0.07)))
+        } else {
             return AnyView(AngularGradient(gradient: Gradient(colors: colors), center: .center).blur(radius: 8))
         }
     }
-    
+
     var body: some View {
         CalendarView(interval: year) { date in
             Button(action: {
-                if (UserDefaults.standard.bool(forKey: "haptic")){
+                if UserDefaults.standard.bool(forKey: "haptic") {
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.impactOccurred()
                 }
-                
+
             }, label: {
                 Text("30")
-                
+
                     .foregroundColor(.black)
                     .hidden()
                     .padding(10)
@@ -281,20 +272,19 @@ struct RootView: View {
                     .clipShape(Circle())
                     .padding(.vertical, 4)
                     .overlay(
-                        VStack(spacing: 0){
+                        VStack(spacing: 0) {
                             Text(String(self.calendar.component(.day, from: date)))
                                 .font(Font.custom("Spectral-Bold", size: 16))
                                 .foregroundColor(self.isToday(date: date) == true ? .white : .white)
-                            
-                            if (self.today(date: date)){
+
+                            if self.today(date: date) {
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(.white)
                                     .frame(width: 15, height: 2, alignment: .center)
                             }
                         }
-                        
                     )
-                
+
             }).buttonStyle(ScaleButtonStyle())
         }
     }
@@ -303,5 +293,6 @@ struct RootView: View {
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
-    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect
+    }
 }

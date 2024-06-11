@@ -1,35 +1,34 @@
-//
-//  DownloadCoordinator.swift
-//  
-//
-//  Created by Dmytro Anokhin on 21/11/2019.
-//
-
 import Foundation
 
-
 protocol RemoteFileCacheServiceProxy: AnyObject {
+    func addFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        sourceURL: URL,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL
 
-    func addFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, sourceURL: URL, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL
-
-    func createFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, data: Data, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL
+    func createFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        data: Data,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL
 
     func getFile(withFileIdentifier fileIdentifier: String, completion: @escaping (_ localFileURL: URL?) -> Void)
 
     func delete(fileName: String) throws
 }
 
-
 protocol DelayedDispatcher: AnyObject {
-
     func dispatch(after delay: TimeInterval, closure: @escaping () -> Void)
 }
-
 
 /// Coordinates abstract download process between URLSessionTask and a set of handler objects.
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 class DownloadCoordinator {
-
     let url: URL
 
     let fileIdentifier: String
@@ -42,7 +41,14 @@ class DownloadCoordinator {
 
     unowned let delayedDispatcher: DelayedDispatcher
 
-    init(url: URL, fileIdentifier: String, task: URLSessionTask, retryCount: Int, remoteFileCache: RemoteFileCacheServiceProxy, delayedDispatcher: DelayedDispatcher) {
+    init(
+        url: URL,
+        fileIdentifier: String,
+        task: URLSessionTask,
+        retryCount: Int,
+        remoteFileCache: RemoteFileCacheServiceProxy,
+        delayedDispatcher: DelayedDispatcher
+    ) {
         self.url = url
         self.fileIdentifier = fileIdentifier
         self.task = task
@@ -54,7 +60,7 @@ class DownloadCoordinator {
     /// Called when `DownloadCoordinator` is no longer used and can be released.
     var finilizeCallback: (() -> Void)?
 
-    var expiryDate: Date? = nil
+    var expiryDate: Date?
 
     func resume(after delay: Double) {
         assert(!handlers.isEmpty, "Starting to load the image at \(url) but no handlers created")
@@ -67,7 +73,11 @@ class DownloadCoordinator {
             if let localURL = localURL {
                 // TODO: Verify that file can be open
                 if FileManager.default.fileExists(atPath: localURL.path) {
-                    log_debug(self, "Found local file at \"\(localURL)\" for remote url \"\(self.url)\".", detail: log_normal)
+                    log_debug(
+                        self,
+                        "Found local file at \"\(localURL)\" for remote url \"\(self.url)\".",
+                        detail: log_normal
+                    )
 
                     if self.transition(to: .finishing) {
                         self.notifyHandlersAboutCompletion(nil, fileURL: localURL)
@@ -78,10 +88,10 @@ class DownloadCoordinator {
 
                         return
                     }
-                }
-                else {
+                } else {
                     log_error(self, "Local file at \"\(localURL)\" for remote url \"\(self.url)\" was removed.")
-                    // This is inconsistent state: URL is still registered in the local cache but the file was removed. Remove file from the cache and redownload.
+                    // This is inconsistent state: URL is still registered in the local cache but the file was removed.
+                    // Remove file from the cache and redownload.
                     try? self.remoteFileCache.delete(fileName: localURL.lastPathComponent)
                 }
             }
@@ -135,8 +145,7 @@ class DownloadCoordinator {
         if (error as NSError).domain == NSURLErrorDomain && (error as NSError).code == NSURLErrorCancelled {
             // Request was cancelled
             transition(to: .cancelled)
-        }
-        else {
+        } else {
             // Network error
             transition(to: .failed, error: error)
             notifyHandlersAboutFailure(error)
@@ -151,7 +160,7 @@ class DownloadCoordinator {
 
     private var state: LoadingState = .initial
 
-    fileprivate func finalize() {
+    private func finalize() {
         if finilizeCallback == nil {
             log_debug(self, "Calling finalize more than once for url: \"\(url)\".", detail: log_detailed)
         }
@@ -163,7 +172,10 @@ class DownloadCoordinator {
     @discardableResult
     fileprivate func transition(to newState: LoadingState, error: Error? = nil) -> Bool {
         if newState == .failed {
-            log_error(self, "Download failed for: \"\(url)\" with error: \(String(describing: error)). Set breakpoint in \(#function) to investigate.")
+            log_error(
+                self,
+                "Download failed for: \"\(url)\" with error: \(String(describing: error)). Set breakpoint in \(#function) to investigate."
+            )
         }
 
         guard state.canTransition(to: newState) else {
@@ -178,7 +190,7 @@ class DownloadCoordinator {
     }
 
     fileprivate func notifyHandlersAboutProgress(_ progress: Float?) {
-        log_debug(self, "Notify progress for url \"\(self.url)\".", detail: 500)
+        log_debug(self, "Notify progress for url \"\(url)\".", detail: 500)
 
         for handler in handlers {
             handler.handleDownloadProgress(progress)
@@ -186,7 +198,7 @@ class DownloadCoordinator {
     }
 
     fileprivate func notifyHandlersAboutPartial(_ data: Data) {
-        log_debug(self, "Notify partial for url \"\(self.url)\".", detail: 500)
+        log_debug(self, "Notify partial for url \"\(url)\".", detail: 500)
 
         for handler in handlers {
             handler.handleDownloadPartial(data)
@@ -194,15 +206,15 @@ class DownloadCoordinator {
     }
 
     fileprivate func notifyHandlersAboutCompletion(_ data: Data?, fileURL: URL) {
-        log_debug(self, "Notify completion for url \"\(self.url)\".", detail: 500)
+        log_debug(self, "Notify completion for url \"\(url)\".", detail: 500)
 
         for handler in handlers {
             handler.handleDownloadCompletion(data, fileURL)
         }
     }
 
-    fileprivate func notifyHandlersAboutFailure(_ error: Error) {
-        log_debug(self, "Notify failuer for url \"\(self.url)\" with error: \(error).", detail: 500)
+    private func notifyHandlersAboutFailure(_ error: Error) {
+        log_debug(self, "Notify failuer for url \"\(url)\" with error: \(error).", detail: 500)
 
         for handler in handlers {
             handler.handleDownloadFailure(error)
@@ -210,13 +222,11 @@ class DownloadCoordinator {
     }
 }
 
-
 /// Coordinates file download between URLSessionTask and a set of handler objects.
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 final class FileDownloadCoordinator: DownloadCoordinator {
-
     func finishDownloading(with tmpURL: URL) {
-        log_debug(self, "Finishing downloading for url \"\(url)\".", detail:log_detailed)
+        log_debug(self, "Finishing downloading for url \"\(url)\".", detail: log_detailed)
 
         guard transition(to: .finishing) else {
             return
@@ -224,23 +234,30 @@ final class FileDownloadCoordinator: DownloadCoordinator {
 
         guard let decoder = ImageDecoder(url: tmpURL) else {
             // Failed to read the file
-            log_debug(self, "Can not read data from tmp file for url \"\(url)\".", detail:log_detailed)
+            log_debug(self, "Can not read data from tmp file for url \"\(url)\".", detail: log_detailed)
             transition(to: .failed)
             return
         }
 
         guard let uti = decoder.uti else {
             // Not an image file
-            log_debug(self, "Can not determine UTI for url \"\(url)\".", detail:log_detailed)
+            log_debug(self, "Can not determine UTI for url \"\(url)\".", detail: log_detailed)
             transition(to: .failed)
             return
         }
 
-        log_debug(self, "UTI for url \"\(url)\" is \"\(uti)\".", detail:log_detailed)
+        log_debug(self, "UTI for url \"\(url)\" is \"\(uti)\".", detail: log_detailed)
 
         let fileExtension = preferredFileExtension(forTypeIdentifier: uti)
 
-        guard let localURL = try? remoteFileCache.addFile(withFileIdentifier: fileIdentifier, remoteURL: url, sourceURL: tmpURL, expiryDate: expiryDate, preferredFileExtension: fileExtension) else {
+        guard let localURL = try? remoteFileCache.addFile(
+            withFileIdentifier: fileIdentifier,
+            remoteURL: url,
+            sourceURL: tmpURL,
+            expiryDate: expiryDate,
+            preferredFileExtension: fileExtension
+        )
+        else {
             // Failed to cache the file
             transition(to: .failed)
             return
@@ -254,11 +271,9 @@ final class FileDownloadCoordinator: DownloadCoordinator {
     }
 }
 
-
 /// Coordinates in memory download between URLSessionTask and a set of handler objects.
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 final class DataDownloadCoordinator: DownloadCoordinator {
-
     private var sharedBuffer = Data()
 
     func append(data: Data) {
@@ -267,7 +282,7 @@ final class DataDownloadCoordinator: DownloadCoordinator {
     }
 
     func finishDownloading() {
-        log_debug(self, "Finishing downloading for url \"\(url)\".", detail:log_detailed)
+        log_debug(self, "Finishing downloading for url \"\(url)\".", detail: log_detailed)
 
         guard transition(to: .finishing) else {
             return
@@ -278,16 +293,23 @@ final class DataDownloadCoordinator: DownloadCoordinator {
 
         guard let uti = decoder.uti else {
             // Not an image data
-            log_debug(self, "Can not determine UTI for url \"\(url)\".", detail:log_detailed)
+            log_debug(self, "Can not determine UTI for url \"\(url)\".", detail: log_detailed)
             transition(to: .failed)
             return
         }
 
-        log_debug(self, "UTI for url \"\(url)\" is \"\(uti)\".", detail:log_detailed)
+        log_debug(self, "UTI for url \"\(url)\" is \"\(uti)\".", detail: log_detailed)
 
         let fileExtension = preferredFileExtension(forTypeIdentifier: uti)
 
-        guard let localURL = try? remoteFileCache.createFile(withFileIdentifier: fileIdentifier, remoteURL: url, data: sharedBuffer, expiryDate: expiryDate, preferredFileExtension: fileExtension) else {
+        guard let localURL = try? remoteFileCache.createFile(
+            withFileIdentifier: fileIdentifier,
+            remoteURL: url,
+            data: sharedBuffer,
+            expiryDate: expiryDate,
+            preferredFileExtension: fileExtension
+        )
+        else {
             // Failed to cache the file
             transition(to: .failed)
             return

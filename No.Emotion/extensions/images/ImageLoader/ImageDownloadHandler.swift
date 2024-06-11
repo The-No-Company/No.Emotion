@@ -1,21 +1,11 @@
-//
-//  ImageDownloadHandler.swift
-//  
-//
-//  Created by Dmytro Anokhin on 22/11/2019.
-//
-
+import CoreGraphics
 import Foundation
 import ImageIO
-import CoreGraphics
-
 
 typealias ImageFrame = (image: CGImage, orientation: CGImagePropertyOrientation?, duration: TimeInterval?)
 
-
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 class ImageDownloadHandler: DownloadHandler {
-
     typealias ProgressCallback = (_ progress: Float?) -> Void
 
     typealias PartialCallback = (_ imageFrames: [ImageFrame]) -> Void
@@ -29,7 +19,6 @@ class ImageDownloadHandler: DownloadHandler {
     let completionCallback: CompletionCallback
 
     struct Properties {
-
         let urlRequest: URLRequest
 
         let incremental: Bool
@@ -43,7 +32,12 @@ class ImageDownloadHandler: DownloadHandler {
 
     let properties: Properties
 
-    init(properties: Properties, progressCallback: @escaping ProgressCallback, partialCallback: @escaping PartialCallback, completionCallback: @escaping CompletionCallback) {
+    init(
+        properties: Properties,
+        progressCallback: @escaping ProgressCallback,
+        partialCallback: @escaping PartialCallback,
+        completionCallback: @escaping CompletionCallback
+    ) {
         self.properties = properties
         self.progressCallback = progressCallback
         self.partialCallback = partialCallback
@@ -79,8 +73,7 @@ class ImageDownloadHandler: DownloadHandler {
             DispatchQueue.main.async {
                 self.partialCallback(imageFrames)
             }
-        }
-        else {
+        } else {
             guard var cgImage = makeCGImage() else {
                 return
             }
@@ -103,12 +96,19 @@ class ImageDownloadHandler: DownloadHandler {
 
     private func _handleDownloadCompletion(_ data: Data?, _ fileURL: URL) {
         if let data = data {
-            log_debug(self, "Handle completion for url: \"\(properties.urlRequest.url!)\" with byte count: \(data.count), and local file: \"\(fileURL)\"", detail: log_detailed)
+            log_debug(
+                self,
+                "Handle completion for url: \"\(properties.urlRequest.url!)\" with byte count: \(data.count), and local file: \"\(fileURL)\"",
+                detail: log_detailed
+            )
+        } else {
+            log_debug(
+                self,
+                "Handle completion for url: \"\(properties.urlRequest.url!)\", local file: \"\(fileURL)\"",
+                detail: log_detailed
+            )
         }
-        else {
-            log_debug(self, "Handle completion for url: \"\(properties.urlRequest.url!)\", local file: \"\(fileURL)\"", detail: log_detailed)
-        }
-    
+
         if decoder == nil {
             guard let dataProvider = CGDataProvider(url: fileURL as CFURL) else {
                 return
@@ -116,8 +116,7 @@ class ImageDownloadHandler: DownloadHandler {
 
             decoder = ImageDecoder()
             decoder!.setDataProvider(dataProvider, allDataReceived: true)
-        }
-        else {
+        } else {
             if let data = data {
                 decoder!.setData(data, allDataReceived: true)
             }
@@ -131,8 +130,7 @@ class ImageDownloadHandler: DownloadHandler {
             DispatchQueue.main.async {
                 self.completionCallback(.success(imageFrames))
             }
-        }
-        else {
+        } else {
             guard var cgImage = makeCGImage() else {
                 return
             }
@@ -183,9 +181,12 @@ class ImageDownloadHandler: DownloadHandler {
 
         if let orientation = decoder.frameOrientation(at: 0) {
             return (cgImage, orientation)
-        }
-        else {
-            log_debug(self, "Frame orienation information missing for \"\(properties.urlRequest.url!)\"", detail: log_detailed)
+        } else {
+            log_debug(
+                self,
+                "Frame orienation information missing for \"\(properties.urlRequest.url!)\"",
+                detail: log_detailed
+            )
             return (cgImage, nil)
         }
     }
@@ -206,8 +207,13 @@ class ImageDownloadHandler: DownloadHandler {
 
         for i in 0..<frameCount {
             guard let cgImage = decoder.createFrameImage(at: i, decodingOptions: decodingOptions),
-                let duration = decoder.frameDuration(at: i) else {
-                log_debug(self, "Failed to create frame at \(i) for \"\(properties.urlRequest.url!)\"", detail: log_detailed)
+                  let duration = decoder.frameDuration(at: i)
+            else {
+                log_debug(
+                    self,
+                    "Failed to create frame at \(i) for \"\(properties.urlRequest.url!)\"",
+                    detail: log_detailed
+                )
                 continue
             }
 

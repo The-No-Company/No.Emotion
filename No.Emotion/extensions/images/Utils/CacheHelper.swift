@@ -1,16 +1,6 @@
-//
-//  CacheHelper.swift
-//  URLImage
-//
-//  Created by Dmytro Anokhin on 14/06/2019.
-//  Copyright © 2019 Dmytro Anokhin. All rights reserved.
-//
-
 import Foundation
 
-
 struct CacheHelper {
-
     static let cachesDirectoryName = "URLImage"
 
     static let imageCachesDirectoryName = "images"
@@ -45,17 +35,21 @@ struct CacheHelper {
         let fileManager = FileManager.default
 
         if !fileManager.fileExists(atPath: imageCachesDirectoryURL.path) {
-            try fileManager.createDirectory(at: imageCachesDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(
+                at: imageCachesDirectoryURL,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
         }
 
         let uuid = UUID()
         let destinationURL = imageCachesDirectoryURL.appendingPathComponent(uuid.uuidString, isDirectory: false)
 
         try fileManager.copyItem(at: sourceURL, to: destinationURL)
-        
+
         return destinationURL
     }
-    
+
     static func delete(at url: URL) throws {
         try FileManager.default.removeItem(at: url)
     }

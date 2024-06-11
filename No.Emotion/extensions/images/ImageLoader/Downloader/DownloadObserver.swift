@@ -1,16 +1,7 @@
-//
-//  DownloadObserver.swift
-//  
-//
-//  Created by Dmytro Anokhin on 21/11/2019.
-//
-
 import Foundation
-
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 final class DownloadObserver: Hashable {
-
     typealias ProgressCallback = (_ progress: Float?) -> Void
 
     typealias PartialCallback = (_ data: Data) -> Void
@@ -23,7 +14,11 @@ final class DownloadObserver: Hashable {
 
     let completion: CompletionCallback
 
-    init(progress: @escaping ProgressCallback, partial: @escaping PartialCallback, completion: @escaping CompletionCallback) {
+    init(
+        progress: @escaping ProgressCallback,
+        partial: @escaping PartialCallback,
+        completion: @escaping CompletionCallback
+    ) {
         self.progress = progress
         self.partial = partial
         self.completion = completion

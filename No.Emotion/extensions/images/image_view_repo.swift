@@ -1,14 +1,7 @@
-//
-//  image_view_repo.swift
-//  Yelm.ProjectX
-//
-//  Created by Michael Safir on 18.04.2021.
-//
-
+import Combine
 import Foundation
 import SwiftUI
 import UIKit
-import Combine
 
 @available(iOS 13.0, *)
 public struct ImageViewerRemote: View {
@@ -18,101 +11,107 @@ public struct ImageViewerRemote: View {
     @State var disableCache: Bool?
     @State var caption: Text?
     @State var closeButtonTopRight: Bool?
-    
+
     var aspectRatio: Binding<CGFloat>?
-    
-    @State var dragOffset: CGSize = CGSize.zero
-    @State var dragOffsetPredicted: CGSize = CGSize.zero
-    
+
+    @State var dragOffset = CGSize.zero
+    @State var dragOffsetPredicted = CGSize.zero
+
     @ObservedObject var loader: ImageLoader
-    
-    public init(imageURL: Binding<String>, viewerShown: Binding<Bool>, aspectRatio: Binding<CGFloat>? = nil, disableCache: Bool? = nil, caption: Text? = nil, closeButtonTopRight: Bool? = false) {
+
+    public init(
+        imageURL: Binding<String>,
+        viewerShown: Binding<Bool>,
+        aspectRatio: Binding<CGFloat>? = nil,
+        disableCache: Bool? = nil,
+        caption: Text? = nil,
+        closeButtonTopRight: Bool? = false
+    ) {
         _imageURL = imageURL
         _viewerShown = viewerShown
         _disableCache = State(initialValue: disableCache)
         self.aspectRatio = aspectRatio
         _caption = State(initialValue: caption)
         _closeButtonTopRight = State(initialValue: closeButtonTopRight)
-        
+
         loader = ImageLoader(url: imageURL)
     }
 
     @ViewBuilder
     public var body: some View {
         VStack {
-            if(viewerShown && imageURL.count > 0) {
+            if viewerShown && !imageURL.isEmpty {
                 ZStack {
                     VStack {
                         HStack {
-                              
                             if self.closeButtonTopRight == true {
                                 Spacer()
                             }
-                            
-                            Button(action: {
-                                
-                                self.viewerShown = false
-                             
-                            }) {
 
+                            Button(action: {
+                                self.viewerShown = false
+
+                            }) {
                                 Image(systemName: "xmark")
                                     .foregroundColor(Color.white)
                                     .frame(width: 15, height: 15, alignment: .center)
                                     .padding([.top, .leading, .bottom, .trailing], 10)
-
                                     .font(.system(size: 15, weight: .bold, design: .rounded))
-
                                     .background(Color.black)
                                     .clipShape(Circle())
-
                             }
-                                .padding(.top, 10)
-                                .padding(.trailing, 10)
-                                .buttonStyle(ScaleButtonStyle())
-                            
-                         
-                            
+                            .padding(.top, 10)
+                            .padding(.trailing, 10)
+                            .buttonStyle(ScaleButtonStyle())
+
                             if self.closeButtonTopRight != true {
                                 Spacer()
                             }
                         }
-                        
+
                         Spacer()
                     }
                     .padding()
                     .zIndex(2)
-                    
+
                     VStack {
                         ZStack {
-                            if(self.disableCache == nil || self.disableCache == false) {
-                                URLImage(URL(string: self.imageURL) ?? URL(string: "https://via.placeholder.com/150.png")!, content: { image in
-                                    image.image
-                                    .resizable()
-                                    .aspectRatio(self.aspectRatio?.wrappedValue, contentMode: .fit)
-                                    .offset(x: self.dragOffset.width, y: self.dragOffset.height)
-                                    .rotationEffect(.init(degrees: Double(self.dragOffset.width / 30)))
-                                    .pinchToZoom()
-                                    .gesture(DragGesture()
-                                        .onChanged { value in
-                                            self.dragOffset = value.translation
-                                            self.dragOffsetPredicted = value.predictedEndTranslation
-                                        }
-                                        .onEnded { value in
-                                            if((abs(self.dragOffset.height) + abs(self.dragOffset.width) > 570) || ((abs(self.dragOffsetPredicted.height)) / (abs(self.dragOffset.height)) > 3) || ((abs(self.dragOffsetPredicted.width)) / (abs(self.dragOffset.width))) > 3) {
-                                                withAnimation(.spring()) {
-                                                    self.dragOffset = self.dragOffsetPredicted
+                            if self.disableCache == nil || self.disableCache == false {
+                                URLImage(
+                                    URL(string: self.imageURL) ?? URL(string: "https://via.placeholder.com/150.png")!,
+                                    content: { image in
+                                        image.image
+                                            .resizable()
+                                            .aspectRatio(self.aspectRatio?.wrappedValue, contentMode: .fit)
+                                            .offset(x: self.dragOffset.width, y: self.dragOffset.height)
+                                            .rotationEffect(.init(degrees: Double(self.dragOffset.width / 30)))
+                                            .pinchToZoom()
+                                            .gesture(DragGesture()
+                                                .onChanged { value in
+                                                    self.dragOffset = value.translation
+                                                    self.dragOffsetPredicted = value.predictedEndTranslation
                                                 }
-                                                self.viewerShown = false
-                                                return
-                                            }
-                                            withAnimation(.interactiveSpring()) {
-                                                self.dragOffset = .zero
-                                            }
-                                        }
-                                    )
-                                })
-                            }
-                            else {
+                                                .onEnded { _ in
+                                                    if (abs(self.dragOffset.height) + abs(self.dragOffset.width) >
+                                                        570) ||
+                                                        (abs(self.dragOffsetPredicted.height) /
+                                                            abs(self.dragOffset.height) >
+                                                            3) ||
+                                                        (abs(self.dragOffsetPredicted.width) /
+                                                            abs(self.dragOffset.width)) > 3 {
+                                                        withAnimation(.spring()) {
+                                                            self.dragOffset = self.dragOffsetPredicted
+                                                        }
+                                                        self.viewerShown = false
+                                                        return
+                                                    }
+                                                    withAnimation(.interactiveSpring()) {
+                                                        self.dragOffset = .zero
+                                                    }
+                                                })
+                                    }
+                                )
+                            } else {
                                 if loader.image != nil {
                                     Image(uiImage: loader.image!)
                                         .resizable()
@@ -125,8 +124,14 @@ public struct ImageViewerRemote: View {
                                                 self.dragOffset = value.translation
                                                 self.dragOffsetPredicted = value.predictedEndTranslation
                                             }
-                                            .onEnded { value in
-                                                if((abs(self.dragOffset.height) + abs(self.dragOffset.width) > 570) || ((abs(self.dragOffsetPredicted.height)) / (abs(self.dragOffset.height)) > 3) || ((abs(self.dragOffsetPredicted.width)) / (abs(self.dragOffset.width))) > 3) {
+                                            .onEnded { _ in
+                                                if (abs(self.dragOffset.height) + abs(self.dragOffset.width) > 570) ||
+                                                    (abs(self.dragOffsetPredicted.height) / abs(
+                                                        self.dragOffset.height
+                                                    ) >
+                                                        3) ||
+                                                    (abs(self.dragOffsetPredicted.width) / abs(self.dragOffset.width)) >
+                                                    3 {
                                                     withAnimation(.spring()) {
                                                         self.dragOffset = self.dragOffsetPredicted
                                                     }
@@ -136,28 +141,26 @@ public struct ImageViewerRemote: View {
                                                 withAnimation(.interactiveSpring()) {
                                                     self.dragOffset = .zero
                                                 }
-                                            }
-                                        )
-                                }
-                                else {
+                                            })
+                                } else {
                                     Text(":/")
                                 }
                             }
-                            
-                            if(self.caption != nil) {
+
+                            if self.caption != nil {
                                 VStack {
                                     Spacer()
-                                    
+
                                     VStack {
                                         Spacer()
-                                        
+
                                         HStack {
                                             Spacer()
-                                            
+
                                             self.caption
                                                 .foregroundColor(.white)
                                                 .multilineTextAlignment(.center)
-                                            
+
                                             Spacer()
                                         }
                                     }
@@ -169,11 +172,16 @@ public struct ImageViewerRemote: View {
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color(red: 0.12, green: 0.12, blue: 0.12, opacity: (1.0 - Double(abs(self.dragOffset.width) + abs(self.dragOffset.height)) / 1000)).edgesIgnoringSafeArea(.all))
+                    .background(Color(
+                        red: 0.12,
+                        green: 0.12,
+                        blue: 0.12,
+                        opacity: 1.0 - Double(abs(self.dragOffset.width) + abs(self.dragOffset.height)) / 1000
+                    ).edgesIgnoringSafeArea(.all))
                     .zIndex(1)
                 }
                 .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.2)))
-                .onAppear() {
+                .onAppear {
                     self.dragOffset = .zero
                     self.dragOffsetPredicted = .zero
                 }
@@ -184,7 +192,6 @@ public struct ImageViewerRemote: View {
 }
 
 class PinchZoomView: UIView {
-
     weak var delegate: PinchZoomViewDelgate?
 
     private(set) var scale: CGFloat = 0 {
@@ -205,7 +212,7 @@ class PinchZoomView: UIView {
         }
     }
 
-    private(set) var isPinching: Bool = false {
+    private(set) var isPinching = false {
         didSet {
             delegate?.pinchZoomView(self, didChangePinching: isPinching)
         }
@@ -213,7 +220,7 @@ class PinchZoomView: UIView {
 
     private var startLocation: CGPoint = .zero
     private var location: CGPoint = .zero
-    private var numberOfTouches: Int = 0
+    private var numberOfTouches = 0
 
     init() {
         super.init(frame: .zero)
@@ -223,12 +230,12 @@ class PinchZoomView: UIView {
         addGestureRecognizer(pinchGesture)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError()
     }
 
     @objc private func pinch(gesture: UIPinchGestureRecognizer) {
-
         switch gesture.state {
         case .began:
             isPinching = true
@@ -238,10 +245,14 @@ class PinchZoomView: UIView {
 
         case .changed:
             if gesture.numberOfTouches != numberOfTouches {
-                // If the number of fingers being used changes, the start location needs to be adjusted to avoid jumping.
+                // If the number of fingers being used changes, the start location needs to be adjusted to avoid
+                // jumping.
                 let newLocation = gesture.location(in: self)
                 let jumpDifference = CGSize(width: newLocation.x - location.x, height: newLocation.y - location.y)
-                startLocation = CGPoint(x: startLocation.x + jumpDifference.width, y: startLocation.y + jumpDifference.height)
+                startLocation = CGPoint(
+                    x: startLocation.x + jumpDifference.width,
+                    y: startLocation.y + jumpDifference.height
+                )
 
                 numberOfTouches = gesture.numberOfTouches
             }
@@ -253,16 +264,15 @@ class PinchZoomView: UIView {
 
         case .ended, .cancelled, .failed:
             withAnimation(.interactiveSpring()) {
-                 isPinching = false
-                 scale = 1.0
-                 anchor = .center
-                 offset = .zero
-             }
+                isPinching = false
+                scale = 1.0
+                anchor = .center
+                offset = .zero
+            }
         default:
             break
         }
     }
-
 }
 
 protocol PinchZoomViewDelgate: AnyObject {
@@ -273,7 +283,6 @@ protocol PinchZoomViewDelgate: AnyObject {
 }
 
 struct PinchZoom: UIViewRepresentable {
-
     @Binding var scale: CGFloat
     @Binding var anchor: UnitPoint
     @Binding var offset: CGSize
@@ -289,7 +298,7 @@ struct PinchZoom: UIViewRepresentable {
         return pinchZoomView
     }
 
-    func updateUIView(_ pageControl: PinchZoomView, context: Context) { }
+    func updateUIView(_ pageControl: PinchZoomView, context: Context) {}
 
     class Coordinator: NSObject, PinchZoomViewDelgate {
         var pinchZoom: PinchZoom
@@ -320,7 +329,7 @@ struct PinchToZoom: ViewModifier {
     @State var scale: CGFloat = 1.0
     @State var anchor: UnitPoint = .center
     @State var offset: CGSize = .zero
-    @State var isPinching: Bool = false
+    @State var isPinching = false
 
     func body(content: Content) -> some View {
         content
@@ -332,48 +341,43 @@ struct PinchToZoom: ViewModifier {
 
 extension View {
     func pinchToZoom() -> some View {
-        self.modifier(PinchToZoom())
+        modifier(PinchToZoom())
     }
 }
-
-
-
-
-
 
 class ImageLoader: ObservableObject {
     @Published var image: UIImage?
     private let url: Binding<String>
     private var cancellable: AnyCancellable?
-    
+
     func getURLRequest(url: String) -> URLRequest {
         let url = URL(string: url) ?? URL(string: "https://via.placeholder.com/150.png")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
-        return request;
+
+        return request
     }
 
     init(url: Binding<String>) {
         self.url = url
-        
-        if(url.wrappedValue.count > 0) {
+
+        if !url.wrappedValue.isEmpty {
             load()
         }
     }
-    
+
     deinit {
         cancellable?.cancel()
     }
 
     func load() {
-        cancellable = URLSession.shared.dataTaskPublisher(for: getURLRequest(url: self.url.wrappedValue))
+        cancellable = URLSession.shared.dataTaskPublisher(for: getURLRequest(url: url.wrappedValue))
             .map { UIImage(data: $0.data) }
             .replaceError(with: nil)
             .receive(on: DispatchQueue.main)
             .assign(to: \.image, on: self)
     }
-    
+
     func cancel() {
         cancellable?.cancel()
     }

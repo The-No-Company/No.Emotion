@@ -1,53 +1,65 @@
-//
-//  logic.swift
-//  No.Emotion
-//
-//  Created by Michael Safir on 31.10.2021.
-//
-
+import Alamofire
 import Foundation
 import SwiftUI
-import Alamofire
 import SwiftyJSON
 
-var LogicAPI: Logic = Logic()
-fileprivate let separator = "\u{FFFF}"
-
+var LogicAPI = Logic()
+private let separator = "\u{FFFF}"
 
 class Logic: ObservableObject, Identifiable {
-    public var id: Int = 0
-    
+    public var id = 0
+
     //  Usable arrays
-    @Published var emotions : [Emotion] = []
-    @Published var monthColors : [Color] = []
-    @Published var news : [News] = []
-    
-    @Published var welcome : Bool = true
-    
-    @Published var smiles = ["😀","😌","😒","😤","😡","😭","😰","🤧","😵","😎","🥳","🥺","😂","🥰","🤪","😬","🤢","🤝","🙏","😞","😴","🤑","😩","🤩"]
-    @Published var add : Bool = false
-    
-    
-    
-    
-    public struct Emotion: Identifiable, Hashable{
-        var id : Int = 0
-        var bright : Float = 0
-        var date : Date = Date()
-        var tags : [String] = []
+    @Published var emotions: [Emotion] = []
+    @Published var monthColors: [Color] = []
+    @Published var news: [News] = []
+
+    @Published var welcome = true
+
+    @Published var smiles = [
+        "😀",
+        "😌",
+        "😒",
+        "😤",
+        "😡",
+        "😭",
+        "😰",
+        "🤧",
+        "😵",
+        "😎",
+        "🥳",
+        "🥺",
+        "😂",
+        "🥰",
+        "🤪",
+        "😬",
+        "🤢",
+        "🤝",
+        "🙏",
+        "😞",
+        "😴",
+        "🤑",
+        "😩",
+        "🤩"
+    ]
+    @Published var add = false
+
+    public struct Emotion: Identifiable, Hashable {
+        var id = 0
+        var bright: Float = 0
+        var date = Date()
+        var tags: [String] = []
     }
-    
-    
-    public struct News: Identifiable, Hashable{
-        var id : Int = 0
-        var title : String = ""
-        var author : String = ""
-        var image : String = ""
+
+    public struct News: Identifiable, Hashable {
+        var id = 0
+        var title = ""
+        var author = ""
+        var image = ""
     }
-    
+
     //    Logic data
-    func getSmileColor(smile: String) -> Color{
-        
+    func getSmileColor(smile: String) -> Color {
         switch smile {
         case "😀":
             return .green
@@ -100,24 +112,22 @@ class Logic: ObservableObject, Identifiable {
         default:
             return .clear
         }
-        
-        
     }
-    
-    func extractTags(tags: String) -> [String]{
+
+    func extractTags(tags: String) -> [String] {
         return tags.components(separatedBy: separator)
     }
-    
-    func impactTags(tags: [String]) -> String{
+
+    func impactTags(tags: [String]) -> String {
         return tags.joined(separator: separator)
     }
-    
-    func getSettings(completionHandler: @escaping (_ success:Bool) -> Void){
-        AF.request("https://service.api.thenoco.co/noemotion/settings", method: .get).responseJSON { (response) in
-            if (response.value != nil) {
+
+    func getSettings(completionHandler: @escaping (_ success: Bool) -> Void) {
+        AF.request("https://service.api.thenoco.co/noemotion/settings", method: .get).responseJSON { response in
+            if response.value != nil {
                 let json = JSON(response.value!)
                 print(json)
-                
+
                 SettingsAPI.policy = json["policy"].string!
                 SettingsAPI.shareURL = json["shareURL"].string!
                 SettingsAPI.rate = json["rate"].string!
@@ -126,84 +136,88 @@ class Logic: ObservableObject, Identifiable {
             }
         }
     }
-    
-    func getTodayNews(completionHandler: @escaping (_ success:Bool) -> Void){
-        AF.request("https://service.api.thenoco.co/noemotion/all", method: .get).responseJSON { (response) in
-            if (response.value != nil) {
+
+    func getTodayNews(completionHandler: @escaping (_ success: Bool) -> Void) {
+        AF.request("https://service.api.thenoco.co/noemotion/all", method: .get).responseJSON { response in
+            if response.value != nil {
                 let json = JSON(response.value!)
                 let json_string_cache = json.rawString()
-                if (json.count > 0) {
+                if !json.isEmpty {
                     self.news.removeAll()
                     for i in 0...json.count - 1 {
                         let object = json[i]
-                        withAnimation{
-                            self.news.append(News(id: object["id"].int!, title: object["title"].string!, author: object["subtitle"].string!, image: object["img"].string!))
+                        withAnimation {
+                            self.news.append(News(
+                                id: object["id"].int!,
+                                title: object["title"].string!,
+                                author: object["subtitle"].string!,
+                                image: object["img"].string!
+                            ))
                         }
                     }
-                    
+
                     DispatchQueue.main.async {
                         completionHandler(true)
                     }
-                }else{
+                } else {
                     completionHandler(false)
                 }
-            }else{
+            } else {
                 completionHandler(false)
             }
         }
     }
-    
-    func getEmotions(){
+
+    func getEmotions() {
         RealmAPI.getEmotions()
     }
-    
-    func impactLine(){
-        let format : String = "MM.yyyy"
+
+    func impactLine() {
+        let format = "MM.yyyy"
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        
-        self.monthColors.removeAll()
-        
+
+        monthColors.removeAll()
+
         for emotion in emotions {
-            if (formatter.string(from: Date()) == formatter.string(from: emotion.date)){
-                for tag in emotion.tags{
-                    self.monthColors.append(self.getSmileColor(smile: tag).opacity(Double(emotion.bright)/100))
+            if formatter.string(from: Date()) == formatter.string(from: emotion.date) {
+                for tag in emotion.tags {
+                    monthColors.append(getSmileColor(smile: tag).opacity(Double(emotion.bright) / 100))
                 }
             }
         }
-        
     }
-    
-    func addEmotion(emotion: Emotion){
-        
+
+    func addEmotion(emotion: Emotion) {
         AnalyticsAPI.send(action: "addEmotion")
-        
+
         let formatter = DateFormatter()
-        formatter.locale =  Locale(identifier: "ru_RU")
+        formatter.locale = Locale(identifier: "ru_RU")
         formatter.dateFormat = "dd.MM.yyyy.HH.mm.ss"
-        
-        let id =  Int(formatter.string(from: emotion.date).replacingOccurrences(of: ".", with: "", options: .literal, range: nil))!
-        
+
+        let id = Int(formatter.string(from: emotion.date).replacingOccurrences(
+            of: ".",
+            with: "",
+            options: .literal,
+            range: nil
+        ))!
+
         RealmAPI.setEmotion(id: id,
-                            tags: self.impactTags(tags: emotion.tags),
+                            tags: impactTags(tags: emotion.tags),
                             date: emotion.date,
                             bright: emotion.bright)
-        
     }
-    
-    func deleteEmotion(id: Int){
+
+    func deleteEmotion(id: Int) {
         RealmAPI.deleteEmotion(id: id)
     }
-    
+
     func welcomeCI() {
-        self.objectWillChange.send()
-        if (UserDefaults.standard.bool(forKey: "onboarding")){
-            self.welcome = true
-        }else{
-            self.welcome = false
+        objectWillChange.send()
+        if UserDefaults.standard.bool(forKey: "onboarding") {
+            welcome = true
+        } else {
+            welcome = false
         }
     }
-    
 }
-
-

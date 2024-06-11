@@ -1,15 +1,6 @@
-//
-//  CGImage+Extensions.swift
-//  
-//
-//  Created by Dmytro Anokhin on 18/10/2019.
-//
-
 import CoreGraphics
 
-
 extension CGImage {
-
     /// Resize image.
     ///
     /// Resizes the image scaling it to fill the target size.

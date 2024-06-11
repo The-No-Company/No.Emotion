@@ -1,18 +1,8 @@
-//
-//  CoreDataModelDescription.swift
-//  URLImage
-//
-//  Created by Dmytro Anokhin on 02/08/2019.
-//  Copyright © 2019 Dmytro Anokhin. All rights reserved.
-//
-
 import CoreData
-
 
 /// Used to create `NSManagedObjectModel`
 @available(iOS 11.0, tvOS 11.0, macOS 10.13, watchOS 4.0, *)
 struct CoreDataModelDescription {
-
     var entities: [CoreDataEntityDescription]
 
     init(entities: [CoreDataEntityDescription]) {
@@ -20,14 +10,14 @@ struct CoreDataModelDescription {
     }
 
     func makeModel() -> NSManagedObjectModel {
-
         // For convenience: the package objects use "Description" suffix, Core Data objects have no suffix.
         let entitiesDescriptions = self.entities
         let entities: [NSEntityDescription]
 
         // Model creation has next steps:
         // - Create entities and their attributes. Entities are mapped to their names for faster lookup.
-        // - Last step builds indexes. This must be done in the last step because changing entities hierarchy structurally drops indexes.
+        // - Last step builds indexes. This must be done in the last step because changing entities hierarchy
+        // structurally drops indexes.
 
         // First step
         var entityNameToEntity: [String: NSEntityDescription] = [:]
@@ -62,17 +52,23 @@ struct CoreDataModelDescription {
             let propertyNameToProperty = entityNameToPropertyNameToProperty[entityDescription.name] ?? [:]
 
             entity.indexes = entityDescription.indexes.map { indexDescription in
-                let elements: [NSFetchIndexElementDescription] = indexDescription.elements.compactMap { elementDescription in
-                    switch elementDescription.property {
+                let elements: [NSFetchIndexElementDescription] = indexDescription.elements
+                    .compactMap { elementDescription in
+                        switch elementDescription.property {
                         case .property(let name):
                             guard let property = propertyNameToProperty[name] else {
-                                assertionFailure("Can not find attribute, fetched property, or relationship with name: \(name).")
+                                assertionFailure(
+                                    "Can not find attribute, fetched property, or relationship with name: \(name)."
+                                )
                                 return nil
                             }
 
-                            return NSFetchIndexElementDescription(property: property, collationType: elementDescription.type)
+                            return NSFetchIndexElementDescription(
+                                property: property,
+                                collationType: elementDescription.type
+                            )
+                        }
                     }
-                }
 
                 return NSFetchIndexDescription(name: indexDescription.name, elements: elements)
             }

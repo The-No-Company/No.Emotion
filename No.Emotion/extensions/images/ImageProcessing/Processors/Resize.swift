@@ -1,19 +1,11 @@
-//
-//  Resize.swift
-//  
-//
-//  Created by Dmytro Anokhin on 17/10/2019.
-//
-
 import CoreGraphics
 
 #if canImport(UIKit)
 
 import UIKit
 
-public extension Resize {
-
-    init(size: CGSize, scale: CGFloat) {
+extension Resize {
+    public init(size: CGSize, scale: CGFloat) {
         self.size = size
         self.scale = scale
     }
@@ -23,8 +15,8 @@ public extension Resize {
 
 import AppKit
 
-public extension Resize {
-    init(size: CGSize, scale: CGFloat = NSScreen.main?.backingScaleFactor ?? 1.0) {
+extension Resize {
+    public init(size: CGSize, scale: CGFloat = NSScreen.main?.backingScaleFactor ?? 1.0) {
         self.size = size
         self.scale = scale
     }
@@ -32,12 +24,10 @@ public extension Resize {
 
 #endif
 
-
 public struct Resize: ImageProcessing {
-
     init() {
-        self.size = .zero
-        self.scale = 0.0
+        size = .zero
+        scale = 0.0
     }
 
     /// New size in points

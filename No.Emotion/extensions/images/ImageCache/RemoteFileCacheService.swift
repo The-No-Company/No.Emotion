@@ -1,21 +1,22 @@
-//
-//  RemoteFileCacheService.swift
-//  URLImage
-//
-//
-//  Created by Dmytro Anokhin on 04/08/2019.
-//  Copyright © 2019 Dmytro Anokhin. All rights reserved.
-//
-
-import Foundation
 import CoreData
-
+import Foundation
 
 protocol RemoteFileCacheService: AnyObject {
+    func addFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        sourceURL: URL,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL
 
-    func addFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, sourceURL: URL, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL
-
-    func createFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, data: Data, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL
+    func createFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        data: Data,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL
 
     func getFile(withFileIdentifier fileIdentifier: String, completion: @escaping (_ localFileURL: URL?) -> Void)
 
@@ -28,12 +29,10 @@ protocol RemoteFileCacheService: AnyObject {
     func clean()
 }
 
-
 // MARK: - RemoteFileCacheServiceImpl
 
 @available(iOS 10.0, *)
 final class RemoteFileCacheServiceImpl: RemoteFileCacheService {
-
     static let shared = RemoteFileCacheServiceImpl(name: "URLImage", baseURL: FileManager.appCachesDirectoryURL)
 
     /// The name of the directory managed by the `RemoteFileCacheService` instance.
@@ -57,7 +56,10 @@ final class RemoteFileCacheServiceImpl: RemoteFileCacheService {
         let versionFileURL = directoryURL.appendingPathComponent("filesCacheVersion", isDirectory: false)
         var cleanFilesCache = true
 
-        if let data = try? Data(contentsOf: versionFileURL), let version = try? JSONDecoder().decode(Version.self, from: data) {
+        if let data = try? Data(contentsOf: versionFileURL), let version = try? JSONDecoder().decode(
+            Version.self,
+            from: data
+        ) {
             cleanFilesCache = version < RemoteFileCacheServiceImpl.minimumCompatibleVersion
         }
 
@@ -67,7 +69,11 @@ final class RemoteFileCacheServiceImpl: RemoteFileCacheService {
         }
 
         // Create directory if necessary. Directory must be created before initializing index or adding files.
-        try? FileManager.default.createDirectory(at: filesDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        try? FileManager.default.createDirectory(
+            at: filesDirectoryURL,
+            withIntermediateDirectories: true,
+            attributes: nil
+        )
 
         let encoder = JSONEncoder()
 
@@ -78,30 +84,55 @@ final class RemoteFileCacheServiceImpl: RemoteFileCacheService {
         index = FileIndex(directoryURL: directoryURL, fileName: "files", pathExtension: "db")
     }
 
-    /// Copy a file downloaded from `remoteURL` and located at `sourceURL` to the directory managed by the `RemoteFileCacheService` instance.
+    /// Copy a file downloaded from `remoteURL` and located at `sourceURL` to the directory managed by the
+    /// `RemoteFileCacheService` instance.
     /// Returns URL of the copy. This function generates unique name for the copied file.
     ///
     /// Example: ".../Library/Caches/URLImage/files/01234567-89AB-CDEF-0123-456789ABCDEF.file"
-    func addFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, sourceURL: URL, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL {
+    func addFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        sourceURL: URL,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL {
         return try queue.sync {
             let fileName = self.fileName(forRemoteURL: remoteURL, preferredFileExtension: preferredFileExtension())
 
             let destinationURL = fileURL(forFileName: fileName)
 
             try copy(from: sourceURL, to: destinationURL)
-            index.insertOrUpdate(fileIdentifier: fileIdentifier, remoteURL: remoteURL, fileName: fileName, dateCreated: Date(), expiryDate: expiryDate)
+            index.insertOrUpdate(
+                fileIdentifier: fileIdentifier,
+                remoteURL: remoteURL,
+                fileName: fileName,
+                dateCreated: Date(),
+                expiryDate: expiryDate
+            )
 
             return destinationURL
         }
     }
 
-    func createFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, data: Data, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL {
+    func createFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        data: Data,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL {
         return try queue.sync {
             let fileName = self.fileName(forRemoteURL: remoteURL, preferredFileExtension: preferredFileExtension())
             let destinationURL = fileURL(forFileName: fileName)
 
             try data.write(to: destinationURL)
-            index.insertOrUpdate(fileIdentifier: fileIdentifier, remoteURL: remoteURL, fileName: fileName, dateCreated: Date(), expiryDate: expiryDate)
+            index.insertOrUpdate(
+                fileIdentifier: fileIdentifier,
+                remoteURL: remoteURL,
+                fileName: fileName,
+                dateCreated: Date(),
+                expiryDate: expiryDate
+            )
 
             return destinationURL
         }
@@ -155,7 +186,11 @@ final class RemoteFileCacheServiceImpl: RemoteFileCacheService {
 
             let fileManager = FileManager.default
             try? fileManager.removeItem(at: self.directoryURL)
-            try? fileManager.createDirectory(at: self.filesDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+            try? fileManager.createDirectory(
+                at: self.filesDirectoryURL,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
 
             self.index = FileIndex(directoryURL: self.directoryURL, fileName: "files", pathExtension: "db")
         }
@@ -175,7 +210,8 @@ final class RemoteFileCacheServiceImpl: RemoteFileCacheService {
     /// The minimum compatible version of the files cache.
     private static let minimumCompatibleVersion = Version(major: 1, minor: 1, patch: 0)
 
-    /// URL of the directory managed by the `RemoteFileCacheService`. This is the concatenation of the `name` and `baseURL`
+    /// URL of the directory managed by the `RemoteFileCacheService`. This is the concatenation of the `name` and
+    /// `baseURL`
     ///
     /// Example: ".../Library/Caches/URLImage/"
     private let directoryURL: URL
@@ -209,30 +245,29 @@ final class RemoteFileCacheServiceImpl: RemoteFileCacheService {
     }
 
     private func performDelete(fileName: String) throws {
-       defer {
-           index.removeFileInfo(forFileName: fileName)
-       }
+        defer {
+            index.removeFileInfo(forFileName: fileName)
+        }
 
-       let localFileURL = fileURL(forFileName: fileName)
-       try FileManager.default.removeItem(at: localFileURL)
+        let localFileURL = fileURL(forFileName: fileName)
+        try FileManager.default.removeItem(at: localFileURL)
     }
 }
 
 // MARK: - File Operations
 
 @available(iOS 10.0, *)
-fileprivate extension RemoteFileCacheServiceImpl {
-
+extension RemoteFileCacheServiceImpl {
     /// Returns the URL of a file in the directory managed by the `RemoteFileCacheService` instance.
     ///
     /// Example: ".../Library/Caches/URLImage/files/01234567-89AB-CDEF-0123-456789ABCDEF.png"
-    func fileURL(forFileName fileName: String) -> URL {
+    private func fileURL(forFileName fileName: String) -> URL {
         return filesDirectoryURL.appendingPathComponent(fileName, isDirectory: false)
     }
 
     /// Copy a file from `sourceURL` to the directory managed by the `RemoteFileCacheService` instance.
     /// `fileName` must be provided.
-    func copy(from sourceURL: URL, to destinationURL: URL) throws {
+    private func copy(from sourceURL: URL, to destinationURL: URL) throws {
         try FileManager.default.copyItem(at: sourceURL, to: destinationURL)
     }
 }

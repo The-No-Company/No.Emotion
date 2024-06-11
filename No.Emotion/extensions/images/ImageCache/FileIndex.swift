@@ -1,27 +1,16 @@
-//
-//  FileIndex.swift
-//  URLImage
-//
-//
-//  Created by Dmytro Anokhin on 26/10/2019.
-//  Copyright © 2019 Dmytro Anokhin. All rights reserved.
-//
-
-import Foundation
 import CoreData
-
+import Foundation
 
 // MARK: - FileIndex
 
 @available(iOS 10.0, *)
 final class FileIndex {
-
     init(directoryURL: URL, fileName: String, pathExtension: String) {
-
         let model = FileIndex.coreDataModelDescription.makeModel()
 
         let storeDescription = NSPersistentStoreDescription()
-        storeDescription.url = directoryURL.appendingPathComponent(fileName, isDirectory: false).appendingPathExtension(pathExtension)
+        storeDescription.url = directoryURL.appendingPathComponent(fileName, isDirectory: false)
+            .appendingPathExtension(pathExtension)
 
         container = NSPersistentContainer(name: "URLImage", managedObjectModel: model)
         container.persistentStoreDescriptions = [storeDescription]
@@ -40,17 +29,29 @@ final class FileIndex {
             }
 
             do {
-                try container.persistentStoreCoordinator.destroyPersistentStore(at: url, ofType: persistentStoreDescription.type, options: nil)
-            }
-            catch {
+                try container.persistentStoreCoordinator.destroyPersistentStore(
+                    at: url,
+                    ofType: persistentStoreDescription.type,
+                    options: nil
+                )
+            } catch {
                 print(error)
             }
         }
     }
 
-    func insertOrUpdate(fileIdentifier: String?, remoteURL: URL, fileName: String, dateCreated: Date, expiryDate: Date?) {
+    func insertOrUpdate(
+        fileIdentifier: String?,
+        remoteURL: URL,
+        fileName: String,
+        dateCreated: Date,
+        expiryDate: Date?
+    ) {
         context.perform {
-            let file = NSEntityDescription.insertNewObject(forEntityName: RemoteFileManagedObject.entityName, into: self.context) as! RemoteFileManagedObject
+            let file = NSEntityDescription.insertNewObject(
+                forEntityName: RemoteFileManagedObject.entityName,
+                into: self.context
+            ) as! RemoteFileManagedObject
             file.fileIdentifier = fileIdentifier
             file.urlString = remoteURL.absoluteString
             file.dateCreated = dateCreated
@@ -59,8 +60,7 @@ final class FileIndex {
 
             do {
                 try self.context.save()
-            }
-            catch {
+            } catch {
                 print(error)
             }
         }
@@ -68,21 +68,29 @@ final class FileIndex {
 
     typealias RemoteFileInfo = (urlString: String, dateCreated: Date, expiryDate: Date?, fileName: String)
 
-    func fileInfo(withFileIdentifier fileIdentifier: String, completion: @escaping (_ fileInfo: RemoteFileInfo?) -> Void) {
+    func fileInfo(
+        withFileIdentifier fileIdentifier: String,
+        completion: @escaping (_ fileInfo: RemoteFileInfo?) -> Void
+    ) {
         fetch(fileIdentifier: fileIdentifier) { result in
             switch result {
-                case .success(let file):
-                    guard let file = file else {
-                        completion(nil)
-                        return
-                    }
-
-                    let result = RemoteFileInfo(urlString: file.urlString!, dateCreated: file.dateCreated!, expiryDate: file.expiryDate, fileName: file.fileName!)
-                    completion(result)
-
-                case .failure(let error):
-                    print(error)
+            case .success(let file):
+                guard let file = file else {
                     completion(nil)
+                    return
+                }
+
+                let result = RemoteFileInfo(
+                    urlString: file.urlString!,
+                    dateCreated: file.dateCreated!,
+                    expiryDate: file.expiryDate,
+                    fileName: file.fileName!
+                )
+                completion(result)
+
+            case .failure(let error):
+                print(error)
+                completion(nil)
             }
         }
     }
@@ -90,18 +98,23 @@ final class FileIndex {
     func fileInfo(forRemoteURL remoteURL: URL, completion: @escaping (_ fileInfo: RemoteFileInfo?) -> Void) {
         fetch(urlString: remoteURL.absoluteString) { result in
             switch result {
-                case .success(let file):
-                    guard let file = file else {
-                        completion(nil)
-                        return
-                    }
-
-                    let result = RemoteFileInfo(urlString: file.urlString!, dateCreated: file.dateCreated!, expiryDate: file.expiryDate, fileName: file.fileName!)
-                    completion(result)
-
-                case .failure(let error):
-                    print(error)
+            case .success(let file):
+                guard let file = file else {
                     completion(nil)
+                    return
+                }
+
+                let result = RemoteFileInfo(
+                    urlString: file.urlString!,
+                    dateCreated: file.dateCreated!,
+                    expiryDate: file.expiryDate,
+                    fileName: file.fileName!
+                )
+                completion(result)
+
+            case .failure(let error):
+                print(error)
+                completion(nil)
             }
         }
     }
@@ -109,17 +122,16 @@ final class FileIndex {
     func removeFileInfo(forFileName fileName: String) {
         fetch(fileName: fileName) { result in
             switch result {
-                case .success(let file):
-                    guard let file = file else {
-                        return
-                    }
-
-                    self.context.delete(file)
-
-
-                case .failure(let error):
-                    print(error)
+            case .success(let file):
+                guard let file = file else {
                     return
+                }
+
+                self.context.delete(file)
+
+            case .failure(let error):
+                print(error)
+                return
             }
         }
     }
@@ -138,8 +150,7 @@ final class FileIndex {
 
                     if let expiryDate = object.expiryDate {
                         expired = expiryDate < now
-                    }
-                    else {
+                    } else {
                         expired = true
                     }
 
@@ -147,8 +158,7 @@ final class FileIndex {
                         self.context.delete(object)
                     }
                 }
-            }
-            catch {
+            } catch {
                 print(error)
             }
         }
@@ -182,10 +192,11 @@ final class FileIndex {
                     )
                 ],
                 indexes: [
-                    .index(name: "byFileIdentifier", elements: [ .property(name: "fileIdentifier") ]),
-                    .index(name: "byURLString", elements: [ .property(name: "urlString") ]),
-                    .index(name: "byFileName", elements: [ .property(name: "fileName") ])
-                ])
+                    .index(name: "byFileIdentifier", elements: [.property(name: "fileIdentifier")]),
+                    .index(name: "byURLString", elements: [.property(name: "urlString")]),
+                    .index(name: "byFileName", elements: [.property(name: "fileName")])
+                ]
+            )
         ]
     )
 
@@ -203,8 +214,7 @@ final class FileIndex {
             do {
                 let fetchedObjects = try self.context.fetch(request)
                 action(.success(fetchedObjects.first))
-            }
-            catch {
+            } catch {
                 action(.failure(error))
             }
         }
@@ -218,8 +228,7 @@ final class FileIndex {
             do {
                 let fetchedObjects = try self.context.fetch(request)
                 action(.success(fetchedObjects.first))
-            }
-            catch {
+            } catch {
                 action(.failure(error))
             }
         }
@@ -233,23 +242,20 @@ final class FileIndex {
             do {
                 let fetchedObjects = try self.context.fetch(request)
                 action(.success(fetchedObjects.first))
-            }
-            catch {
+            } catch {
                 action(.failure(error))
             }
         }
     }
 }
 
-
 // MARK: - NSPersistentContainer extension
 
-fileprivate extension NSPersistentContainer {
-
-    func load() {
+extension NSPersistentContainer {
+    fileprivate func load() {
         let semaphore = DispatchSemaphore(value: 1)
 
-        loadPersistentStores { result, error in
+        loadPersistentStores { _, _ in
             semaphore.signal()
         }
 
@@ -257,14 +263,13 @@ fileprivate extension NSPersistentContainer {
     }
 }
 
-
 // MARK: - RemoteFileManagedObject
 
-fileprivate final class RemoteFileManagedObject: NSManagedObject {
-
+private final class RemoteFileManagedObject: NSManagedObject {
     static let entityName = "RemoteFile"
 
-    /// Unique identifier. Typically this field is the remote URL of a file. It can be different for cases when one file has multiple URLs or URL is dynamic.
+    /// Unique identifier. Typically this field is the remote URL of a file. It can be different for cases when one file
+    /// has multiple URLs or URL is dynamic.
     @NSManaged public var fileIdentifier: String?
 
     @NSManaged public var urlString: String?

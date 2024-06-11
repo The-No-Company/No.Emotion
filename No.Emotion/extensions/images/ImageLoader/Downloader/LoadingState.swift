@@ -1,12 +1,4 @@
-//
-//  LoadingState.swift
-//  
-//
-//  Created by Dmytro Anokhin on 29/09/2019.
-//
-
-enum LoadingState : Hashable {
-
+enum LoadingState: Hashable {
     /// Initial state after the object was created
     case initial
 
@@ -30,25 +22,25 @@ enum LoadingState : Hashable {
     /// Cancelled
     case cancelled
 
-    /** Map of valid transitions.
-
-        Each transition has "from" and "to" states.  Key in the map is "from" state. Value is a set of possible "to" states. Together this indicates all possible transitions for a state.
-
-        Allowing transition from `finished`, `failed`, and  `cancelled` states back to `scheduled` state enables reloading data.
-    */
+    /// Map of valid transitions.
+    ///
+    ///    Each transition has "from" and "to" states.  Key in the map is "from" state. Value is a set of possible "to"
+    /// states. Together this indicates all possible transitions for a state.
+    ///
+    ///    Allowing transition from `finished`, `failed`, and  `cancelled` states back to `scheduled` state enables
+    /// reloading data.
     private static let transitions: [LoadingState: Set<LoadingState>] = [
-        .initial   : [ .scheduled ],
-        .scheduled  : [ .loading, .finishing, finished, .cancelling ],
-        .loading   : [ .finishing, .failed, .cancelling ],
-        .finishing : [ .finished, .failed ],
-        .finished  : [ .scheduled ],
-        .failed    : [ .scheduled ],
-        .cancelling : [ .cancelled ],
-        .cancelled : [ .scheduled ]
+        .initial: [.scheduled],
+        .scheduled: [.loading, .finishing, finished, .cancelling],
+        .loading: [.finishing, .failed, .cancelling],
+        .finishing: [.finished, .failed],
+        .finished: [.scheduled],
+        .failed: [.scheduled],
+        .cancelling: [.cancelled],
+        .cancelled: [.scheduled]
     ]
 
-    /** Verifies if transition from `self` to `state` is possible.
-    */
+    /// Verifies if transition from `self` to `state` is possible.
     func canTransition(to state: LoadingState) -> Bool {
         return Self.transitions[self]!.contains(state)
     }

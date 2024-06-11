@@ -1,18 +1,9 @@
-//
-//  CoreDataModelDescription.swift
-//  URLImage
-//
-//  Created by Dmytro Anokhin on 02/08/2019.
-//  Copyright © 2019 Dmytro Anokhin. All rights reserved.
-//
-
 import CoreData
-
 
 /// Used to create `NSAttributeDescription`
 struct CoreDataAttributeDescription {
-
-    static func attribute(name: String, type: NSAttributeType, isOptional: Bool = false) -> CoreDataAttributeDescription {
+    static func attribute(name: String, type: NSAttributeType,
+                          isOptional: Bool = false) -> CoreDataAttributeDescription {
         CoreDataAttributeDescription(name: name, attributeType: type, isOptional: isOptional)
     }
 

@@ -1,10 +1,3 @@
-//
-//  welcomeView.swift
-//  No.Emotion
-//
-//  Created by Michael Safir on 31.10.2021.
-//
-
 import SwiftUI
 
 struct welcomeView: View {
@@ -12,4 +5,3 @@ struct welcomeView: View {
         Text("Welcome View")
     }
 }
-

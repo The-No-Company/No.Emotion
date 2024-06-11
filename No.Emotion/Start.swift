@@ -1,25 +1,17 @@
-//
-//  ContentView.swift
-//  No.Emotion
-//
-//  Created by Michael Safir on 31.10.2021.
-//
-
 import SwiftUI
 import WidgetKit
 
 struct Start: View {
-    
     @ObservedObject var logic: Logic = LogicAPI
     @ObservedObject var analytics: Analytics = AnalyticsAPI
 
     @Environment(\.calendar) var calendar
-    
+
     @State var showing_add = false
-    @State var loadNews : Bool = false
-    
-    @State var openType : Int = 0
-    
+    @State var loadNews = false
+
+    @State var openType = 0
+
     private var header: some View {
         let component = calendar.component(.month, from: Date())
         let formatter = component == 1 ? DateFormatter.monthAndYear : .month
@@ -27,12 +19,12 @@ struct Start: View {
             .font(Font.custom("Spectral-Medium", size: 26))
             .foregroundColor(Color.white)
     }
-    
+
     var body: some View {
-        ZStack(alignment: .bottomTrailing){
-            VStack{
-                HStack{
-                    VStack(alignment: .leading, spacing: 5){
+        ZStack(alignment: .bottomTrailing) {
+            VStack {
+                HStack {
+                    VStack(alignment: .leading, spacing: 5) {
                         Text("No.Emotion")
                             .font(Font.custom("Spectral-Medium", size: 20))
                         Divider()
@@ -41,12 +33,11 @@ struct Start: View {
                     Spacer()
 
                     Button(action: {
-                        if (UserDefaults.standard.bool(forKey: "haptic")){
+                        if UserDefaults.standard.bool(forKey: "haptic") {
                             let generator = UIImpactFeedbackGenerator(style: .light)
                             generator.impactOccurred()
                         }
-                        
-                        
+
                         self.openType = 0
                         self.logic.add.toggle()
 
@@ -55,23 +46,27 @@ struct Start: View {
                             .font(.system(size: 20, weight: .medium, design: .rounded))
                             .foregroundColor(.white)
                     })
-                        .buttonStyle(ScaleButtonStyle())
-                        .padding(.leading)
+                    .buttonStyle(ScaleButtonStyle())
+                    .padding(.leading)
 
                 }.padding(.horizontal)
-                ScrollView(.vertical, showsIndicators: false){
-                    HStack(spacing: 35){
+                ScrollView(.vertical, showsIndicators: false) {
+                    HStack(spacing: 35) {
                         RootView()
                             .padding(.vertical)
-                       
-                        if (!self.logic.monthColors.isEmpty){
+
+                        if !self.logic.monthColors.isEmpty {
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(LinearGradient(gradient: Gradient(colors: self.logic.monthColors), startPoint: .top, endPoint: .bottom))
+                                .fill(LinearGradient(
+                                    gradient: Gradient(colors: self.logic.monthColors),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                ))
                                 .frame(width: 6, alignment: .center)
                                 .padding(.vertical)
                                 .blur(radius: 2)
                                 .drawingGroup()
-                        }else{
+                        } else {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color.white.opacity(0.7))
                                 .frame(width: 6, alignment: .center)
@@ -82,14 +77,14 @@ struct Start: View {
 
                     }.padding(.horizontal)
 
-                    HStack{
+                    HStack {
                         Text("Timeline")
                             .font(Font.custom("Spectral-Medium", size: 26))
                             .foregroundColor(Color.white)
                         Spacer()
                     }.padding(.horizontal)
 
-                    HStack{
+                    HStack {
                         Text("Quotes added daily to lift your spirits")
                             .font(.custom("SourceCodePro-Regular", size: 14))
                             .foregroundColor(Color.white)
@@ -98,18 +93,17 @@ struct Start: View {
                     .padding(.horizontal)
                     .padding(.bottom)
 
-                    if (self.loadNews){
+                    if self.loadNews {
                         newsView()
                             .padding(.horizontal)
                             .padding(.bottom)
-                    }else{
+                    } else {
                         ActivityIndicator(isAnimating: .constant(true), style: .large)
                             .padding(.horizontal)
                             .padding(.bottom)
                     }
 
-
-                    HStack{
+                    HStack {
                         Text("Add a quote widget to the desktop")
                             .font(.custom("SourceCodePro-Regular", size: 14))
                             .foregroundColor(Color.white)
@@ -118,160 +112,132 @@ struct Start: View {
                     .padding(.horizontal)
                     .padding(.bottom)
 
-
                     Spacer(minLength: 120)
                 }
             }
-            
+
             if #available(iOS 15.0, *) {
-                HStack{
-                    HStack{
+                HStack {
+                    HStack {
                         Image(systemName: "quote.bubble")
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .offset(y: -5)
-                        
-                        
+
                         Text("New emotion")
                             .font(Font.custom("Spectral-Medium", size: 18))
                             .offset(y: -5)
                     }.padding(.horizontal)
-                    
+
                     Spacer()
                     Button(action: {
-                        if (UserDefaults.standard.bool(forKey: "haptic")){
+                        if UserDefaults.standard.bool(forKey: "haptic") {
                             let generator = UIImpactFeedbackGenerator(style: .light)
                             generator.impactOccurred()
                         }
                         self.openType = 1
                         self.logic.add.toggle()
-                        
+
                     }, label: {
-                        ZStack{
+                        ZStack {
                             Circle()
                                 .fill(Color.white)
-                            
+
                             Image(systemName: "plus")
                                 .font(.system(size: 30, weight: .medium, design: .rounded))
                                 .foregroundColor(.black)
                         }
                         .frame(width: 45, height: 45, alignment: .center)
                         .padding()
-                        
                         .clipped()
-                        
-                        
-                        
-                        
-                    })
-                        .offset(y: -5)
-                        .contentShape(Rectangle())
-                        .buttonStyle(ScaleButtonStyle())
-                        
 
+                    })
+                    .offset(y: -5)
+                    .contentShape(Rectangle())
+                    .buttonStyle(ScaleButtonStyle())
                 }
                 .background(.ultraThinMaterial)
                 .cornerRadius(16)
-                
-            }else{
-                
-                HStack{
-                    HStack{
+
+            } else {
+                HStack {
+                    HStack {
                         Image(systemName: "quote.bubble")
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .offset(y: -5)
-                        
-                        
+
                         Text("New emotion")
                             .font(Font.custom("Spectral-Medium", size: 18))
                             .offset(y: -5)
                     }.padding(.horizontal)
-                    
+
                     Spacer()
                     Button(action: {
-                        if (UserDefaults.standard.bool(forKey: "haptic")){
+                        if UserDefaults.standard.bool(forKey: "haptic") {
                             let generator = UIImpactFeedbackGenerator(style: .light)
                             generator.impactOccurred()
                         }
                         self.openType = 1
                         self.logic.add.toggle()
-                        
+
                     }, label: {
-                        ZStack{
+                        ZStack {
                             Circle()
                                 .fill(Color.white)
-                            
+
                             Image(systemName: "plus")
                                 .font(.system(size: 30, weight: .medium, design: .rounded))
                                 .foregroundColor(.black)
                         }
                         .frame(width: 45, height: 45, alignment: .center)
                         .padding()
-                        
                         .clipped()
-                        
-                        
-                        
-                        
-                    })
-                        .offset(y: -5)
-                        .contentShape(Rectangle())
-                        .buttonStyle(ScaleButtonStyle())
-                        
 
+                    })
+                    .offset(y: -5)
+                    .contentShape(Rectangle())
+                    .buttonStyle(ScaleButtonStyle())
                 }
                 .background(Color.black)
                 .cornerRadius(16)
-                
             }
-            
         }
         .preferredColorScheme(.dark)
         .ignoresSafeArea(.all, edges: .bottom)
         .ignoresSafeArea(.keyboard)
-        
-
-        
-        .sheet(isPresented: self.$logic.add) {
-           
-        } content: {
-            if (self.openType == 1){
+        .sheet(isPresented: $logic.add) {} content: {
+            if self.openType == 1 {
                 addEmotionView()
                     .ignoresSafeArea(.keyboard)
             }
-            
-            if (self.openType == 0){
+
+            if self.openType == 0 {
                 settingsView()
                     .ignoresSafeArea(.keyboard)
             }
         }
-        
-        .onAppear{
-            
-            
+
+        .onAppear {
             WidgetCenter.shared.reloadAllTimelines()
             SettingsAPI.setupPushNotifications()
             self.logic.getEmotions()
             self.analytics.register()
             self.analytics.send(action: "open")
             self.logic.getSettings { result in
-                if (result){
+                if result {
                     print("settings")
                 }
             }
             self.logic.getTodayNews { result in
-                if (result){
+                if result {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        withAnimation{
+                        withAnimation {
                             self.loadNews = result
                         }
                     }
                 }
             }
         }
-
-        
     }
 }
-

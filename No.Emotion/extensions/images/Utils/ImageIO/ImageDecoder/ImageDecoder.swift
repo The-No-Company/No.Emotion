@@ -1,22 +1,10 @@
-//
-//  ImageDecoder.swift
-//
-//
-//  Created by Dmytro Anokhin on 16/11/2019.
-//
-//  ImageDecoder is based on ImageDecoderCG from WebCore https://trac.webkit.org/browser/webkit/trunk/Source/WebCore/platform/graphics/cg/ImageDecoderCG.cpp
-
-import ImageIO
 import Foundation
-
+import ImageIO
 
 @available(iOS 9.0, macOS 10.11, *)
 final class ImageDecoder {
-
     struct DecodingOptions {
-
         enum Mode {
-
             case synchronous
 
             case asynchronous
@@ -32,7 +20,6 @@ final class ImageDecoder {
     }
 
     enum SubsamplingLevel: Int {
-
         case level0 = 1
 
         case level1 = 2
@@ -47,7 +34,6 @@ final class ImageDecoder {
     }
 
     enum EncodedDataStatus {
-
         case unknown
 
         case error
@@ -74,7 +60,7 @@ final class ImageDecoder {
         setDataProvider(dataProvider, allDataReceived: true)
     }
 
-    private(set) var isAllDataReceived: Bool = false
+    private(set) var isAllDataReceived = false
 
     func setData(_ data: Data, allDataReceived: Bool) {
         assert(!isAllDataReceived)
@@ -94,46 +80,53 @@ final class ImageDecoder {
     }
 
     var encodedDataStatus: EncodedDataStatus {
-        guard let uti = self.uti, !uti.isEmpty else {
+        guard let uti = uti, !uti.isEmpty else {
             return .unknown
         }
 
         switch CGImageSourceGetStatus(imageSource) {
-            case .statusUnknownType:
-                return .error
+        case .statusUnknownType:
+            return .error
 
-            case .statusUnexpectedEOF:
-                fallthrough
-            case .statusInvalidData:
-                fallthrough
-            case .statusReadingHeader:
-                // Ragnaros yells: TOO SOON! You have awakened me TOO SOON, Executus!
-                return isAllDataReceived ? .error : .unknown
+        case .statusUnexpectedEOF:
+            fallthrough
+        case .statusInvalidData:
+            fallthrough
+        case .statusReadingHeader:
+            // Ragnaros yells: TOO SOON! You have awakened me TOO SOON, Executus!
+            return isAllDataReceived ? .error : .unknown
 
-            case .statusIncomplete:
-                // WebCore checks isSupportedImageType here and returns error if not:
-                // if (!isSupportedImageType(uti))
-                //     return EncodedDataStatus::Error;
+        case .statusIncomplete:
+            // WebCore checks isSupportedImageType here and returns error if not:
+            // if (!isSupportedImageType(uti))
+            //     return EncodedDataStatus::Error;
 
-                guard let image0Properties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, imageSourceOptions()) as? [CFString: Any] else {
-                    return .typeAvailable
-                }
+            guard let image0Properties = CGImageSourceCopyPropertiesAtIndex(
+                imageSource,
+                0,
+                imageSourceOptions()
+            ) as? [CFString: Any]
+            else {
+                return .typeAvailable
+            }
 
-                guard let _ = image0Properties[kCGImagePropertyPixelWidth] as? Int, let _ = image0Properties[kCGImagePropertyPixelHeight] as? Int else {
-                    return .typeAvailable
-                }
+            guard let _ = image0Properties[kCGImagePropertyPixelWidth] as? Int,
+                  let _ = image0Properties[kCGImagePropertyPixelHeight] as? Int
+            else {
+                return .typeAvailable
+            }
 
-                return .sizeAvailable
+            return .sizeAvailable
 
-            case .statusComplete:
-                // WebCore checks isSupportedImageType here and returns error if not
-                // if (!isSupportedImageType(uti))
-                //     return EncodedDataStatus::Error;
+        case .statusComplete:
+            // WebCore checks isSupportedImageType here and returns error if not
+            // if (!isSupportedImageType(uti))
+            //     return EncodedDataStatus::Error;
 
-                return .complete
+            return .complete
 
-            @unknown default:
-                return .unknown
+        @unknown default:
+            return .unknown
         }
     }
 
@@ -142,7 +135,9 @@ final class ImageDecoder {
     }
 
     func frameDuration(at index: Int) -> TimeInterval? {
-        guard let frameProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, index, imageSourceOptions()) as? [CFString: Any] else {
+        guard let frameProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, index,
+                                                                       imageSourceOptions()) as? [CFString: Any]
+        else {
             return nil
         }
 
@@ -159,11 +154,9 @@ final class ImageDecoder {
         // Use the unclamped frame delay if it exists. Otherwise use the clamped frame delay.
         if let unclampedDelay = animationProperties?["UnclampedDelayTime" as CFString] as? TimeInterval {
             duration = unclampedDelay
-        }
-        else if let delay = animationProperties?["DelayTime" as CFString] as? TimeInterval {
+        } else if let delay = animationProperties?["DelayTime" as CFString] as? TimeInterval {
             duration = delay
-        }
-        else {
+        } else {
             duration = 0.0
         }
 
@@ -177,19 +170,29 @@ final class ImageDecoder {
     }
 
     func frameSize(at index: Int, subsamplingLevel: SubsamplingLevel = .default) -> CGSize? {
-        guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, index, imageSourceOptions(with: subsamplingLevel)) as? [CFString: Any] else {
+        guard let properties = CGImageSourceCopyPropertiesAtIndex(
+            imageSource,
+            index,
+            imageSourceOptions(with: subsamplingLevel)
+        ) as? [CFString: Any]
+        else {
             return nil
         }
 
-        guard let width = properties[kCGImagePropertyPixelWidth] as? Int, let height = properties[kCGImagePropertyPixelHeight] as? Int else {
+        guard let width = properties[kCGImagePropertyPixelWidth] as? Int,
+              let height = properties[kCGImagePropertyPixelHeight] as? Int
+        else {
             return nil
         }
 
         return CGSize(width: width, height: height)
     }
 
-    func createFrameImage(at index: Int, subsamplingLevel: SubsamplingLevel = .default, decodingOptions: DecodingOptions = .default) -> CGImage? {
-
+    func createFrameImage(
+        at index: Int,
+        subsamplingLevel: SubsamplingLevel = .default,
+        decodingOptions: DecodingOptions = .default
+    ) -> CGImage? {
         guard index < frameCount else {
             return nil
         }
@@ -198,25 +201,25 @@ final class ImageDecoder {
         let options: CFDictionary
 
         switch decodingOptions.mode {
-            case .asynchronous:
-                // Don't consider the subsamplingLevel when comparing the image native size with sizeForDrawing.
-                guard var size = frameSize(at: index) else {
-                    return nil
+        case .asynchronous:
+            // Don't consider the subsamplingLevel when comparing the image native size with sizeForDrawing.
+            guard var size = frameSize(at: index) else {
+                return nil
+            }
+
+            if let sizeForDrawing = decodingOptions.sizeForDrawing {
+                // See which size is smaller: the image native size or the sizeForDrawing.
+                if sizeForDrawing.width * sizeForDrawing.height < size.width * size.height {
+                    size = sizeForDrawing
                 }
+            }
 
-                if let sizeForDrawing = decodingOptions.sizeForDrawing {
-                    // See which size is smaller: the image native size or the sizeForDrawing.
-                    if sizeForDrawing.width * sizeForDrawing.height < size.width * size.height {
-                        size = sizeForDrawing
-                    }
-                }
+            options = imageSourceAsyncOptions(sizeForDrawing: size, subsamplingLevel: subsamplingLevel)
+            image = CGImageSourceCreateThumbnailAtIndex(imageSource, index, options)
 
-                options = imageSourceAsyncOptions(sizeForDrawing: size, subsamplingLevel: subsamplingLevel)
-                image = CGImageSourceCreateThumbnailAtIndex(imageSource, index, options)
-
-            case .synchronous:
-                options = imageSourceOptions(with: subsamplingLevel)
-                image = CGImageSourceCreateImageAtIndex(imageSource, index, options)
+        case .synchronous:
+            options = imageSourceOptions(with: subsamplingLevel)
+            image = CGImageSourceCreateImageAtIndex(imageSource, index, options)
         }
 
         // WebKit has support for xbm images but we don't
@@ -243,7 +246,9 @@ final class ImageDecoder {
             return nil
         }
 
-        guard let frameProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, index, imageSourceOptions()) as? [CFString: Any] else {
+        guard let frameProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, index,
+                                                                       imageSourceOptions()) as? [CFString: Any]
+        else {
             return nil
         }
 
@@ -271,33 +276,32 @@ final class ImageDecoder {
         var options = ImageDecoder.imageSourceOptions
 
         switch subsamplingLevel {
-            case .default:
-                return options as CFDictionary
-            default:
-                options[kCGImageSourceSubsampleFactor] = subsamplingLevel
-                return options as CFDictionary
+        case .default:
+            return options as CFDictionary
+        default:
+            options[kCGImageSourceSubsampleFactor] = subsamplingLevel
+            return options as CFDictionary
         }
     }
 
-    private func imageSourceAsyncOptions(sizeForDrawing: CGSize, subsamplingLevel: SubsamplingLevel = .default) -> CFDictionary {
+    private func imageSourceAsyncOptions(sizeForDrawing: CGSize,
+                                         subsamplingLevel: SubsamplingLevel = .default) -> CFDictionary {
         var options = ImageDecoder.imageSourceAsyncOptions
 
         options[kCGImageSourceThumbnailMaxPixelSize] = Int(max(sizeForDrawing.width, sizeForDrawing.height))
 
         switch subsamplingLevel {
-            case .default:
-                return options as CFDictionary
-            default:
-                options[kCGImageSourceSubsampleFactor] = subsamplingLevel
-                return options as CFDictionary
+        case .default:
+            return options as CFDictionary
+        default:
+            options[kCGImageSourceSubsampleFactor] = subsamplingLevel
+            return options as CFDictionary
         }
     }
 }
 
-
 @available(iOS 9.0, macOS 10.11, *)
 extension ImageDecoder {
-
     fileprivate static func animationProperties(from properties: [CFString: Any]) -> [CFString: Any]? {
         if let gifProperties = properties[kCGImagePropertyGIFDictionary] as? [CFString: Any] {
             return gifProperties
@@ -308,15 +312,16 @@ extension ImageDecoder {
         }
 
 //        if #available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *) {
-            if let heicsProperties = properties[kCGImagePropertyHEICSDictionary] as? [CFString: Any] {
-                return heicsProperties
+        if let heicsProperties = properties[kCGImagePropertyHEICSDictionary] as? [CFString: Any] {
+            return heicsProperties
 //            }
         }
 
         return nil
     }
 
-    fileprivate static func animationHEICSProperties(from properties: [CFString: Any], at index: Int) -> [CFString: Any]? {
+    fileprivate static func animationHEICSProperties(from properties: [CFString: Any],
+                                                     at index: Int) -> [CFString: Any]? {
         // For HEICS images, ImageIO does not create a properties dictionary for each HEICS frame. Instead it maintains
         // all frames' information in the image properties dictionary. Here is how ImageIO structures the properties
         // dictionary for HEICS image:
@@ -326,15 +331,15 @@ extension ImageDecoder {
         //      ...
         //  };
 //        if #available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *) {
-            guard let heicsProperties = properties[kCGImagePropertyHEICSDictionary] as? [CFString: Any] else {
-                return nil
-            }
+        guard let heicsProperties = properties[kCGImagePropertyHEICSDictionary] as? [CFString: Any] else {
+            return nil
+        }
 
-            guard let array = heicsProperties["FrameInfo" as CFString] as? [[CFString: Any]], array.count > index else {
-                return nil
-            }
+        guard let array = heicsProperties["FrameInfo" as CFString] as? [[CFString: Any]], array.count > index else {
+            return nil
+        }
 
-            return array[index]
+        return array[index]
 //        }
 
 //        return nil

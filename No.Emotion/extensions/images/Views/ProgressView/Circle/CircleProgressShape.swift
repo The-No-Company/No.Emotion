@@ -1,26 +1,14 @@
-//
-//  CircleProgressShape.swift
-//  URLImage
-//  
-//
-//  Created by Dmytro Anokhin on 26/09/2019.
-//  Copyright © 2019 Dmytro Anokhin. All rights reserved.
-//
-
 import SwiftUI
-
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 struct CircleProgressShape: Shape {
-
     struct Geometry {
-
         init(rect: CGRect) {
             self.rect = rect
         }
 
         init(size: CGSize) {
-            self.rect = CGRect(origin: .zero, size: size)
+            rect = CGRect(origin: .zero, size: size)
         }
 
         let rect: CGRect
@@ -41,13 +29,19 @@ struct CircleProgressShape: Shape {
 
     var progress: Double
 
-    var damping: Double = 0.35
+    var damping = 0.35
 
     func path(in rect: CGRect) -> Path {
         Path { path in
             let geometry = Geometry(rect: rect)
             path.move(to: geometry.startPoint(forAngle: startAngle))
-            path.addArc(center: geometry.center, radius: geometry.radius, startAngle: self.startAngle, endAngle: self.endAngle, clockwise: false)
+            path.addArc(
+                center: geometry.center,
+                radius: geometry.radius,
+                startAngle: self.startAngle,
+                endAngle: self.endAngle,
+                clockwise: false
+            )
         }
     }
 
@@ -72,8 +66,7 @@ struct CircleProgressShape: Shape {
             } else {
                 angle = Angle(degrees: 0.0)
             }
-        }
-        else {
+        } else {
             angle = Angle(degrees: 0.0)
         }
 

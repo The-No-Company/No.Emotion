@@ -1,15 +1,8 @@
-//
-//  buttons.swift
-//  No.Chat
-//
-//  Created by Michael Safir on 01.10.2021.
-//
-
+import Combine
 import Foundation
+import PassKit
 import SwiftUI
 import UIKit
-import Combine
-import PassKit
 
 struct ScaleButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
@@ -24,12 +17,9 @@ struct ApplePayButtonStyle: ButtonStyle {
     }
 }
 
-
 struct ApplePayButton: UIViewRepresentable {
-    func updateUIView(_ uiView: PKPaymentButton, context: Context) {
-        
-    }
-    
+    func updateUIView(_ uiView: PKPaymentButton, context: Context) {}
+
     func makeUIView(context: Context) -> PKPaymentButton {
         return PKPaymentButton(paymentButtonType: .plain, paymentButtonStyle: .black)
     }

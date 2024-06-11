@@ -1,10 +1,3 @@
-//
-//  Log.swift
-//  
-//
-//  Created by Dmytro Anokhin on 24/11/2019.
-//
-
 import os.log
 
 let log_none = Int.min
@@ -13,16 +6,14 @@ let log_normal = 2
 let log_detailed = 3
 let log_all = Int.max
 
-fileprivate let log_detail = log_none
-
+private let log_detail = log_none
 
 @inline(__always)
 private func log(_ object: Any? = nil, _ message: String, type osLogType: OSLogType = .default) {
     if let object = object {
         let typeString = String(reflecting: type(of: object))
         os_log("[%@] %@", log: .default, type: osLogType, typeString, message)
-    }
-    else {
+    } else {
         os_log("%@", log: .default, type: osLogType, message)
     }
 }

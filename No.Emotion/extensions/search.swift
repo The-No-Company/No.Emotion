@@ -1,21 +1,14 @@
-//
-//  search.swift
-//  No.Chat
-//
-//  Created by Michael Safir on 01.10.2021.
-//
-
 import Foundation
 import SwiftUI
 
 struct SearchBarView: View {
     @Binding var text: String
-    
-    @State var title: String = "type your city"
-    @State var image: String = "magnifyingglass"
-    
+
+    @State var title = "type your city"
+    @State var image = "magnifyingglass"
+
     @State var type: UIKeyboardType = .webSearch
-    
+
     var body: some View {
         HStack {
             TextField(self.title, text: $text)
@@ -35,8 +28,6 @@ struct SearchBarView: View {
                             .padding(.leading, 10)
                     }
                 )
-            
-            
         }
     }
 }

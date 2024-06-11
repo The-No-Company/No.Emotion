@@ -1,16 +1,8 @@
-//
-//  indicator.swift
-//  NoEmotion
-//
-//  Created by Michael Safir on 10.11.2021.
-//
-
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 struct ActivityIndicator: UIViewRepresentable {
-
     @Binding var isAnimating: Bool
     let style: UIActivityIndicatorView.Style
 

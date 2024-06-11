@@ -1,17 +1,8 @@
-//
-//  CoreImageFilterProcessor.swift
-//  
-//
-//  Created by Dmytro Anokhin on 19/10/2019.
-//
-
 #if canImport(CoreImage)
 
 import CoreImage
 
-
 public struct CoreImageFilterProcessor: ImageProcessing {
-
     public let name: String
 
     public let parameters: [String: Any]
@@ -39,7 +30,13 @@ public struct CoreImageFilterProcessor: ImageProcessing {
         }
 
         let bounds = CGRect(x: 0, y: 0, width: input.width, height: input.height)
-        guard let resultImage = self.context.createCGImage(outputImage, from: bounds, format: .RGBA8, colorSpace: input.colorSpace) else {
+        guard let resultImage = context.createCGImage(
+            outputImage,
+            from: bounds,
+            format: .RGBA8,
+            colorSpace: input.colorSpace
+        )
+        else {
             print("Failed to render final image with Core Image filter: '\(name)'")
             return input
         }

@@ -1,29 +1,30 @@
-//
-//  DownloadService.swift
-//  
-//
-//  Created by Dmytro Anokhin on 21/11/2019.
-//
-
 import Foundation
-
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 protocol DownloadService: AnyObject {
+    func add(
+        _ handler: DownloadHandler,
+        forURLRequest urlRequest: URLRequest,
+        withFileIdentifier fileIdentifier: String
+    )
 
-    func add(_ handler: DownloadHandler, forURLRequest urlRequest: URLRequest, withFileIdentifier fileIdentifier: String)
+    func remove(
+        _ handler: DownloadHandler,
+        fromURLRequest urlRequest: URLRequest,
+        withFileIdentifier fileIdentifier: String
+    )
 
-    func remove(_ handler: DownloadHandler, fromURLRequest urlRequest: URLRequest, withFileIdentifier fileIdentifier: String)
-
-    func load(urlRequest: URLRequest, withFileIdentifier fileIdentifier: String, after delay: TimeInterval, expiryDate: Date?)
+    func load(
+        urlRequest: URLRequest,
+        withFileIdentifier fileIdentifier: String,
+        after delay: TimeInterval,
+        expiryDate: Date?
+    )
 }
-
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 final class DownloadServiceImpl: DownloadService {
-
     init(remoteFileCache: RemoteFileCacheService, retryCount: Int = 3) {
-
         let configuration = URLSessionConfiguration.default.copy(with: nil) as! URLSessionConfiguration
         configuration.httpMaximumConnectionsPerHost = 1
 
@@ -52,7 +53,7 @@ final class DownloadServiceImpl: DownloadService {
             downloader.finishDownloading(with: tmpURL)
         }
 
-        urlSessionDelegate.writeDataCallback = { task, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
+        urlSessionDelegate.writeDataCallback = { task, _, totalBytesWritten, totalBytesExpectedToWrite in
             guard let downloader = downloaderForTask(task) as? FileDownloadCoordinator else {
                 return
             }
@@ -60,8 +61,7 @@ final class DownloadServiceImpl: DownloadService {
             if totalBytesExpectedToWrite > 0 {
                 let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
                 downloader.progress(Float(progress))
-            }
-            else {
+            } else {
                 downloader.progress(nil)
             }
         }
@@ -70,7 +70,7 @@ final class DownloadServiceImpl: DownloadService {
             if let url = task.originalRequest?.url {
                 log_debug(self, "Received response: \(response), for \"\(url)\".", detail: log_detailed)
             }
-            
+
             completion(.allow)
         }
 
@@ -93,12 +93,12 @@ final class DownloadServiceImpl: DownloadService {
 
             (downloader as? DataDownloadCoordinator)?.finishDownloading()
             downloader.complete(with: error)
-            
+
             let pendingHandlers = downloader.handlers
             let currentRetryCount = downloader.retryCount + 1
-            
+
             guard let request = task.originalRequest,
-                downloader.isFailed && pendingHandlers.count > 0 && currentRetryCount <= retryCount
+                  downloader.isFailed && !pendingHandlers.isEmpty && currentRetryCount <= retryCount
             else {
                 return
             }
@@ -106,34 +106,56 @@ final class DownloadServiceImpl: DownloadService {
             let fileIdentifier = downloader.fileIdentifier
 
             let expiryDate = downloader.expiryDate
-            
+
             DispatchQueue.main.async {
                 if let url = request.url {
-                    log_debug(self, "Retry for: \"\(url)\" with retry count: \(currentRetryCount)", detail: log_detailed)
+                    log_debug(
+                        self,
+                        "Retry for: \"\(url)\" with retry count: \(currentRetryCount)",
+                        detail: log_detailed
+                    )
                 }
-                
+
                 for handler in pendingHandlers {
-                    self._add(handler, forURLRequest: request, withFileIdentifier: fileIdentifier, retryCount: currentRetryCount)
+                    self._add(
+                        handler,
+                        forURLRequest: request,
+                        withFileIdentifier: fileIdentifier,
+                        retryCount: currentRetryCount
+                    )
                 }
-                
+
                 self.load(urlRequest: request, withFileIdentifier: fileIdentifier, after: 0.0, expiryDate: expiryDate)
             }
         }
     }
 
-    func add(_ handler: DownloadHandler, forURLRequest urlRequest: URLRequest, withFileIdentifier fileIdentifier: String) {
+    func add(
+        _ handler: DownloadHandler,
+        forURLRequest urlRequest: URLRequest,
+        withFileIdentifier fileIdentifier: String
+    ) {
         _add(handler, forURLRequest: urlRequest, withFileIdentifier: fileIdentifier, retryCount: 0)
     }
-    
-    private func _add(_ handler: DownloadHandler, forURLRequest urlRequest: URLRequest, withFileIdentifier fileIdentifier: String, retryCount: Int) {
+
+    private func _add(
+        _ handler: DownloadHandler,
+        forURLRequest urlRequest: URLRequest,
+        withFileIdentifier fileIdentifier: String,
+        retryCount: Int
+    ) {
         queue.addOperation {
             let downloader: DownloadCoordinator
 
             if let existingDownloader = self.fileIdentifierToDownloaderMap[fileIdentifier] {
                 downloader = existingDownloader
-            }
-            else {
-                downloader = self.createDownloader(forURLRequest: urlRequest, fileIdentifier: fileIdentifier, inMemory: handler.inMemory, retryCount: retryCount)
+            } else {
+                downloader = self.createDownloader(
+                    forURLRequest: urlRequest,
+                    fileIdentifier: fileIdentifier,
+                    inMemory: handler.inMemory,
+                    retryCount: retryCount
+                )
 
                 downloader.finilizeCallback = {
                     self.queue.addOperation {
@@ -148,7 +170,11 @@ final class DownloadServiceImpl: DownloadService {
         }
     }
 
-    func remove(_ handler: DownloadHandler, fromURLRequest urlRequest: URLRequest, withFileIdentifier fileIdentifier: String) {
+    func remove(
+        _ handler: DownloadHandler,
+        fromURLRequest urlRequest: URLRequest,
+        withFileIdentifier fileIdentifier: String
+    ) {
         queue.addOperation {
             guard let downloader = self.fileIdentifierToDownloaderMap[fileIdentifier] else {
                 return
@@ -166,7 +192,12 @@ final class DownloadServiceImpl: DownloadService {
         }
     }
 
-    func load(urlRequest: URLRequest, withFileIdentifier fileIdentifier: String, after delay: TimeInterval, expiryDate: Date?) {
+    func load(
+        urlRequest: URLRequest,
+        withFileIdentifier fileIdentifier: String,
+        after delay: TimeInterval,
+        expiryDate: Date?
+    ) {
         if let url = urlRequest.url {
             log_debug(self, "Load \"\(url)\".")
 //            print("START LOAD IMAGE")
@@ -182,8 +213,7 @@ final class DownloadServiceImpl: DownloadService {
                 if let currentExpiryDate = downloader.expiryDate {
                     // If there is expiry date make sure to use the latest of two
                     downloader.expiryDate = currentExpiryDate < expiryDate ? expiryDate : currentExpiryDate
-                }
-                else {
+                } else {
                     downloader.expiryDate = expiryDate
                 }
             }
@@ -221,34 +251,74 @@ final class DownloadServiceImpl: DownloadService {
         }
     }
 
-    private func createDownloader(forURLRequest urlRequest: URLRequest, fileIdentifier: String, inMemory: Bool, retryCount: Int) -> DownloadCoordinator {
+    private func createDownloader(
+        forURLRequest urlRequest: URLRequest,
+        fileIdentifier: String,
+        inMemory: Bool,
+        retryCount: Int
+    ) -> DownloadCoordinator {
         let downloader: DownloadCoordinator
 
         if inMemory {
             let task = urlSession.dataTask(with: urlRequest)
             task.taskDescription = fileIdentifier
-            downloader = DataDownloadCoordinator(url: urlRequest.url!, fileIdentifier: fileIdentifier, task: task, retryCount: retryCount, remoteFileCache: self, delayedDispatcher: self)
-        }
-        else {
+            downloader = DataDownloadCoordinator(
+                url: urlRequest.url!,
+                fileIdentifier: fileIdentifier,
+                task: task,
+                retryCount: retryCount,
+                remoteFileCache: self,
+                delayedDispatcher: self
+            )
+        } else {
             let task = urlSession.downloadTask(with: urlRequest)
             task.taskDescription = fileIdentifier
-            downloader = FileDownloadCoordinator(url: urlRequest.url!, fileIdentifier: fileIdentifier, task: task, retryCount: retryCount, remoteFileCache: self, delayedDispatcher: self)
+            downloader = FileDownloadCoordinator(
+                url: urlRequest.url!,
+                fileIdentifier: fileIdentifier,
+                task: task,
+                retryCount: retryCount,
+                remoteFileCache: self,
+                delayedDispatcher: self
+            )
         }
 
         return downloader
     }
 }
 
-
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
-extension DownloadServiceImpl : RemoteFileCacheServiceProxy {
-
-    func addFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, sourceURL: URL, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL {
-        try remoteFileCache.addFile(withFileIdentifier: fileIdentifier, remoteURL: remoteURL, sourceURL: sourceURL, expiryDate: expiryDate, preferredFileExtension: preferredFileExtension())
+extension DownloadServiceImpl: RemoteFileCacheServiceProxy {
+    func addFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        sourceURL: URL,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL {
+        try remoteFileCache.addFile(
+            withFileIdentifier: fileIdentifier,
+            remoteURL: remoteURL,
+            sourceURL: sourceURL,
+            expiryDate: expiryDate,
+            preferredFileExtension: preferredFileExtension()
+        )
     }
 
-    func createFile(withFileIdentifier fileIdentifier: String, remoteURL: URL, data: Data, expiryDate: Date?, preferredFileExtension: @autoclosure () -> String?) throws -> URL {
-        try remoteFileCache.createFile(withFileIdentifier: fileIdentifier, remoteURL: remoteURL, data: data, expiryDate: expiryDate, preferredFileExtension: preferredFileExtension())
+    func createFile(
+        withFileIdentifier fileIdentifier: String,
+        remoteURL: URL,
+        data: Data,
+        expiryDate: Date?,
+        preferredFileExtension: @autoclosure () -> String?
+    ) throws -> URL {
+        try remoteFileCache.createFile(
+            withFileIdentifier: fileIdentifier,
+            remoteURL: remoteURL,
+            data: data,
+            expiryDate: expiryDate,
+            preferredFileExtension: preferredFileExtension()
+        )
     }
 
     func getFile(withFileIdentifier fileIdentifier: String, completion: @escaping (_ localFileURL: URL?) -> Void) {
@@ -264,10 +334,8 @@ extension DownloadServiceImpl : RemoteFileCacheServiceProxy {
     }
 }
 
-
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
-extension DownloadServiceImpl : DelayedDispatcher {
-
+extension DownloadServiceImpl: DelayedDispatcher {
     func dispatch(after delay: TimeInterval, closure: @escaping () -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
             self.queue.addOperation {

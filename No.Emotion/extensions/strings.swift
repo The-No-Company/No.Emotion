@@ -1,10 +1,3 @@
-//
-//  strings.swift
-//  No.Chat
-//
-//  Created by Michael Safir on 01.10.2021.
-//
-
 import Foundation
 
 extension String {

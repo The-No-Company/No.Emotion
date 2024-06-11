@@ -1,16 +1,7 @@
-//
-//  URLImageService.swift
-//  
-//
-//  Created by Dmytro Anokhin on 11/10/2019.
-//
-
 import Foundation
-
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 public protocol URLImageServiceType {
-
     var services: Services { get }
 
     var defaultExpiryTime: TimeInterval { get }
@@ -24,10 +15,8 @@ public protocol URLImageServiceType {
     func removeCachedImage(with url: URL)
 }
 
-
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 public final class Services {
-
     init(remoteFileCacheService: RemoteFileCacheService, downloadService: DownloadService) {
         self.remoteFileCacheService = remoteFileCacheService
         self.downloadService = downloadService
@@ -38,10 +27,8 @@ public final class Services {
     let downloadService: DownloadService
 }
 
-
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6.0, *)
 public final class URLImageService: URLImageServiceType {
-
     public static let shared: URLImageServiceType = URLImageService()
 
     public let services: Services
@@ -65,7 +52,10 @@ public final class URLImageService: URLImageServiceType {
     }
 
     private init() {
-        let remoteFileCacheService = RemoteFileCacheServiceImpl(name: "URLImage", baseURL: FileManager.appCachesDirectoryURL)
+        let remoteFileCacheService = RemoteFileCacheServiceImpl(
+            name: "URLImage",
+            baseURL: FileManager.appCachesDirectoryURL
+        )
         let downloadService = DownloadServiceImpl(remoteFileCache: remoteFileCacheService)
 
         services = Services(remoteFileCacheService: remoteFileCacheService, downloadService: downloadService)
