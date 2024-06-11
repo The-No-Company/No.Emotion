@@ -18,19 +18,7 @@
 			<key>path</key>
 			<string>platform/ios/VisionCenter/VisionCenter.xcodeproj</string>
 			<key>name</key>
-			<string>VisionCenter</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Memomi</string>
-			<key>path</key>
-			<string>platform/ios/MemomiRetina/MemomiRetina.xcodeproj</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>App</string>
-			<key>path</key>
-			<string>platform/ios/app/app/App.xcodeproj</string>
+			<string>NoEmotion</string>
 		</dict>
 	</array>
 </dict>
