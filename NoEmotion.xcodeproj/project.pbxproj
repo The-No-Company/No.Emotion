@@ -233,16 +233,16 @@
 		D4AD776A273B20A9001A681A /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		D4AD7793273B27BE001A681A /* indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indicator.swift; sourceTree = "<group>"; };
 		D4AD7795273C4AE1001A681A /* analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = analytics.swift; sourceTree = "<group>"; };
-		D4F486CE274AE06D009CE21F /* Cocktail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cocktail.png; path = AlternateIcons/Cocktail.png; sourceTree = SOURCE_ROOT; };
-		D4F486CF274AE06D009CE21F /* Money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Money.png; path = AlternateIcons/Money.png; sourceTree = SOURCE_ROOT; };
-		D4F486D0274AE06D009CE21F /* Plant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Plant.png; path = AlternateIcons/Plant.png; sourceTree = SOURCE_ROOT; };
-		D4F486D1274AE06D009CE21F /* Warming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Warming.png; path = AlternateIcons/Warming.png; sourceTree = SOURCE_ROOT; };
-		D4F486D2274AE06D009CE21F /* Inspire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Inspire.png; path = AlternateIcons/Inspire.png; sourceTree = SOURCE_ROOT; };
-		D4F486D3274AE06D009CE21F /* Story.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Story.png; path = AlternateIcons/Story.png; sourceTree = SOURCE_ROOT; };
-		D4F486D4274AE06D009CE21F /* Speech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Speech.png; path = AlternateIcons/Speech.png; sourceTree = SOURCE_ROOT; };
-		D4F486D5274AE06D009CE21F /* Soda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Soda.png; path = AlternateIcons/Soda.png; sourceTree = SOURCE_ROOT; };
-		D4F486D6274AE06D009CE21F /* Stock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Stock.png; path = AlternateIcons/Stock.png; sourceTree = SOURCE_ROOT; };
-		D4F486D7274AE06D009CE21F /* Election.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Election.png; path = AlternateIcons/Election.png; sourceTree = SOURCE_ROOT; };
+		D4F486CE274AE06D009CE21F /* Cocktail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cocktail.png; path = No.Emotion/Icons/Cocktail.png; sourceTree = SOURCE_ROOT; };
+		D4F486CF274AE06D009CE21F /* Money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Money.png; path = No.Emotion/Icons/Money.png; sourceTree = SOURCE_ROOT; };
+		D4F486D0274AE06D009CE21F /* Plant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Plant.png; path = No.Emotion/Icons/Plant.png; sourceTree = SOURCE_ROOT; };
+		D4F486D1274AE06D009CE21F /* Warming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Warming.png; path = No.Emotion/Icons/Warming.png; sourceTree = SOURCE_ROOT; };
+		D4F486D2274AE06D009CE21F /* Inspire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Inspire.png; path = No.Emotion/Icons/Inspire.png; sourceTree = SOURCE_ROOT; };
+		D4F486D3274AE06D009CE21F /* Story.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Story.png; path = No.Emotion/Icons/Story.png; sourceTree = SOURCE_ROOT; };
+		D4F486D4274AE06D009CE21F /* Speech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Speech.png; path = No.Emotion/Icons/Speech.png; sourceTree = SOURCE_ROOT; };
+		D4F486D5274AE06D009CE21F /* Soda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Soda.png; path = No.Emotion/Icons/Soda.png; sourceTree = SOURCE_ROOT; };
+		D4F486D6274AE06D009CE21F /* Stock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Stock.png; path = No.Emotion/Icons/Stock.png; sourceTree = SOURCE_ROOT; };
+		D4F486D7274AE06D009CE21F /* Election.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Election.png; path = No.Emotion/Icons/Election.png; sourceTree = SOURCE_ROOT; };
 		D4F486E3274BC6EC009CE21F /* onboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onboardingView.swift; sourceTree = "<group>"; };
 		F4443DEAFB35727ECD794E1C /* Pods-NoEmotion-NoEmotionUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotion-NoEmotionUITests.release.xcconfig"; path = "Target Support Files/Pods-NoEmotion-NoEmotionUITests/Pods-NoEmotion-NoEmotionUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA706BECBDCA7A3B86B66AEA /* Pods-NoEmotionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoEmotionTests.release.xcconfig"; path = "Target Support Files/Pods-NoEmotionTests/Pods-NoEmotionTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -302,6 +302,23 @@
 			path = settings;
 			sourceTree = "<group>";
 		};
+		309307912C186EF50050BD80 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				D4F486CE274AE06D009CE21F /* Cocktail.png */,
+				D4F486D7274AE06D009CE21F /* Election.png */,
+				D4F486D2274AE06D009CE21F /* Inspire.png */,
+				D4F486CF274AE06D009CE21F /* Money.png */,
+				D4F486D0274AE06D009CE21F /* Plant.png */,
+				D4F486D5274AE06D009CE21F /* Soda.png */,
+				D4F486D4274AE06D009CE21F /* Speech.png */,
+				D4F486D6274AE06D009CE21F /* Stock.png */,
+				D4F486D3274AE06D009CE21F /* Story.png */,
+				D4F486D1274AE06D009CE21F /* Warming.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		BF2089106799139E3F7431AB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,7 +359,7 @@
 		D41BDB61272EC58C00B4E388 /* No.Emotion */ = {
 			isa = PBXGroup;
 			children = (
-				D467080A27456A0F0022AEAE /* Icons */,
+				309307912C186EF50050BD80 /* Icons */,
 				D41BDBA1272EC79700B4E388 /* No.Emotion.entitlements */,
 				D41BDB9E272EC61600B4E388 /* No-Emotion-Info.plist */,
 				D41BDBB3272EC86900B4E388 /* logic */,
@@ -461,23 +478,6 @@
 				D447278F272F4595007EF947 /* addEmotionView.swift */,
 			);
 			path = addEmotion;
-			sourceTree = "<group>";
-		};
-		D467080A27456A0F0022AEAE /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				D4F486CE274AE06D009CE21F /* Cocktail.png */,
-				D4F486D7274AE06D009CE21F /* Election.png */,
-				D4F486D2274AE06D009CE21F /* Inspire.png */,
-				D4F486CF274AE06D009CE21F /* Money.png */,
-				D4F486D0274AE06D009CE21F /* Plant.png */,
-				D4F486D5274AE06D009CE21F /* Soda.png */,
-				D4F486D4274AE06D009CE21F /* Speech.png */,
-				D4F486D6274AE06D009CE21F /* Stock.png */,
-				D4F486D3274AE06D009CE21F /* Story.png */,
-				D4F486D1274AE06D009CE21F /* Warming.png */,
-			);
-			path = Icons;
 			sourceTree = "<group>";
 		};
 		D46708422745C2880022AEAE /* No.Emotion */ = {
